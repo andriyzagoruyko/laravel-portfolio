@@ -1,0 +1,89 @@
+body {
+    font-family: $font_family;
+    font-size: 16px;
+}
+
+a{
+
+    text-decoration: none;
+}
+
+button{
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+p{
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.btn {
+    padding: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: $color_white;
+    background: $color_white;
+    box-shadow: $shadow_button;
+    border-radius: 5px;
+    display: block;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &-primary {
+        background: $color_primary;
+
+        &:hover {
+            background: lighten($color_primary, 6%);
+        }
+    }
+
+    &-success {
+        background: $color_succsess;
+
+        &:hover {
+            background: lighten($color_succsess, 6%);
+        }
+    }
+}
+
+.tabs {
+    ul {
+        display: flex;
+    }
+
+    &__item {
+        font-size: 16px;
+        line-height: 16px;
+        letter-spacing: 0.1em;
+        color: $color_text;
+        font-weight: bold;
+        box-shadow: $shadow_layout;
+        
+        a {
+            display: block;
+            border-radius: 5px;
+            color: $color_text;
+        }
+
+        &.is-active, &:hover {
+            a{
+                color: $color_white;
+                background: $color_primary;
+            }
+        }
+    }
+}
