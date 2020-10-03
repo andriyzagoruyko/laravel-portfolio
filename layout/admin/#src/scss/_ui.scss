@@ -1,31 +1,32 @@
 body {
     font-family: $font_family;
     font-size: 16px;
+    color: $color_text;
 }
 
-a{
-
+a {
+    color: $color_text;
     text-decoration: none;
 }
 
-button{
+button {
     background: transparent;
     border: none;
     outline: none;
 }
 
-ul{
+ul {
     margin: 0;
     padding: 0;
 }
 
-li{
+li {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-p{
+p {
     font-size: 16px;
     line-height: 150%;
 }
@@ -58,6 +59,22 @@ p{
             background: lighten($color_succsess, 6%);
         }
     }
+
+    &-warning {
+        background: $color_warning;
+
+        &:hover {
+            background: lighten($color_warning, 6%);
+        }
+    }
+
+    &-danger {
+        background: $color_danger;
+
+        &:hover {
+            background: lighten($color_danger, 6%);
+        }
+    }
 }
 
 .tabs {
@@ -72,18 +89,71 @@ p{
         color: $color_text;
         font-weight: bold;
         box-shadow: $shadow_layout;
-        
+
         a {
             display: block;
             border-radius: 5px;
             color: $color_text;
         }
 
-        &.is-active, &:hover {
-            a{
+        &.is-active,
+        &:hover {
+            a {
                 color: $color_white;
                 background: $color_primary;
             }
+        }
+    }
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    label {
+        display: block;
+        margin: 0 0 0 5px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    input[type="text"],
+    textarea {
+        border: 1px solid #c4c4c4;
+        box-sizing: border-box;
+        border-radius: 2px;
+        margin: 5px 0 0 0;
+        width: 100%;
+        padding: 5px;
+    }
+
+    input[type="file"] {
+        margin: 0 auto;
+        margin: 5px auto 0 auto;
+    }
+
+    &__group {
+        margin: 20px 0 0 0;
+
+        &-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+    }
+
+    &__submit {
+        align-self: center;
+        margin: 30px auto 0 auto;
+        min-width: 280px;
+
+        @media (max-width: $md6+px) {
+            min-width: initial;
+            padding: 10px 20px;
         }
     }
 }

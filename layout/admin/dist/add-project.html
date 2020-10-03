@@ -38,7 +38,7 @@
     </nav>
 </aside>
         <main class="main">
-            <header class="main__header header">
+            <header class="header">
                 <div class="header__hamburger hamburger" type="button" aria-label="menu" aria-controls="navigation">
                     <img src="img/icons/burger.svg" alt="">
                 </div>
@@ -54,20 +54,28 @@
 </nav>
 
 <section class="content__block content__section section">
-    <div class="section__header"><h2>SEO</h2></div>
+    <div class="section__header"><h2>Редагування проекту</h2></div>
     <div class="section__body">
         <form action="#" class="form">
             <div class="form__group">
-                <label for="title">Заголовок title</label>
+                <label for="title">Назва</label>
                 <input type="text" name="title" id="title">
             </div>
             <div class="form__group">
-                <label for="h1">Заголовок h1</label>
+                <label for="h1">Слаг</label>
                 <input type="text" name="h1" id="h1">
             </div>
             <div class="form__group">
-                <label for="metadesc">Заголовок h1</label>
+                <label for="h1">Посилання на сайт</label>
+                <input type="text" name="h1" id="h1">
+            </div>
+            <div class="form__group">
+                <label for="metadesc">Опис</label>
                 <textarea name="metadesc" id="metadesc" cols="30" rows="10"></textarea>
+            </div>
+            <div class="form__group form__group-row">
+                <label for="image">Зображенния</label>
+                <input type="file"  name="image" id="image">
             </div>
             <button type="submit" class="btn btn-success form__submit">Зберегти</button>
         </form>

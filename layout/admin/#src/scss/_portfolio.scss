@@ -1,0 +1,119 @@
+.portfolio {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px -30px 0 -30px;
+
+    
+    @media (max-width: $md7+px) {
+        flex-direction: column;
+    }
+
+    &__item {
+        flex: 0 0 calc(50% - 60px);
+        margin: 30px;
+
+        @media (max-width: $md2+px) {
+            flex: 0 0 calc(100% - 30px);
+        }
+
+        @media (max-width: $md5+px) {
+            flex: 0 0 calc(100% - 20px);
+            margin: 30px 10px;
+        }
+
+        @media (max-width: $md7+px) {
+            margin: 20px 10px;
+        }
+
+    }
+}
+
+.project {
+    display: flex;
+    
+    @media (max-width: $md7+px) {
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    &__img {
+        box-shadow: $shadow_layout;
+        border-radius: 5px;
+        overflow: hidden;
+        flex: 0 0 230px;
+
+        @media (max-width: $md6+px) {
+            flex: 0 0 40%;
+        }
+
+        @media (max-width: $md7+px) {
+            flex: 0 0 90%;
+        }
+
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__body {
+        box-sizing: border-box;
+        padding: 10px 30px ;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        @media (max-width: $md6+px) {
+            padding: 10px 20px 10px 10px;
+            justify-content: center;
+        }
+
+        @media (max-width: $md7+px) {
+            margin: 10px 0 0 0;
+            padding: 0 5px;
+        }
+    }
+
+    
+
+    &__title {
+        a{
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 123%;
+
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__desc {
+        margin: 10px 0 0 0;
+        font-weight: 300;
+        font-size: 15px;
+        line-height: 123%;
+    }
+
+    &__buttons {
+        display: flex;
+        margin-top: auto;
+
+        @media (max-width: $md6+px) {
+            justify-content: space-between;
+        }
+
+        .btn {
+            margin: 20px 30px 0 0;
+            padding: 10px 20px!important;
+
+            @media (max-width: $md6+px) {
+                margin: 20px 0px 0px 0px;
+            }
+        }
+    }
+}

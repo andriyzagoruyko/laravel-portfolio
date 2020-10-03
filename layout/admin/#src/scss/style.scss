@@ -1,10 +1,5 @@
 @import "libs/_normalize";
 
-@import "_vars";
-@import "_utils";
-@import "_fonts";
-@import "_ui";
-
 $md1: 1600;
 $md2: 1400;
 $md3: 1170;
@@ -14,12 +9,20 @@ $md6: 670;
 $md7: 480;
 $md8: 350;
 
+@import "_vars";
+@import "_utils";
+@import "_fonts";
+@import "_ui";
+
 .page {
     display: flex;
     min-height: 100vh;
+    overflow: hidden;
 }
 
 .container {
+    max-width: $md2 + px;
+    margin: 0 auto;
     padding: 0 40px;
 
     @media (max-width: $md4+px) {
@@ -41,13 +44,24 @@ $md8: 350;
 
 .sidebar {
     background: black;
+    background: linear-gradient(
+            180deg,
+            #000000 6.27%,
+            rgba(0, 0, 0, 0.2) 43.75%,
+            rgba(0, 0, 0, 0.2) 64.58%,
+            #000000 100%,
+            #000000 100%
+        ),
+        #0f4c81;
     max-width: 295px;
     width: 100%;
     transition: max-width 0.4s;
 
     &.is-active {
         max-width: 80px;
-        .navigation__label, .logo__label {
+
+        .navigation__label,
+        .logo__label {
             display: none;
         }
     }
@@ -55,14 +69,16 @@ $md8: 350;
     @media (max-width: $md4+px) {
         &:not(.is-active) {
             max-width: 80px;
-            .navigation__label, .logo__label {
+            .navigation__label,
+            .logo__label {
                 display: none;
             }
         }
 
         &.is-active {
             max-width: 295px;
-            .navigation__label, .logo__label {
+            .navigation__label,
+            .logo__label {
                 display: block;
             }
         }
@@ -70,15 +86,17 @@ $md8: 350;
 
     @media (max-width: $md7+px) {
         &:not(.is-active) {
-            max-width: 60px;
-            .navigation__label, .logo__label {
+            max-width: 0px;
+            .navigation__label,
+            .logo__label {
                 display: none;
             }
         }
 
         &.is-active {
             max-width: 250px;
-            .navigation__label, .logo__label {
+            .navigation__label,
+            .logo__label {
                 display: block;
             }
         }
@@ -89,7 +107,7 @@ $md8: 350;
         display: flex;
         align-items: center;
 
-        &__img{
+        &__img {
             padding: 15px;
 
             @media (max-width: $md7+px) {
@@ -97,13 +115,13 @@ $md8: 350;
             }
         }
 
-        &__label{
+        &__label {
             font-size: 24px;
             line-height: 24px;
             letter-spacing: 0.15em;
             text-transform: uppercase;
             font-weight: bold;
-            color: #FFFFFF;
+            color: #ffffff;
             margin: 0 60px 0 0;
         }
     }
@@ -113,16 +131,14 @@ $md8: 350;
 }
 
 .navigation {
-
     &__item {
-        a{
+        a {
             display: flex;
             align-items: center;
             padding: 15px 0;
             color: $color_white;
 
-
-            .icon{
+            .icon {
                 padding: 0 30px;
 
                 @media (max-width: $md7+px) {
@@ -131,9 +147,9 @@ $md8: 350;
             }
         }
 
-        
-        &.is-active, &:hover{
-            a{
+        &.is-active,
+        &:hover {
+            a {
                 background: $color_primary;
                 font-weight: bold;
             }
@@ -165,28 +181,40 @@ $md8: 350;
     }
 
     &__controll {
-        a{
+        a {
             color: $color_primary;
             font-weight: bold;
+
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 }
+
 .content {
     display: flex;
     flex-direction: column;
-    
-    &__tabs {
+    position: relative;
+
+    @media (max-width: $md7+px) {
+        min-width: 100vw;
+    }
+
+    &__block {
         margin: 60px 0 0 0;
 
-        
         @media (max-width: $md3+px) {
             margin: 30px 0 0 0;
         }
 
-        
         @media (max-width: $md6+px) {
             margin: 15px 0 0 0;
         }
+    }
+
+    &__tabs {
+        @extend .content__block;
 
         ul {
             width: 100%;
@@ -200,7 +228,7 @@ $md8: 350;
                 margin: 0 10px;
             }
 
-            a{
+            a {
                 padding: 15px 30px;
 
                 @media (max-width: $md6+px) {
@@ -210,15 +238,19 @@ $md8: 350;
         }
     }
 
-    &__section {
-        margin: 60px 0 0 0;
+    &__buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        .btn {
+            min-width: 280px;
+            max-width: 100%;
+            text-align: center;
+            margin: 10px 30px;
 
-        @media (max-width: $md3+px) {
-            margin: 30px 0 0 0;
-        }
-
-        @media (max-width: $md6+px) {
-            margin: 15px 0 0 0;
+            @media (max-width: $md3+px) {
+                min-width: 150px;
+            }
         }
     }
 }
@@ -241,11 +273,15 @@ $md8: 350;
     }
 
     &__header {
-        border-bottom: 1px solid #C4C4C4;
+        border-bottom: 1px solid #c4c4c4;
         padding: 25px 30px;
         box-sizing: border-box;
 
-        h2{
+        @media (max-width: $md7+px) {
+            text-align: center;
+        }
+
+        h2 {
             margin: 0;
             font-size: 18px;
             font-weight: bold;
@@ -267,37 +303,4 @@ $md8: 350;
     }
 }
 
-.form {
-    label {
-        display: block;
-        margin: 0 0 0 5px;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 16px;
-    }
-
-    input, textarea {
-        border: 1px solid #C4C4C4;
-        box-sizing: border-box;
-        border-radius: 2px;
-        margin: 5px 0 0 0;
-        width: 100%;
-        padding: 5px;
-    }
-
-    &__group {
-        margin: 20px 0 0 0;
-    }
-
-    &__submit {
-        align-self: center;
-        margin: 30px auto 0 auto;    
-        min-width: 280px;
-
-        @media (max-width: $md6+px) {
-            min-width: initial;
-            padding: 10px 20px;
-        }
-    }
-}
-
+@import "_portfolio";
