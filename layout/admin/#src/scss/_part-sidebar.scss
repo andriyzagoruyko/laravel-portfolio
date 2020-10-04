@@ -1,15 +1,15 @@
 $sidebar_width: 295;
-$sidebar_width_mobile: 250;
+$sidebar_width_mobile: 260;
 $sidebar_closed: 80;
 $sidebar_closed_mobile: 0;
 
 .sidebar {
     background: black;
     min-width: $sidebar_width + px;
-    transition: min-width 0.4s;
+    transition: min-width 0.4s  ease-in-out;
     overflow: hidden;
 
-    @media (max-width: $md5+px) {
+    @media (max-width: $md4+px) {
         &:before {
             content: "";
             position: fixed;
@@ -18,15 +18,16 @@ $sidebar_closed_mobile: 0;
             top: 0;
             left: 0;
             background: #000000;
-            transition: opacity 0.3s, transform 0.3s;
+            transition: opacity 0.2s;
+            transition-delay: 0.3s;
             z-index: 10;
             opacity: 0.8;
+            pointer-events: none;
         }
 
         &:not(.is-active) {
             &:before {
                 opacity: 0;
-                pointer-events: none;
             }
         }
     }
@@ -37,7 +38,7 @@ $sidebar_closed_mobile: 0;
         left: 0;
         z-index: 50;
         overflow: hidden;
-        transition: max-width 0.4s;
+        transition: max-width 0.4s ease-in-out;
         height: 100vh;
         overflow-y: auto;
         background: linear-gradient(
@@ -115,10 +116,6 @@ $sidebar_closed_mobile: 0;
 
             .icon {
                 padding: 0 30px;
-
-                @media (max-width: $md7+px) {
-                    padding: 0 20px;
-                }
             }
         }
 

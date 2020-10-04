@@ -3,46 +3,61 @@
     flex-wrap: wrap;
     margin: 30px -30px 0 -30px;
 
-    
+    @media (max-width: $md3+px) {
+        margin: 30px -10px 0 -10px;
+    }
+
     @media (max-width: $md7+px) {
         flex-direction: column;
     }
+    
 
     &__item {
-        flex: 0 0 calc(50% - 60px);
-        margin: 30px;
 
-        @media (max-width: $md2+px) {
-            flex: 0 0 calc(100% - 30px);
+        flex: 0 0 calc(33.3333% - 40px);
+        margin: 20px;
+
+        @media (max-width: $md1+px) {
+            flex: 0 0 calc(50% - 60px);
+            margin: 30px;
         }
 
-        @media (max-width: $md5+px) {
-            flex: 0 0 calc(100% - 20px);
+        @media (max-width: $md3+px) {
+            flex: 0 0 calc(50% - 20px);
             margin: 30px 10px;
+        }
+
+        @media (max-width: $md4+px) {
+            flex: 0 0 calc(100% - 20px);
+        }
+
+        @media (max-width: $md6+px) {
+            &:first-child {
+                margin-top: 0 !important;
+            }
         }
 
         @media (max-width: $md7+px) {
             margin: 20px 10px;
             flex: auto;
         }
-
     }
 }
 
 .project {
     display: flex;
-    
+
     @media (max-width: $md7+px) {
         flex-direction: column;
         align-items: center;
     }
 
-
     &__img {
-        box-shadow: $shadow_layout;
-        border-radius: 5px;
-        overflow: hidden;
         flex: 0 0 230px;
+
+        @media (max-width: $md3+px) {
+            flex: 0 0 180px;
+        }
 
         @media (max-width: $md6+px) {
             flex: 0 0 40%;
@@ -55,18 +70,19 @@
             box-sizing: border-box;
         }
 
-
         img {
             display: block;
             width: 100%;
             height: 100%;
+            border-radius: 5px;
+            box-shadow: $shadow_layout;
             object-fit: cover;
         }
     }
 
     &__body {
         box-sizing: border-box;
-        padding: 10px 30px ;
+        padding: 10px 30px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -83,14 +99,13 @@
         }
     }
 
-
     &__title {
-        a{
+        a {
             font-weight: 500;
             font-size: 16px;
             line-height: 123%;
 
-            &:hover{
+            &:hover {
                 text-decoration: underline;
             }
         }
@@ -99,7 +114,7 @@
     &__desc {
         margin: 10px 0 0 0;
         font-weight: 300;
-        font-size: 15px;
+        font-size: 14px;
         line-height: 123%;
     }
 
@@ -113,7 +128,7 @@
 
         .btn {
             margin: 20px 30px 0 0;
-            padding: 10px 20px!important;
+            padding: 10px 20px !important;
 
             @media (max-width: $md6+px) {
                 margin: 20px 0px 0px 0px;

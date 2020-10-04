@@ -1,3 +1,13 @@
+.container {
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: $md1 + px;
+
+    @media (max-width: $md1+px) {
+        max-width: $md2 + px;
+    }
+}
+
 .main {
     flex: 1 1 auto;
     width: 100%;
@@ -33,7 +43,7 @@
         transition: color 0.3s;
 
         &.is-active {
-            @media (max-width: $md5+px) {
+            @media (max-width: $md4+px) {
                 color: $color_white;
             }
         }
@@ -51,11 +61,6 @@
     }
 }
 
-.container {
-    max-width: $md2 + px;
-    box-sizing: border-box;
-    margin: 0 auto;
-}
 
 .content {
     display: flex;
