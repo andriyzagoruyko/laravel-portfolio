@@ -31,6 +31,18 @@ p {
     line-height: 150%;
 }
 
+.page {
+    display: flex;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .btn {
     padding: 10px;
     font-weight: 500;
@@ -104,12 +116,6 @@ p {
             }
         }
     }
-}
-
-.icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .form {
