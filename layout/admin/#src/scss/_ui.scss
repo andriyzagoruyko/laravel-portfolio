@@ -55,6 +55,7 @@ p {
     display: block;
     cursor: pointer;
     transition: 0.3s;
+    text-align: center;
 
     &-primary {
         background: $color_primary;
@@ -128,6 +129,8 @@ p {
     }
 
     input[type="text"],
+    input[type="password"],
+    input[type="email"],
     textarea {
         border: 1px solid #c4c4c4;
         box-sizing: border-box;
