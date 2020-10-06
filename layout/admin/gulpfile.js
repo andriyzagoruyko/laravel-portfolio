@@ -2,37 +2,39 @@ let folder_prefix = "admin";
 let project_folder = "dist/assets/" + folder_prefix;
 let source_folder = "#src";
 
+let fs = require('fs');
+
+let laravel_folder_prefix = 'admin';
+
 let path = {
     build: {
-        html: project_folder+"/",
-        css: project_folder+"/css/",
-        js: project_folder+"/js/",
-        img: project_folder+"/img/",
-        fonts: project_folder+"/fonts/",
+        html:project_folder+"/",
+        css:project_folder+"/css/",
+        js:project_folder+"/js/",
+        img:project_folder+"/img/",
+        fonts:project_folder+"/fonts/",
     },
     laravel: {
-        css: "../../portfolio/public/assets/" + folder_prefix + "/css",
-        js: "../../portfolio/public/assets/"+ folder_prefix + "/js",
-        fonts: "../../portfolio/public/assets/"+ folder_prefix + "/fonts",
-        img: "../../portfolio/public/assets/"+ folder_prefix + "/img",
+        css: "../../portfolio/public/assets/" + laravel_folder_prefix + "/css",
+        js: "../../portfolio/public/assets/"+ laravel_folder_prefix + "/js",
+        fonts: "../../portfolio/public/assets/"+ laravel_folder_prefix + "/fonts",
+        img: "../../portfolio/public/assets/"+ laravel_folder_prefix + "/img",
     },
     src: {
         html: [source_folder+"/*.html", "!"+source_folder+"/_*.html"],
-        css: source_folder+"/scss/style.scss",
-        js: source_folder+"/js/script.js",
-        img: source_folder+"/img/**/*.+(png|jpg|gif|ico|svg|webp)",
-        fonts: source_folder+"/fonts/**/*.+(woff|woff2|eot|svg|ttf|woff)",
+        css:source_folder+"/scss/style.scss",
+        js:source_folder+"/js/script.js",
+        img:source_folder+"/img/**/*.+(png|jpg|gif|ico|svg|webp)",
+        fonts:source_folder+"/fonts/**/*.+(woff|woff2|eot|svg|ttf|woff)",
     },
     watch: {
-        html: source_folder+"/**/*.html",
-        css: source_folder+"/scss/**/*.scss",
-        js: source_folder+"/js/**/*.js",
-        img: source_folder+"/img/**/*.+(png|jpg|gif|ico|svg|webp)",
+        html:source_folder+"/**/*.html",
+        css:source_folder+"/scss/**/*.scss",
+        js:source_folder+"/js/**/*.js",
+        img:source_folder+"/img/**/*.+(png|jpg|gif|ico|svg|webp)",
     },
     clean: "./" + project_folder +"/"
 }
-
-let fs = require('fs');
 
 let { src, dest } = require('gulp'),
     gulp = require('gulp'),
@@ -97,6 +99,9 @@ function fonts(){
     return src(path.src.fonts)
         .pipe(dest(path.build.fonts))    
         .pipe(dest(path.laravel.fonts))
+}
+
+function cb(){
 }
 
 function clean(){
