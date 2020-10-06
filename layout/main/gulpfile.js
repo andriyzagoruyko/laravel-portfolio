@@ -1,34 +1,40 @@
-let project_folder = "dist";
+let folder_prefix = "main";
+let project_folder = "dist/assets/" + folder_prefix;
 let source_folder = "#src";
 
-let fs = require('fs');
-
-let path={
-    build:{
-        html:project_folder+"/",
-        css:project_folder+"/css/",
-        js:project_folder+"/js/",
-        img:project_folder+"/img/",
-        fonts:project_folder+"/fonts/",
+let path = {
+    build: {
+        html: project_folder+"/",
+        css: project_folder+"/css/",
+        js: project_folder+"/js/",
+        img: project_folder+"/img/",
+        fonts: project_folder+"/fonts/",
     },
-    src:{
+    laravel: {
+        css: "../../portfolio/public/assets/" + folder_prefix + "/css",
+        js: "../../portfolio/public/assets/"+ folder_prefix + "/js",
+        fonts: "../../portfolio/public/assets/"+ folder_prefix + "/fonts",
+        img: "../../portfolio/public/assets/"+ folder_prefix + "/img",
+    },
+    src: {
         html: [source_folder+"/*.html", "!"+source_folder+"/_*.html"],
-        css:source_folder+"/scss/style.scss",
-        js:source_folder+"/js/script.js",
-        img:source_folder+"/img/**/*.+(png|jpg|gif|ico|svg|webp)",
-        fonts:source_folder+"/fonts/**/*.+(woff|woff2|eot|svg|ttf|woff)",
-
+        css: source_folder+"/scss/style.scss",
+        js: source_folder+"/js/script.js",
+        img: source_folder+"/img/**/*.+(png|jpg|gif|ico|svg|webp)",
+        fonts: source_folder+"/fonts/**/*.+(woff|woff2|eot|svg|ttf|woff)",
     },
-    watch:{
-        html:source_folder+"/**/*.html",
-        css:source_folder+"/scss/**/*.scss",
-        js:source_folder+"/js/**/*.js",
-        img:source_folder+"/img/**/*.+(png|jpg|gif|ico|svg|webp)",
+    watch: {
+        html: source_folder+"/**/*.html",
+        css: source_folder+"/scss/**/*.scss",
+        js: source_folder+"/js/**/*.js",
+        img: source_folder+"/img/**/*.+(png|jpg|gif|ico|svg|webp)",
     },
     clean: "./" + project_folder +"/"
 }
 
-let { src, dest} = require('gulp'),
+let fs = require('fs');
+
+let { src, dest } = require('gulp'),
     gulp = require('gulp'),
     browsersync = require('browser-sync').create(),
     fileinclude = require('gulp-file-include'),
@@ -61,12 +67,12 @@ function browserSync(params){
 gulp.task('svgSprite', function(){
     return gulp.src([source_folder + '/iconsprite/*.svg'])
     .pipe(svgSprite({
-        mode:{
-            stack:{
-                sprite: "../icons/icons.svg",
+            mode:{
+                stack:{
+                    sprite: "../icons/icons.svg",
+                }
             }
         }
-    }
     ))
     .pipe(dest(path.build.img))
 })
@@ -84,42 +90,18 @@ function watchFiles(params){
     gulp.watch([path.watch.css], css);
     gulp.watch([path.watch.js], js);
     gulp.watch([path.watch.img], images);
-
 }
 
-function fontsStyle(params) {
-    let file_content = fs.readFileSync(source_folder + '/scss/fonts.scss');
-    if (file_content == '') {
-        fs.writeFile(source_folder + '/scss/fonts.scss', '', cb);
-        return fs.readdir(path.build.fonts, function (err, items) {
-        if (items) {
-        let c_fontname;
-        for (var i = 0; i < items.length; i++) {
-            let fontname = items[i].split('.');
-            fontname = fontname[0];
-            if (c_fontname != fontname) {
-                fs.appendFile(source_folder + '/scss/fonts.scss', '@include font("' + fontname + '", "' + fontname + '", "400", "normal");\r\n', cb);
-            }
-            c_fontname = fontname;
-        }
-        }
-    })
-    }
-}
 
 function fonts(){
     return src(path.src.fonts)
         .pipe(dest(path.build.fonts))    
-}
-
-
-function cb(){
+        .pipe(dest(path.laravel.fonts))
 }
 
 function clean(){
     return del(path.clean);
 }
-
 
 function css(params){
     return src(path.src.css)
@@ -147,6 +129,7 @@ function css(params){
         )*/
         .pipe(dest(path.build.css))
         .pipe(browsersync.stream())
+        .pipe(dest(path.laravel.css))
 }
 
 function html(){
@@ -161,6 +144,7 @@ function js(){
     return src(path.src.js)
         .pipe(fileinclude())
         .pipe(dest(path.build.js))
+        .pipe(dest(path.laravel.js))
         .pipe(
             rename({
                 extname:".min.js"
@@ -169,6 +153,7 @@ function js(){
         //.pipe(uglify())
         .pipe(dest(path.build.js))
         .pipe(browsersync.stream())
+        .pipe(dest(path.laravel.js))
 }
 
 function images(){
@@ -199,7 +184,31 @@ function images(){
             ])
         )
         .pipe(dest(path.build.img))
+        .pipe(dest(path.laravel.img))
         .pipe(browsersync.stream())
+}
+
+function fontsStyle(params) {
+    let file_content = fs.readFileSync(source_folder + '/scss/fonts.scss');
+    if (file_content == '') {
+        fs.writeFile(source_folder + '/scss/fonts.scss', '', cb);
+        return fs.readdir(path.build.fonts, function (err, items) {
+        if (items) {
+        let c_fontname;
+        for (var i = 0; i < items.length; i++) {
+            let fontname = items[i].split('.');
+            fontname = fontname[0];
+            if (c_fontname != fontname) {
+                fs.appendFile(source_folder + '/scss/fonts.scss', '@include font("' + fontname + '", "' + fontname + '", "400", "normal");\r\n', cb);
+            }
+            c_fontname = fontname;
+        }
+        }
+    })
+    }
+}
+
+function cb(){
 }
 
 let build = gulp.series(clean,  gulp.parallel(js, css, html, images, fonts));
