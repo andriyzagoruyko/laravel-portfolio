@@ -3,21 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AdminController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+use App\Http\Controllers\Admin\PortfolioController;
 
 Route::get('/', [MainController::class, 'index'])->name('index');
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
+Route::group([
+    'middleware' => 'auth',
+    'prefix' => 'admin'
+    ], function() {
+    Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
+    Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('admin.logout');
+    Route::resource('/projects', App\Http\Controllers\Admin\ProjectController::class);
+});
 
 $disabled = [
     'confirm' => false,
@@ -27,4 +24,3 @@ $disabled = [
 ];
 
 Auth::routes($disabled);
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

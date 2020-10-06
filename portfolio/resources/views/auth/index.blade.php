@@ -1,4 +1,4 @@
-@extends('auth.admin.layouts.master')
+@extends('auth.layouts.master')
 
 @section('content')
     test
