@@ -119,11 +119,15 @@ $sidebar_closed_mobile: 0;
             }
         }
 
-        &.is-active,
-        &:hover {
+        &.is-active
             a {
                 background: $color_primary;
                 font-weight: bold;
+            }
+
+        &:hover {
+            a {
+                background: $color_primary;
             }
         }
     }

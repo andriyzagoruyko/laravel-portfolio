@@ -60,7 +60,7 @@ p {
         background: $color_primary;
 
         &:hover {
-            background: lighten($color_primary, 6%);
+            background: lighten($color_primary, 12%);
         }
     }
 
@@ -68,7 +68,7 @@ p {
         background: $color_succsess;
 
         &:hover {
-            background: lighten($color_succsess, 6%);
+            background: lighten($color_succsess, 5%);
         }
     }
 
@@ -76,7 +76,7 @@ p {
         background: $color_warning;
 
         &:hover {
-            background: lighten($color_warning, 6%);
+            background: lighten($color_warning, 8%);
         }
     }
 

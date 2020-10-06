@@ -497,7 +497,7 @@ p {
 }
 
 .btn-primary:hover {
-  background: #0f4d83;
+  background: #125d9f;
 }
 
 .btn-success {
@@ -505,7 +505,7 @@ p {
 }
 
 .btn-success:hover {
-  background: #00d8b1;
+  background: #00d3ad;
 }
 
 .btn-warning {
@@ -513,7 +513,7 @@ p {
 }
 
 .btn-warning:hover {
-  background: #edb37e;
+  background: #eeb887;
 }
 
 .btn-danger {
@@ -824,10 +824,13 @@ p {
   padding: 0 30px;
 }
 
-.navigation__item.is-active a,
-.navigation__item:hover a {
+.navigation__item.is-active a {
   background: #0c3d68;
   font-weight: bold;
+}
+
+.navigation__item:hover a {
+  background: #0c3d68;
 }
 
 .portfolio {
