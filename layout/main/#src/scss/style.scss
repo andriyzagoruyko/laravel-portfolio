@@ -1,5 +1,5 @@
 @import "libs/_normalize";
-@import "libs/_swiper";
+//@import "libs/_swiper";
 
 @import "_vars";
 @import "_utils";
@@ -67,12 +67,6 @@ p{
 @import "_header";
 
 .main {
-
-    /*background: url(/img/projects/bg.svg);
-    background-position: center top;
-    background-size: 100%;
-    background-repeat: no-repeat;
-*/
     position: relative;
 
     .main-bg{
@@ -178,7 +172,6 @@ p{
                 }
 
                 @media (max-width: $md6+px) {
-                   // margin: 5px; 
                     font-size: 12px;
                 }
             }
@@ -443,7 +436,7 @@ p{
 }
 
 .section-about{
-    background: linear-gradient(180deg, #000000 6.27%, rgba(0, 0, 0, 0.85) 43.75%, rgba(0, 0, 0, 0.85) 64.58%, #000000 100%, #000000 100%), url(/img/logo.svg) fixed;
+    background: linear-gradient(180deg, #000000 6.27%, rgba(0, 0, 0, 0.85) 43.75%, rgba(0, 0, 0, 0.85) 64.58%, #000000 100%, #000000 100%), url(/assets/main/img/logo.svg) fixed;
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
@@ -506,7 +499,7 @@ p{
 }
 
 .section-contact {
-    background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.3) 28.13%, rgba(0, 0, 0, 0.2) 99.99%, rgba(0, 0, 0, 0.1) 100%), url(/img/contacts/bg.jpg);
+    background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.3) 28.13%, rgba(0, 0, 0, 0.2) 99.99%, rgba(0, 0, 0, 0.1) 100%), url(/assets/main/img/contacts/bg.jpg);
     background-size: cover;
     background-position: center;
 }
