@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [MainController::class, 'index'])->name('index');
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
+
+$disabled = [
+    'confirm' => false,
+    'email' => false,
+    'reset' => false,
+    'register' => false,
+];
+
+Auth::routes($disabled);
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
