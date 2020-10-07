@@ -1,5 +1,7 @@
 @extends('auth.layouts.master')
 
+@section('title', 'Проекти')
+
 @section('content')
     <div class="content__block content__buttons">
         <a href="{{ route('projects.create') }}" class="btn btn-success">Додати проект</a>

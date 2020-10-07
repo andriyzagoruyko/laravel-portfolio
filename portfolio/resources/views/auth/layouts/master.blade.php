@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/admin/css/style.css"> 
 	<script src="/assets/admin/js/script.js"></script>
-    <title>@yield('title')</title>
+    <title>Панель управления: @yield('title')</title>
 </head>
 <body>
     <div class="page">
