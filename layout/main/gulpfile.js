@@ -2,7 +2,6 @@ let folder_prefix = "main";
 let project_folder = "dist/assets/" + folder_prefix;
 let source_folder = "#src";
 
-<<<<<<< HEAD
 let path = {
     build: {
         html: project_folder+"/",
@@ -29,47 +28,12 @@ let path = {
         css: source_folder+"/scss/**/*.scss",
         js: source_folder+"/js/**/*.js",
         img: source_folder+"/img/**/*.+(png|jpg|gif|ico|svg|webp)",
-=======
-let fs = require('fs');
-
-let laravel_folder_prefix = 'main';
-
-let path = {
-    build: {
-        html:project_folder+"/",
-        css:project_folder+"/css/",
-        js:project_folder+"/js/",
-        img:project_folder+"/img/",
-        fonts:project_folder+"/fonts/",
-    },
-    laravel: {
-        css: "../../portfolio/public/assets/" + laravel_folder_prefix + "/css",
-        js: "../../portfolio/public/assets/"+ laravel_folder_prefix + "/js",
-        fonts: "../../portfolio/public/assets/"+ laravel_folder_prefix + "/fonts",
-        img: "../../portfolio/public/assets/"+ laravel_folder_prefix + "/img",
-    },
-    src: {
-        html: [source_folder+"/*.html", "!"+source_folder+"/_*.html"],
-        css:source_folder+"/scss/style.scss",
-        js:source_folder+"/js/script.js",
-        img:source_folder+"/img/**/*.+(png|jpg|gif|ico|svg|webp)",
-        fonts:source_folder+"/fonts/**/*.+(woff|woff2|eot|svg|ttf|woff)",
-    },
-    watch: {
-        html:source_folder+"/**/*.html",
-        css:source_folder+"/scss/**/*.scss",
-        js:source_folder+"/js/**/*.js",
-        img:source_folder+"/img/**/*.+(png|jpg|gif|ico|svg|webp)",
->>>>>>> 10c139687fd9c467184ae377337dd9a0fdfc3416
     },
     clean: "./" + project_folder +"/"
 }
 
-<<<<<<< HEAD
 let fs = require('fs');
 
-=======
->>>>>>> 10c139687fd9c467184ae377337dd9a0fdfc3416
 let { src, dest } = require('gulp'),
     gulp = require('gulp'),
     browsersync = require('browser-sync').create(),
@@ -93,7 +57,7 @@ let { src, dest } = require('gulp'),
 function browserSync(params){
     browsersync.init({
         server:{
-            baseDir: "./" + project_folder +"/"
+            baseDir: "./dist/" 
         },
         port:3000,
         notify:false
@@ -133,12 +97,9 @@ function fonts(){
     return src(path.src.fonts)
         .pipe(dest(path.build.fonts))    
         .pipe(dest(path.laravel.fonts))
-<<<<<<< HEAD
-=======
 }
 
 function cb(){
->>>>>>> 10c139687fd9c467184ae377337dd9a0fdfc3416
 }
 
 function clean(){
