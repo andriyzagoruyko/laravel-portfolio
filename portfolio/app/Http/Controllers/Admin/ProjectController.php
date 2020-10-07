@@ -37,7 +37,12 @@ class ProjectController extends Controller
      */
     public function store(ProjectRequest $request)
     {
-        Project::create($request->all());
+        $project = Project::create($request->except(['image']));
+
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+            $project->addMediaFromRequest('image')->toMediaCollection('images');
+        }
+
         return redirect()->route('projects.index');
     }
 
@@ -72,7 +77,13 @@ class ProjectController extends Controller
      */
     public function update(ProjectRequest $request, Project $project)
     {
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+            $project->clearMediaCollection('images');
+            $project->addMediaFromRequest('image')->toMediaCollection('images');
+        }
+
         $project->update($request->all());
+
         return redirect()->route('projects.index');
     }
 

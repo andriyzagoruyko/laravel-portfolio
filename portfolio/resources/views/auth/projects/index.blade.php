@@ -12,7 +12,7 @@
         <div class="portfolio__item project">
             <div class="project__img">
                 <a href="{{ route("projects.edit", $project->id) }}">   
-                    <img src="/assets/admin/img/projects/02.jpg" alt="">
+                    {{ $project->getThumbnail() }}
                 </a>
             </div>
             <div class="project__body">

@@ -15,7 +15,7 @@
         <div class="section__header"><h2>Додати проект</h2></div>
     @endisset
     <div class="section__body">
-        <form method="POST" 
+        <form method="POST" enctype="multipart/form-data"
             @isset($project) 
                 action="{{ route('projects.update', $project->id) }}" 
             @else
