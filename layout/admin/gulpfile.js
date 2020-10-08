@@ -13,9 +13,9 @@ let path = {
     },
     laravel: {
         css: laravel_folder + folder_prefix + "/css",
-        js: laravel_folder + folder_prefix + "/js",
+        js: laravel_folder + folder_prefix + "/js/",
         fonts: laravel_folder + folder_prefix + "/fonts",
-        img: laravel_folder + folder_prefix + "/img",
+        img: laravel_folder + folder_prefix + "/img/",
     },
     src: {
         html: [source_folder + "/*.html", "!" + source_folder + "/_*.html"],
@@ -49,9 +49,9 @@ let { src, dest } = require('gulp'),
     imagemin = require("gulp-imagemin"),
     webp = require("gulp-webp"),
     webphtml = require("gulp-webp-html")
-webpcss = require("gulp-webpcss"),
+    webpcss = require("gulp-webpcss"),
     svgSprite = require("gulp-svg-sprite")
-ttf2woff = require("gulp-ttf2woff"),
+    ttf2woff = require("gulp-ttf2woff"),
     ttf2woff2 = require("gulp-ttf2woff2"),
     fonter = require("gulp-fonter"),
     pretty_html = require('gulp-pretty-html');
