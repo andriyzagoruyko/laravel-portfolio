@@ -72,9 +72,13 @@
                                     <span class="current-lang">EN</span> 
                                 </div>
                                 <ul class="dropdown__list">
-                                    <li class="dropdown__item"><a href="#">EN (English)</a></li>
-                                    <li class="dropdown__item"><a href="#">UA (Українська)</a></li>
-                                    <li class="dropdown__item"><a href="#">RU (Русский)</a></li>
+                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    <li class="dropdown__item">
+                                        <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                            {{ mb_strtoupper(explode('_', $properties['regional'])[0]) }} ({{ ucfirst($properties['native']) }})
+                                        </a>
+                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <button class="navigation__hamburger hamburger hamburger--spring" type="button" aria-label="menu" aria-controls="navigation">
