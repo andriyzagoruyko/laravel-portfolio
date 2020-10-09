@@ -21,7 +21,7 @@ class AlterProjectsTableCreateLangTable extends Migration
 
         Schema::create('project_localizations', function (Blueprint $table) {
             $table->id();
-            $table->integer('project_id')->unsigned()->index();
+            $table->bigInteger('project_id')->unsigned()->index();
             $table->string('lang', 2);
             $table->string('name', 60)->nullable();
             $table->text('description')->nullable();

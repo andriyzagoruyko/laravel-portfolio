@@ -43,6 +43,15 @@
                 <textarea name="description" id="description" cols="30" rows="10">@isset($project) {{ $localization->description }} @endisset</textarea>
             </div>
             <div class="form__group form__group-row">
+                <label for="image">Тег</label>
+                <select name="tag_id" id="tag_id">
+                    @foreach ($tags as $tag)
+                        <option value="{{ $tag->id }}" @if($project->tag_id === $tag->id) selected @endif>{{ $tag->defaultLocalization->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form__group form__group-row">
                 <label for="image">Зображенния</label>
                 <input type="file" name="image" id="image">
             </div>

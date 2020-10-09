@@ -443,6 +443,10 @@ button {
   outline: none;
 }
 
+select {
+  outline: none;
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -489,7 +493,7 @@ p {
   -webkit-box-shadow: 1px 0px 1px rgba(0, 0, 0, 0.2), -1px 0px 1px rgba(0, 0, 0, 0.2), 0px 3px 3px rgba(0, 0, 0, 0.35);
           box-shadow: 1px 0px 1px rgba(0, 0, 0, 0.2), -1px 0px 1px rgba(0, 0, 0, 0.2), 0px 3px 3px rgba(0, 0, 0, 0.35);
   border-radius: 5px;
-  display: block;
+  display: inline-block;
   cursor: pointer;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
@@ -603,6 +607,37 @@ p {
       align-self: center;
   margin: 30px auto 0 auto;
   min-width: 280px;
+}
+
+.table {
+  width: 100%;
+  border-spacing: 0;
+}
+
+.table th {
+  text-align: left;
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  vertical-align: top;
+}
+
+.table th.actions,
+.table td.actions {
+  text-align: right;
+}
+
+.table tbody {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+select {
+  padding: 5px;
+  margin: 5px;
 }
 
 .container {
@@ -855,6 +890,16 @@ p {
 
 .navigation__item:hover a {
   background: #0c3d68;
+}
+
+.navigation__label {
+  white-space: nowrap;
+  overflow: hidden;
+  padding-right: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
 }
 
 .portfolio {

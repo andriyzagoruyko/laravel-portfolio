@@ -14,8 +14,10 @@ class Project extends LocalizedModel implements HasMedia
     use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
-            'slug', 'link'
+            'slug', 'link', 'tag_id'
     ];
+
+    public $timestamps = false;
 
     public function registerMediaConversions(Media $media = null): void
     {
@@ -35,5 +37,13 @@ class Project extends LocalizedModel implements HasMedia
     public function getThumbnail() {
         $media = $this->getFirstMedia('images');
         return($media->img('thumb', ['alt' => '']));
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function projects()
+    {
+        return $this->belongsTo(Tag::class);
     }
 }

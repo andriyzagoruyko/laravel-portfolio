@@ -14,12 +14,14 @@ Route::group([
 
 Route::group([
     'middleware' => 'auth',
-    'prefix' => 'admin'
+    'prefix' => LaravelLocalization::setLocale() . '/admin',
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function() {
         Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
+        Route::get('/locale/{localeCode}', [App\Http\Controllers\AdminController::class, 'setEditingLocale'])->name('admin.locale');
         Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('admin.logout');
         Route::resource('projects', App\Http\Controllers\Admin\ProjectController::class);
-        Route::get('/locale/{localeCode}', [App\Http\Controllers\AdminController::class, 'setEditingLocale'])->name('admin.locale');
+        Route::resource('tags', App\Http\Controllers\Admin\TagController::class);
 });
 
 $disabled = [

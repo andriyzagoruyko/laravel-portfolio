@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Tag;
 use App\Models\Project;
 use App\Classes\EditingLocalization;
 use App\Http\Controllers\Controller;
@@ -17,9 +18,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $locale = EditingLocalization::getDefaultLocale();
-        $projects = Project::withLocalization($locale)->get();
-
+        $projects = Project::all();
         return view('auth.projects.index', compact('projects'));
     }
 
@@ -31,7 +30,8 @@ class ProjectController extends Controller
     public function create()
     {
         $locale = EditingLocalization::getCurrentLocale();
-        return view('auth.projects.form', compact('locale'));
+        $tags = Tag::all();
+        return view('auth.projects.form', compact('locale', 'tags'));
     }
 
     /**
@@ -45,6 +45,7 @@ class ProjectController extends Controller
         $project = Project::create([
             'slug' => $request->slug,
             'link' => $request->link,
+            'tag_id' => $request->tag_id,
         ]);
 
         if($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -78,12 +79,13 @@ class ProjectController extends Controller
     {
         $locale = EditingLocalization::getCurrentLocale();
         $localization = $project->localizations()->where('lang', $locale)->first();
+        $tags = Tag::all();
 
         if (is_null($localization)) {
             $localization = $project->localizations()->create(['lang' => $locale]);
         }
 
-        return view('auth.projects.form', compact('project', 'localization', 'locale'));
+        return view('auth.projects.form', compact('project', 'localization', 'locale', 'tags'));
     }
 
     /**

@@ -32,10 +32,16 @@
                                     <span class="navigation__label">Портфоліо</span> 
                                 </a>
                             </li>
-                            <li class="navigation__item">
-                                <a href="#">
-                                    <div class="icon"><img src="/assets/admin/img/icons/lang.svg" alt=""></div> 
-                                    <span class="navigation__label">Локалізація</span> 
+                            <li class="navigation__item @navactive('tags')">
+                                <a href="{{ route('tags.index') }}"><div class="icon">
+                                    <img src="/assets/admin/img/icons/tags.svg" alt=""></div>
+                                    <span class="navigation__label">Теги</span> 
+                                </a>
+                            </li>
+                            <li class="navigation__item @navactive('about')">
+                                <a href="{{ route('projects.index') }}"><div class="icon">
+                                    <img src="/assets/admin/img/icons/about.svg" alt=""></div>
+                                    <span class="navigation__label">Про мене</span> 
                                 </a>
                             </li>
                         </ul>
