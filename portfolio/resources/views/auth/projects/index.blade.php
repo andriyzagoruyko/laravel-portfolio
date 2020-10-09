@@ -9,6 +9,7 @@
     </div>
     <div class="content__block content__portfolio portfolio">
         @foreach($projects as $project)
+
         <div class="portfolio__item project">
             <div class="project__img">
                 <a href="{{ route("projects.edit", $project->id) }}">   
@@ -17,8 +18,8 @@
             </div>
             <div class="project__body">
                 <div class="project__text">
-                    <div class="project__title"><a href="{{ route("projects.edit", $project->id) }}">{{ $project->name }}</a></div>
-                    <div class="project__desc">{{ $project->description }}</div>
+                    <div class="project__title"><a href="{{ route("projects.edit", $project->id) }}">{{ $project->localization->name }}</a></div>
+                    <div class="project__desc">{{ $project->localization->description }}</div>
                 </div>
                 
                 <form action="{{ route("projects.destroy", $project->id) }}"  method="POST" class="project__buttons">

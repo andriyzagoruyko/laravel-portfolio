@@ -9,11 +9,13 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
-class Project extends Model implements HasMedia
+class Project extends LocalizedModel implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    protected $fillable = ['slug', 'link', 'name', 'description', 'image'];
+    protected $fillable = [
+            'slug', 'link'
+    ];
 
     public function registerMediaConversions(Media $media = null): void
     {
@@ -29,7 +31,7 @@ class Project extends Model implements HasMedia
 
         $this->addMediaConversion('full-size');
     }
-
+    
     public function getThumbnail() {
         $media = $this->getFirstMedia('images');
         return($media->img('thumb', ['alt' => '']));

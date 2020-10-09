@@ -20,13 +20,13 @@
                     </a>
                     <nav class="sidebar__nav navigation">
                         <ul>
-                            <li class="navigation__item is-active">
+                            <li class="navigation__item @navactive('admin.index')">
                                 <a href="{{ route('admin.index') }}"><div class="icon">
                                     <img src="/assets/admin/img/icons/settings.svg" alt=""></div> 
                                     <span class="navigation__label">Налаштування</span>
                                 </a>
                             </li>
-                            <li class="navigation__item">
+                            <li class="navigation__item @navactive('projects')">
                                 <a href="{{ route('projects.index') }}"><div class="icon">
                                     <img src="/assets/admin/img/icons/portfolio.svg" alt=""></div>
                                     <span class="navigation__label">Портфоліо</span> 

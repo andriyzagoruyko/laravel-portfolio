@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
+use App\Classes\EditingLocalization;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
+use Illuminate\Support\Facades\Route;
 
 class ProjectController extends Controller
 {
@@ -15,7 +17,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $locale = EditingLocalization::getDefaultLocale();
+        $projects = Project::withLocalization($locale)->get();
+
         return view('auth.projects.index', compact('projects'));
     }
 
@@ -26,7 +30,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('auth.projects.form');
+        $locale = EditingLocalization::getCurrentLocale();
+        return view('auth.projects.form', compact('locale'));
     }
 
     /**
@@ -37,13 +42,19 @@ class ProjectController extends Controller
      */
     public function store(ProjectRequest $request)
     {
-        $project = Project::create($request->except(['image']));
+        $project = Project::create([
+            'slug' => $request->slug,
+            'link' => $request->link,
+        ]);
 
         if($request->hasFile('image') && $request->file('image')->isValid()) {
             $project->addMediaFromRequest('image')->toMediaCollection('images');
         }
 
-        return redirect()->route('projects.index');
+        $params = $request->except('image', 'slug', 'link');
+        $project->localizations()->create($params);
+
+        return redirect()->route('projects.edit', $project->id);
     }
 
     /**
@@ -65,7 +76,14 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('auth.projects.form', compact('project'));
+        $locale = EditingLocalization::getCurrentLocale();
+        $localization = $project->localizations()->where('lang', $locale)->first();
+
+        if (is_null($localization)) {
+            $localization = $project->localizations()->create(['lang' => $locale]);
+        }
+
+        return view('auth.projects.form', compact('project', 'localization', 'locale'));
     }
 
     /**
@@ -77,14 +95,17 @@ class ProjectController extends Controller
      */
     public function update(ProjectRequest $request, Project $project)
     {
-        if($request->hasFile('image') && $request->file('image')->isValid()) {
+        $localization = $project->localizations()->where('lang', $request->lang)->firstOrFail();
+        
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $project->clearMediaCollection('images');
             $project->addMediaFromRequest('image')->toMediaCollection('images');
         }
 
         $project->update($request->all());
+        $localization->update($request->all());
 
-        return redirect()->route('projects.index');
+        return redirect()->route('projects.edit', $project->id);
     }
 
     /**

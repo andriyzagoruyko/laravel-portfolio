@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Classes\EditingLocalization;
+
 
 class AdminController extends Controller
 {
@@ -16,5 +18,14 @@ class AdminController extends Controller
         return view('auth.index');
     }
 
-    
+    /**
+     * Set an editing locale.
+     *
+     * 
+     */
+    public function setEditingLocale($localeCode)
+    {
+        EditingLocalization::setCurrentLocale($localeCode);
+        return back();;
+    }
 }

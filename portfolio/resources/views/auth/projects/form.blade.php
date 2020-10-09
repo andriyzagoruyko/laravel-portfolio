@@ -1,19 +1,16 @@
 @extends('auth.layouts.master')
 
 @section('content')
-<nav class="content__block content__tabs tabs">
-    <ul>
-        <li class="tabs__item is-active"><a href="#">UA</a></li>
-        <li class="tabs__item"><a href="#">EN</a></li>
-    </ul>
-</nav>
+
+@include('auth.layouts.lang-tabs')
 
 <section class="content__block content__section section">
     @isset($project)
-        <div class="section__header"><h2>{{ $project->name }}</h2></div>
+        <div class="section__header"><h2>Редагування проекта</h2></div>
     @else
         <div class="section__header"><h2>Додати проект</h2></div>
     @endisset
+
     <div class="section__body">
         <form method="POST" enctype="multipart/form-data"
             @isset($project) 
@@ -27,9 +24,11 @@
                 @method('PUT')
             @endisset
             @csrf
+            <input type="hidden" name="lang" id="lang" value={{ $locale }}>
+
             <div class="form__group">
                 <label for="name">Назва</label>
-                <input type="text" name="name" id="name" @isset($project) value="{{ $project->name }}" @endisset>
+                <input type="text" name="name" id="name" @isset($project) value="{{ $localization->name }}" @endisset>
             </div>
             <div class="form__group">
                 <label for="slug">Слаг</label>
@@ -41,17 +40,16 @@
             </div>
             <div class="form__group">
                 <label for="description">Опис</label>
-                <textarea name="description" id="description" cols="30" rows="10">@isset($project) {{ $project->description }} @endisset</textarea>
+                <textarea name="description" id="description" cols="30" rows="10">@isset($project) {{ $localization->description }} @endisset</textarea>
             </div>
             <div class="form__group form__group-row">
                 <label for="image">Зображенния</label>
                 <input type="file" name="image" id="image">
             </div>
+
             <div class="form__group form__group-row">
                 <button type="submit" class="btn btn-success form__submit">@isset($project) Зберегти @else Додати @endisset </button>
-                <a href="{{ url()->previous() }}" class="btn btn-danger form__submit">Повернутися назад</a>
             </div>
-
         </form>
     </div>
 </section>

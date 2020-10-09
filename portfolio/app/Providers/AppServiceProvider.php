@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Blade::directive('navactive', function($route){
+            return "<?php echo strpos(Route::currentRouteName(), $route) !== false  ? 'is-active' : '' ?>";
+        });
+
+        Blade::directive('localeactive', function($locale){
+            return "<?php echo \App\Classes\EditingLocalization::getCurrentLocale() === $locale ? 'is-active' : '' ?>";
+        });
     }
 }
