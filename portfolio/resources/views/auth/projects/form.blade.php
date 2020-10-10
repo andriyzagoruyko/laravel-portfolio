@@ -42,14 +42,32 @@
                 <label for="description">Опис</label>
                 <textarea name="description" id="description" cols="30" rows="10">@isset($project) {{ $localization->description }} @endisset</textarea>
             </div>
-            <div class="form__group form__group-row">
-                <label for="image">Тег</label>
-                <select name="tag_id" id="tag_id">
-                    @foreach ($tags as $tag)
-                        <option value="{{ $tag->id }}" @if($project->tag_id === $tag->id) selected @endif>{{ $tag->defaultLocalization->name }}</option>
-                    @endforeach
-                </select>
-            </div>
+            @if($tags->count())
+                <div class="form__group form__group-row">
+                    <label for="image">Тег</label>
+                    <select name="tag_id" id="tag_id">
+                        @foreach ($tags as $tag)
+                            <option value="{{ $tag->id }}" @if($project->tag_id === $tag->id) selected @endif>{{ $tag->defaultLocalization->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
+            @if(!is_null($technologies) && $technologies->count())
+                <div class="form__group">
+                    <label for="image">Технології</label>
+                    <select name="technology_ids[]" id="technology_ids" multiple>
+                        @foreach ($technologies as $technology)
+                            <option value="{{ $technology->id }}" 
+                                    @if(isset($project) && $project->technologies->contains($technology->id)) 
+                                        selected 
+                                    @endif>
+                                    {{ $technology->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
+
 
             <div class="form__group form__group-row">
                 <label for="image">Зображенния</label>

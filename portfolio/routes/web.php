@@ -20,7 +20,7 @@ Route::group([
         Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
         Route::get('/locale/{localeCode}', [App\Http\Controllers\AdminController::class, 'setEditingLocale'])->name('admin.locale');
         Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('admin.logout');
-        
+
         Route::resource('projects', App\Http\Controllers\Admin\ProjectController::class, [
             'except' => [
                 'show'
@@ -34,6 +34,11 @@ Route::group([
         Route::resource('info', App\Http\Controllers\Admin\InfoController::class, [
             'only' => [
                 'index', 'update'
+            ]
+        ]);
+        Route::resource('technologies', App\Http\Controllers\Admin\TechnologyController::class, [
+            'except' => [
+                'show'
             ]
         ]);
 });

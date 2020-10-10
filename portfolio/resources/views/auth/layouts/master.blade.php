@@ -38,6 +38,12 @@
                                     <span class="navigation__label">Теги</span> 
                                 </a>
                             </li>
+                            <li class="navigation__item @navactive('technologies')">
+                                <a href="{{ route('technologies.index') }}"><div class="icon">
+                                    <img src="/assets/admin/img/icons/techno.svg" alt=""></div>
+                                    <span class="navigation__label">Технології</span> 
+                                </a>
+                            </li>
                             <li class="navigation__item @navactive('info')">
                                 <a href="{{ route('info.index') }}"><div class="icon">
                                     <img src="/assets/admin/img/icons/about.svg" alt=""></div>

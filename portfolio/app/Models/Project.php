@@ -46,4 +46,12 @@ class Project extends LocalizedModel implements HasMedia
     {
         return $this->belongsTo(Tag::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function technologies()
+    {
+        return $this->belongsToMany(Technology::class);
+    }
 }

@@ -62,12 +62,23 @@
     }
 
     &__controll {
-        a {
+        display: flex;
+        align-items: flex-end;
+
+        a, .current-lang {
             color: $color_primary;
             font-weight: bold;
 
             &:hover {
                 text-decoration: underline;
+            }
+        }
+
+        .dropdown {
+            margin: 0 10px 0 0;
+            svg {
+                color: $color_primary;
+                padding: 0 2px;
             }
         }
     }

@@ -15,6 +15,12 @@ class CreateInfosTable extends Migration
     {
         Schema::create('infos', function (Blueprint $table) {
             $table->id();
+            $table->string('mail')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('telegram')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('behance')->nullable();
+            $table->string('github')->nullable();
         });
 
         Schema::create('info_localizations', function (Blueprint $table) {
@@ -25,12 +31,6 @@ class CreateInfosTable extends Migration
             $table->string('name')->nullable();
             $table->text('about')->nullable();
             $table->text('contact')->nullable();
-            $table->string('mail')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('telegram')->nullable();
-            $table->string('linkedin')->nullable();
-            $table->string('behance')->nullable();
-            $table->string('github')->nullable();
         });
     }
 

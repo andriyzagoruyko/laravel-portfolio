@@ -140,4 +140,12 @@ $sidebar_closed_mobile: 0;
             }
         }
     }
+
+    &__label {
+        white-space: nowrap;
+        overflow: hidden;
+        padding-right: 10px;
+        box-sizing: border-box;
+        text-overflow: ellipsis;
+    }
 }

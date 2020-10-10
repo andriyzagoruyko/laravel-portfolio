@@ -15,6 +15,10 @@ button {
     outline: none;
 }
 
+select {
+    outline: none;
+}
+
 ul {
     margin: 0;
     padding: 0;
@@ -52,7 +56,7 @@ p {
     background: $color_white;
     box-shadow: $shadow_button;
     border-radius: 5px;
-    display: block;
+    display: inline-block;
     cursor: pointer;
     transition: 0.3s;
     text-align: center;
@@ -163,6 +167,84 @@ p {
         @media (max-width: $md6+px) {
             min-width: initial;
             padding: 10px 20px;
+        }
+    }
+}
+
+.table {
+    width: 100%;
+    border-spacing: 0;
+    th {
+        text-align: left;
+    }
+    
+    th, td{
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+        vertical-align: top;
+
+        &.actions {
+            text-align: right;
+        }
+    }
+
+    tbody {
+        box-sizing: border-box;
+    }
+}
+
+select {
+    padding: 5px;
+    margin: 5px;
+}
+
+.dropdown {
+    position: relative;
+
+    &, &__toggle {
+        align-self: center;
+        display: inline-flex;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        cursor: pointer;
+    }
+
+    &.is-active{
+        .dropdown__list{
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    &__list {
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.3s;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 200;
+        transform: translateY(100%) translateY(10px);
+        background: rgb(255, 255, 255);
+        border-radius: 3px;
+        box-sizing: border-box;
+        box-shadow: $shadow_layout;
+    }
+
+    &__item {
+        white-space: nowrap;
+        color: black;
+
+        a{
+            display: block;
+            padding: 5px 10px;
+            color: $shadow_layout;
+            font-size: 16px;
+
+            &:hover{
+                background: $color_primary;
+                color: white;
+            }
         }
     }
 }
