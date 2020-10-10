@@ -12,6 +12,17 @@ class Info extends LocalizedModel implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
+    protected $fillable = [
+        'mail', 
+        'phone', 
+        'telegram', 
+        'linkedin', 
+        'behance', 
+        'github'
+    ];
+
+    public $timestamps = false;
+    
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')

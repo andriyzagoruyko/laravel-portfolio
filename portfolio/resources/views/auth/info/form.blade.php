@@ -33,27 +33,27 @@
             </div>
             <div class="form__group">
                 <label for="mail">Почта</label>
-                <input type="text" name="mail" id="mail" value="{{ $info->mail }}">
+                <input type="text" name="social[mail]" id="mail" value="{{ $info->mail }}">
             </div>
             <div class="form__group">
                 <label for="phone">Телефон</label>
-                <input type="text" name="phone" id="phone" value="{{ $info->phone }}">
+                <input type="text" name="social[phone]" id="phone" value="{{ $info->phone }}">
             </div>
             <div class="form__group">
                 <label for="telegram">Telegram</label>
-                <input type="text" name="telegram" id="telegram" value="{{ $info->telegram }}">
+                <input type="text" name="social[telegram]" id="telegram" value="{{ $info->telegram }}">
             </div>
             <div class="form__group">
                 <label for="linkedin">Linkedin</label>
-                <input type="text" name="linkedin" id="linkedin" value="{{ $info->linkedin }}">
+                <input type="text" name="social[linkedin]" id="linkedin" value="{{ $info->linkedin }}">
             </div>
             <div class="form__group">
                 <label for="linkedin">Behance</label>
-                <input type="text" name="behance" id="behance" value="{{ $info->behance }}">
+                <input type="text" name="social[behance]" id="behance" value="{{ $info->behance }}">
             </div>
             <div class="form__group">
                 <label for="github">Github</label>
-                <input type="text" name="github" id="github" value="{{ $info->github }}">
+                <input type="text" name="social[github]" id="github" value="{{ $info->github }}">
             </div>
             <div class="form__group form__group-row">
                 <button type="submit" class="btn btn-success form__submit">Зберегти </button>

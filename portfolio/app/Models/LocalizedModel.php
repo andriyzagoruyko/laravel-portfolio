@@ -27,6 +27,7 @@ class LocalizedModel extends Model
             $this->getLocalizationModelName()
         );
     }
+    
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

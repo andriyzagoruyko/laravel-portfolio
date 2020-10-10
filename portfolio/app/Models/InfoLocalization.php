@@ -15,11 +15,6 @@ class InfoLocalization extends Model
         'name', 
         'about', 
         'contact', 
-        'phone', 
-        'telegram', 
-        'linkedin', 
-        'behance', 
-        'github'
     ];
 
     public $timestamps = false;

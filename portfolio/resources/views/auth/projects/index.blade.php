@@ -5,6 +5,7 @@
 @section('content')
     <div class="content__block content__buttons">
         <a href="{{ route('projects.create') }}" class="btn btn-success">Додати проект</a>
+        <a href="#" class="btn btn-warning">Керування тегами</a>
     </div>
     <div class="content__block content__portfolio portfolio">
         @foreach($projects as $project)

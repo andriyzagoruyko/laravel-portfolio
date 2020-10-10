@@ -20,6 +20,7 @@ class InfoController extends Controller
         $info = Info::get()->first();
         $localization = $info->localizations()->where('lang', $locale)->first();
 
+
         if (is_null($localization)) {
             $localization = $info->localizations()->create(['lang' => $locale]);
         }
@@ -36,6 +37,8 @@ class InfoController extends Controller
      */
     public function update(Request $request, Info $info)
     {
+        $info->update($request->input('social'));
+
         $localization = $info->localizations()->where('lang', $request->lang)->firstOrFail();
         $localization->update($request->all());
 

@@ -9,6 +9,7 @@ use App\Classes\EditingLocalization;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class ProjectController extends Controller
 {
@@ -45,18 +46,18 @@ class ProjectController extends Controller
      */
     public function store(ProjectRequest $request)
     {
-        $project = Project::create([
-            'slug' => $request->slug,
-            'link' => $request->link,
-            'tag_id' => $request->tag_id,
-        ]);
-
+        $project = Project::create($request->only('slug', 'link', 'tag_id'));
         $project->technologies()->attach($request->technology_ids);
-        $params = $request->except('image', 'slug', 'link');
-        $project->localizations()->create($params);
 
         if($request->hasFile('image') && $request->file('image')->isValid()) {
             $project->addMediaFromRequest('image')->toMediaCollection('images');
+        }
+
+        $locales = EditingLocalization::getSupportedLocales();
+        
+        foreach ($locales as $code => $locale) {
+            $project->localizations()
+                ->create($request->except('slug', 'link', 'tag_id') + ['lang' => $code]);
         }
         
         return redirect()->route('projects.edit', $project->id);
@@ -71,9 +72,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $locale = EditingLocalization::getCurrentLocale();
-        $localization = $project->localizations()->where('lang', $locale)->first();
         $tags = Tag::all();
         $technologies = Technology::all();
+        $localization = $project->localizations()->where('lang', $locale)->first();
 
         if (is_null($localization)) {
             $localization = $project->localizations()->create(['lang' => $locale]);
@@ -98,9 +99,9 @@ class ProjectController extends Controller
             $project->addMediaFromRequest('image')->toMediaCollection('images');
         }
 
-        $project->update($request->all());
+        $project->update($request->only('slug', 'link', 'tag_id'));
         $project->technologies()->sync($request->technology_ids);
-        $localization->update($request->all());
+        $localization->update($request->except('slug', 'link', 'tag_id'));
 
         return redirect()->route('projects.edit', $project->id);
     }
@@ -115,6 +116,7 @@ class ProjectController extends Controller
     {
         $project->technologies()->detach();
         $project->delete();
+
         return redirect()->route('projects.index');
     }
 }

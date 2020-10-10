@@ -6,6 +6,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Classes\EditingLocalization;
 use App\Http\Controllers\Controller;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class TagController extends Controller
 {
@@ -17,7 +18,8 @@ class TagController extends Controller
     public function index()
     {
         $tags = Tag::all();
-        return view('auth.tags.index', compact('tags'));
+        $locale = LaravelLocalization::getCurrentLocale();
+        return view('auth.tags.index', compact('tags', 'locale'));
     }
 
     /**
@@ -39,11 +41,13 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $tag = Tag::create([
-            'slug' => $request->slug,
-        ]);
-
-        $tag->localizations()->create($request->except('slug'));
+        $tag = Tag::create($request->only('slug'));
+        $locales = EditingLocalization::getSupportedLocales();
+        
+        foreach ($locales as $code => $locale) {
+            $tag->localizations()
+                ->create($request->except('slug') + ['lang' => $code]);
+        }
 
         return redirect()->route('tags.index');    
     }
@@ -75,9 +79,9 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
+        $tag->update($request->only('slug'));
         $localization = $tag->localizations()->where('lang', $request->lang)->firstOrFail();
-        $tag->update($request->all());
-        $localization->update($request->all());
+        $localization->update($request->except('slug'));
 
         return redirect()->route('tags.index');
     }

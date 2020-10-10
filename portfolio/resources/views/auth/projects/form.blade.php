@@ -22,10 +22,9 @@
         >
             @isset($project)
                 @method('PUT')
+                <input type="hidden" name="lang" id="lang" value={{ $locale }}>
             @endisset
             @csrf
-            <input type="hidden" name="lang" id="lang" value={{ $locale }}>
-
             <div class="form__group">
                 <label for="name">Назва</label>
                 <input type="text" name="name" id="name" @isset($project) value="{{ $localization->name }}" @endisset>
@@ -47,7 +46,12 @@
                     <label for="image">Тег</label>
                     <select name="tag_id" id="tag_id">
                         @foreach ($tags as $tag)
-                            <option value="{{ $tag->id }}" @if($project->tag_id === $tag->id) selected @endif>{{ $tag->defaultLocalization->name }}</option>
+                            <option value="{{ $tag->id }}"
+                                @if(isset($project) && $project->tag_id === $tag->id) 
+                                    selected 
+                                @endif>
+                                {{ $tag->defaultLocalization->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -67,8 +71,6 @@
                     </select>
                 </div>
             @endif
-
-
             <div class="form__group form__group-row">
                 <label for="image">Зображенния</label>
                 <input type="file" name="image" id="image">
