@@ -39,13 +39,16 @@
                             {{ $tag->defaultLocalization->name }}
                         </td>
 
-
                         <td class="actions">
                             <form action="{{ route('tags.destroy', $tag) }}" method="POST">
-                                <a class="btn btn-warning" type="button" href="{{ route('tags.edit', $tag) }}">Редагувати</a>
+                                <a href="{{ route("tags.edit", $tag->id) }}" class="btn btn-primary">
+                                    <div class="icon"><img src="/assets/admin/img/icons/edit.svg" alt=""></div>
+                                </a>
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger" type="submit">Видалити</button>
+                                <button type="submit" class="btn btn-danger">
+                                    <span class="icon"><img src="/assets/admin/img/icons/remove.svg" alt=""></span>
+                                </button>
                             </form>
                         </td>
                     </tr>

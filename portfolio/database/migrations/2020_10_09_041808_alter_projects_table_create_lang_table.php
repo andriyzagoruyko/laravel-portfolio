@@ -36,11 +36,11 @@ class AlterProjectsTableCreateLangTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('project_localizations');
         Schema::table('projects', function (Blueprint $table) {
             $table->string('name', 60);
             $table->text('description')->nullable();
         });
 
-        Schema::dropIfExists('project_localizations');
     }
 }

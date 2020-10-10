@@ -59,17 +59,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Project $project)
-    {
-        return redirect()->route('projects.index');
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Project  $project
