@@ -16,7 +16,7 @@ class Technology extends Model implements HasMedia
 
     public function getLogoUrl() {
         $media = $this->getFirstMedia('images');
-        return $media->getUrl();
+        return !is_null($media) ? $media->getUrl() : '';
         //return($media->img('logo', ['alt' => '']));
     }
 }

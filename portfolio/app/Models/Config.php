@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Config extends LocalizedModel
 {
+    use HasFactory;
+    
     public $timestamps = false;
 }

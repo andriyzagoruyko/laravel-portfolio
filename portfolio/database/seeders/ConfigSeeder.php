@@ -15,15 +15,17 @@ class ConfigSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('configs')->insert(['id' => 1]);
-
         $locales =  EditingLocalization::getSupportedLocales();
 
-        foreach($locales as $lang => $locale) {
-            DB::table('config_localizations')->insert([
-                'config_id' => 1,
-                'lang' => $lang,
-            ]);
-        }    
+        \App\Models\Config::factory()->create()
+            ->each(function($config) use ($locales)
+            {
+                foreach($locales as $lang => $locale) {
+                    \App\Models\ConfigLocalization::factory()->create([ 
+                            'config_id' => $config->id,
+                            'lang' => $lang,
+                        ]);
+                }
+            });
     }
 }

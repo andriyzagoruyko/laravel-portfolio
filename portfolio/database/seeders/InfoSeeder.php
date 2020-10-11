@@ -15,15 +15,20 @@ class InfoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('infos')->insert(['id' => 1]);
-
+        $appUrl = 'http://127.0.0.1:8000';
         $locales =  EditingLocalization::getSupportedLocales();
 
-        foreach($locales as $lang => $locale) {
-            DB::table('info_localizations')->insert([
-                'info_id' => 1,
-                'lang' => $lang,
-            ]);
-        }
+        \App\Models\Info::factory()->create()
+            ->each(function($info) use ($locales, $appUrl)
+            {
+                $info->addMediaFromUrl( $appUrl . '/demo/man.png')->toMediaCollection('photo');
+
+                foreach($locales as $lang => $locale) {
+                    \App\Models\InfoLocalization::factory()->create([ 
+                            'info_id' => $info->id,
+                            'lang' => $lang,
+                        ]);
+                }
+            });
     }
 }

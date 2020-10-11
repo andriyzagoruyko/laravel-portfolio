@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ConfigLocalization extends Model
 {
+    use HasFactory;
+
     public $timestamps = false;
 
     protected $fillable = [

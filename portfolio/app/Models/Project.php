@@ -21,7 +21,7 @@ class Project extends LocalizedModel implements HasMedia
 
     public function registerMediaConversions(Media $media = null): void
     {
-        $this->addMediaConversion('thumb')
+        /*$this->addMediaConversion('thumb')
             ->crop('crop-top', 800, 660)
             ->quality(70)
             ->withResponsiveImages();
@@ -31,7 +31,10 @@ class Project extends LocalizedModel implements HasMedia
             ->quality(70)
             ->withResponsiveImages();
 
-        $this->addMediaConversion('full-size');
+        $this->addMediaConversion('full-size');*/
+
+        $this->addMediaConversion('thumb')
+            ->crop('crop-top', 500, 415);
     }
     
     public function getThumbnail() {
