@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Info;
+use App\Http\Requests\InfoRequest;
 use App\Classes\EditingLocalization;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\TechnologyRequest;
 
 class InfoController extends Controller
 {
@@ -30,11 +30,11 @@ class InfoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\TechnologyRequest  $request
+     * @param  \App\Http\Requests\InfoRequest  $request
      * @param  \App\Models\Info  $info
      * @return \Illuminate\Http\Response
      */
-    public function update(TechnologyRequest $request, Info $info)
+    public function update(InfoRequest $request, Info $info)
     {
         $info->update($request->input('social'));
 
@@ -46,6 +46,9 @@ class InfoController extends Controller
             $info->addMediaFromRequest('photo')->toMediaCollection('photo');
         }
 
-        return redirect()->route('info.index');    
+        return redirect()->route('info.index')->with([
+            'flash_message' => 'Інформація збережена',
+            'flash_message_type' => 'success'
+        ]);    
     }
 }

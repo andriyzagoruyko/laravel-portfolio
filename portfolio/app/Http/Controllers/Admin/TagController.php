@@ -49,7 +49,10 @@ class TagController extends Controller
                 ->create($request->except('slug') + ['lang' => $code]);
         }
 
-        return redirect()->route('tags.index');    
+        return redirect()->route('tags.index')->with([
+            'flash_message' => 'Тег успішно додано',
+            'flash_message_type' => 'success'
+        ]);
     }
 
     /**
@@ -83,7 +86,10 @@ class TagController extends Controller
         $localization = $tag->localizations()->where('lang', $request->lang)->firstOrFail();
         $localization->update($request->except('slug'));
 
-        return redirect()->route('tags.index');
+        return redirect()->route('tags.index')->with([
+            'flash_message' => 'Тег збережено',
+            'flash_message_type' => 'success'
+        ]);
     }
 
     /**
@@ -95,6 +101,10 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
-        return redirect()->route('tags.index');
+
+        return redirect()->route('tags.index')->with([
+            'flash_message' => 'Тег видалений',
+            'flash_message_type' => 'danger'
+        ]);
     }
 }

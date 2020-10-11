@@ -6,6 +6,7 @@
     @include('auth.layouts.lang-tabs')
 @endisset
 
+
 <section class="content__block content__section section">
     @isset($project)
         <div class="section__header"><h2>Редагування проекта</h2></div>

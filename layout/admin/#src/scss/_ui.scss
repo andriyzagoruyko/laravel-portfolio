@@ -261,3 +261,38 @@ select {
         }
     }
 }
+
+
+.message {
+    ul{
+        display: inline-flex;
+        flex-direction: column;
+    }
+
+    li {
+        padding: 2px;
+        list-style: initial;
+    }
+
+    li, p{
+        font-weight: bold;
+        color: $color_main_bg;
+    }
+
+    &__body {
+        padding: 10px;
+        text-align: center;
+    }
+
+    &-danger{
+        background: $color_danger!important;
+    }
+
+    &-success{
+        background: $color_succsess!important;
+    }
+
+    &-warning{
+        background: $color_warning!important;
+    }
+}

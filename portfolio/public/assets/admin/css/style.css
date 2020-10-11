@@ -718,6 +718,44 @@ select[multiple] {
   color: white;
 }
 
+.message ul {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.message li {
+  padding: 2px;
+  list-style: initial;
+}
+
+.message li,
+.message p {
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.message__body {
+  padding: 10px;
+  text-align: center;
+}
+
+.message-danger {
+  background: #ed6060 !important;
+}
+
+.message-success {
+  background: #00b998 !important;
+}
+
+.message-warning {
+  background: #e9a363 !important;
+}
+
 .container {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;

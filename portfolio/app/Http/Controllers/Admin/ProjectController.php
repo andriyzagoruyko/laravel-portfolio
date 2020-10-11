@@ -60,7 +60,10 @@ class ProjectController extends Controller
                 ->create($request->except('slug', 'link', 'tag_id') + ['lang' => $code]);
         }
         
-        return redirect()->route('projects.edit', $project->id);
+        return redirect()->route('projects.edit', $project->id)->with([
+            'flash_message' => 'Проект успішно додано',
+            'flash_message_type' => 'success'
+        ]);    
     }
 
     /**
@@ -103,7 +106,10 @@ class ProjectController extends Controller
         $project->technologies()->sync($request->technology_ids);
         $localization->update($request->except('slug', 'link', 'tag_id'));
 
-        return redirect()->route('projects.edit', $project->id);
+        return redirect()->route('projects.edit', $project->id)->with([
+            'flash_message' => 'Проект збережно',
+            'flash_message_type' => 'success'
+        ]); 
     }
 
     /**
@@ -117,6 +123,9 @@ class ProjectController extends Controller
         $project->technologies()->detach();
         $project->delete();
 
-        return redirect()->route('projects.index');
+        return redirect()->route('projects.index')->with([
+            'flash_message' => 'Проект видалено',
+            'flash_message_type' => 'danger'
+        ]);
     }
 }

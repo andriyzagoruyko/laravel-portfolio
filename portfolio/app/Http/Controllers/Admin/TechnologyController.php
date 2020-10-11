@@ -42,7 +42,10 @@ class TechnologyController extends Controller
             $technology->addMediaFromRequest('image')->toMediaCollection('images');
         }
 
-        return redirect()->route('technologies.index');    
+        return redirect()->route('technologies.index')->with([
+            'flash_message' => 'Технологія добавлена успішно',
+            'flash_message_type' => 'success'
+        ]);    
     }
     
     /**
@@ -72,7 +75,10 @@ class TechnologyController extends Controller
             $technology->addMediaFromRequest('image')->toMediaCollection('images');
         }
 
-        return redirect()->route('technologies.index');    
+        return redirect()->route('technologies.index')->with([
+            'flash_message' => 'Технологія збережена',
+            'flash_message_type' => 'success'
+        ]);        
     }
 
     /**

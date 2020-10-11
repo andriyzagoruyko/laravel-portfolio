@@ -88,6 +88,7 @@
             </header>
             <div class="container ">
                 <div class="content">
+                    @include('auth.layouts.message')
                     @yield('content')
                 </div>
             </div>

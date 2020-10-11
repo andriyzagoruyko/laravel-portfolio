@@ -26,7 +26,7 @@ class InfoRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'about' => 'required',
-            'image' => 'required',
+            'photo' => 'required',
         ];
     }
 }
