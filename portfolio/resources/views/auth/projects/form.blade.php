@@ -2,7 +2,9 @@
 
 @section('content')
 
-@include('auth.layouts.lang-tabs')
+@isset($project)
+    @include('auth.layouts.lang-tabs')
+@endisset
 
 <section class="content__block content__section section">
     @isset($project)

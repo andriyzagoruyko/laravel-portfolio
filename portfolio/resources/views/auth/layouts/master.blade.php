@@ -20,8 +20,8 @@
                     </a>
                     <nav class="sidebar__nav navigation">
                         <ul>
-                            <li class="navigation__item @navactive('admin.index')">
-                                <a href="{{ route('admin.index') }}"><div class="icon">
+                            <li class="navigation__item @navactive('config')">
+                                <a href="{{ route('config.index') }}"><div class="icon">
                                     <img src="/assets/admin/img/icons/settings.svg" alt=""></div> 
                                     <span class="navigation__label">Налаштування</span>
                                 </a>

@@ -31,14 +31,19 @@ Route::group([
                 'show'
             ]
         ]);
+        Route::resource('technologies', App\Http\Controllers\Admin\TechnologyController::class, [
+            'except' => [
+                'show'
+            ]
+        ]);
         Route::resource('info', App\Http\Controllers\Admin\InfoController::class, [
             'only' => [
                 'index', 'update'
             ]
         ]);
-        Route::resource('technologies', App\Http\Controllers\Admin\TechnologyController::class, [
-            'except' => [
-                'show'
+        Route::resource('config', App\Http\Controllers\Admin\ConfigController::class, [
+            'only' => [
+                'index', 'update'
             ]
         ]);
 });

@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Classes\EditingLocalization;
 
-class InfoSeeder extends Seeder
+class ConfigSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,15 +15,15 @@ class InfoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('infos')->insert(['id' => 1]);
+        DB::table('configs')->insert(['id' => 1]);
 
         $locales =  EditingLocalization::getSupportedLocales();
 
         foreach($locales as $lang => $locale) {
-            DB::table('info_localizations')->insert([
-                'info_id' => 1,
+            DB::table('config_localizations')->insert([
+                'config_id' => 1,
                 'lang' => $lang,
             ]);
-        }
+        }    
     }
 }

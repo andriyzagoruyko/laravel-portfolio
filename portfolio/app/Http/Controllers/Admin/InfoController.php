@@ -20,7 +20,6 @@ class InfoController extends Controller
         $info = Info::get()->first();
         $localization = $info->localizations()->where('lang', $locale)->first();
 
-
         if (is_null($localization)) {
             $localization = $info->localizations()->create(['lang' => $locale]);
         }

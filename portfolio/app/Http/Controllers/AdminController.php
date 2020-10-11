@@ -15,7 +15,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('auth.index');
+        return redirect()->route('projects.index');
     }
 
     /**
