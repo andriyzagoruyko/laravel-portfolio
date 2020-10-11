@@ -30,19 +30,34 @@
             @csrf
             <div class="form__group">
                 <label for="name">Назва</label>
-                <input type="text" name="name" id="name" @isset($project) value="{{ $localization->name }}" @endisset>
+                <input type="text" name="name" id="name" 
+                    @isset($project) 
+                        value="{{ $localization->name }}" 
+                    @else 
+                        value="{{ old('name') }}" 
+                    @endisset>
             </div>
             <div class="form__group">
                 <label for="slug">Слаг</label>
-                <input type="text" name="slug" id="slug" @isset($project) value="{{ $project->slug }}" @endisset>
+                <input type="text" name="slug" id="slug" 
+                    @isset($project) 
+                        value="{{ $project->slug }}"
+                    @else 
+                        value="{{ old('slug') }}" 
+                    @endisset>
             </div>
             <div class="form__group">
                 <label for="link">Посилання на сайт</label>
-                <input type="text" name="link" id="link" @isset($project) value="{{ $project->link }}" @endisset>
+                <input type="text" name="link" id="link" 
+                    @isset($project) 
+                        value="{{ $project->link }}" 
+                    @else 
+                        value="{{ old('link') }}" 
+                    @endisset>
             </div>
             <div class="form__group">
                 <label for="description">Опис</label>
-                <textarea name="description" id="description" cols="30" rows="10">@isset($project) {{ $localization->description }} @endisset</textarea>
+                <textarea name="description" id="description" cols="30" rows="10">@isset($project){{ $localization->description }} @else{{ old('description') }}@endisset</textarea>
             </div>
             @if($tags->count())
                 <div class="form__group form__group-row">
@@ -76,9 +91,8 @@
             @endif
             <div class="form__group form__group-row">
                 <label for="image">Зображенния</label>
-                <input type="file" name="image" id="image">
+                <input type="file" name="image" id="image" value="{{ old('image') }}">
             </div>
-
             <div class="form__group form__group-row">
                 <button type="submit" class="btn btn-success form__submit">@isset($project) Зберегти @else Додати @endisset </button>
             </div>

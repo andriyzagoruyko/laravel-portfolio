@@ -16,7 +16,13 @@
             <input type="hidden" name="lang" id="lang" value={{ $locale }}>
             <div class="form__group">
                 <label for="name">Ім'я</label>
-                <input type="text" name="name" id="name" value="{{ $localization->name }}">
+                <input type="text" name="name" id="name"                 
+                    @if ($errors->any())
+                        value="{{ old('name') }}" 
+                    @else 
+                        value="{{ $localization->name }}" 
+                    @endif
+                ">
             </div>
             <div class="form__group">
                 <label for="about">Про мене</label>
