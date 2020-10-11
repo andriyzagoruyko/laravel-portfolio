@@ -36,7 +36,10 @@ class TechnologyController extends Controller
      */
     public function store(TechnologyRequest $request)
     {
-        $technology = Technology::create($request->all());
+        $params = $request->all();
+        $params['in_header'] = $request->in_header == "on" ? 1 : 0;
+
+        $technology = Technology::create($params);
 
         if($request->hasFile('image') && $request->file('image')->isValid()) {
             $technology->addMediaFromRequest('image')->toMediaCollection('images');
@@ -68,7 +71,10 @@ class TechnologyController extends Controller
      */
     public function update(TechnologyRequest $request, Technology $technology)
     {
-        $technology->update($request->all());
+        $params = $request->all();
+        $params['in_header'] = $request->in_header == "on" ? 1 : 0;
+
+        $technology->update($params);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $technology->clearMediaCollection('images');

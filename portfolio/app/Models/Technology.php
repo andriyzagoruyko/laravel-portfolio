@@ -12,7 +12,7 @@ class Technology extends Model implements HasMedia
 { 
     use HasFactory, InteractsWithMedia;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'in_header'];
 
     public function getLogoUrl() {
         $media = $this->getFirstMedia('images');

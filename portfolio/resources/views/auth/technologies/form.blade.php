@@ -22,7 +22,6 @@
                 @method('PUT')
             @endisset
             @csrf
-
             <div class="form__group">
                 <label for="name">Назва</label>
                 <input type="text" name="name" id="name" @isset($technology) value="{{ $technology->name }}" @endisset>
@@ -30,6 +29,10 @@
             <div class="form__group form__group-row">
                 <label for="image">Логотип</label>
                 <input type="file" name="image" id="image">
+            </div>
+            <div class="form__group form__group-row">
+                <input type="checkbox" name="in_header" id="in_header" @if ($technology->in_header) checked @endif>
+                <label for="in_header">Показати в шапці</label>
             </div>
             <div class="form__group form__group-row">
                 <button type="submit" class="btn btn-success form__submit">@isset($technology) Зберегти @else Додати @endisset </button>
