@@ -5,6 +5,10 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Classes\EditingLocalization;
+use App\Models\Config;
+use App\Models\ConfigLocalization;
+
+
 
 class ConfigSeeder extends Seeder
 {
@@ -17,11 +21,11 @@ class ConfigSeeder extends Seeder
     {
         $locales =  EditingLocalization::getSupportedLocales();
 
-        \App\Models\Config::factory()->create()
+        Config::factory()->create()
             ->each(function($config) use ($locales)
             {
                 foreach($locales as $lang => $locale) {
-                    \App\Models\ConfigLocalization::factory()->create([ 
+                    ConfigLocalization::factory()->create([ 
                             'config_id' => $config->id,
                             'lang' => $lang,
                         ]);
