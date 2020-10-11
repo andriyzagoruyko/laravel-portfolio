@@ -28,4 +28,17 @@ class TechnologyRequest extends FormRequest
             'image' => 'required',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'required' => 'Поле :attribute обов`язкове',
+            'max' => 'Максимальна кількість символів для :attribute - :max',
+        ];
+    }
 }

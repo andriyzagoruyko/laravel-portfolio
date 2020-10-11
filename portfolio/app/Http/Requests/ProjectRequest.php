@@ -27,6 +27,21 @@ class ProjectRequest extends FormRequest
             'slug' => 'required|min:3|max:60',
             'name' => 'required|max:255',
             'link' => 'required|max:255',
+            'image' => 'required',
+        ];
+    }
+    
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'required' => 'Поле :attribute обов`язкове',
+            'max' => 'Максимальна кількість символів для :attribute - :max',
+            'min' => 'Мінімальна кількість символів для :attribute - :min',
         ];
     }
 }
