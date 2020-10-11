@@ -22,7 +22,7 @@ class CreateTagsTable extends Migration
             $table->id();
             $table->bigInteger('tag_id')->unsigned()->index();
             $table->string('lang', 2);
-            $table->string('name', 60)->nullable();
+            $table->string('name')->nullable();
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }

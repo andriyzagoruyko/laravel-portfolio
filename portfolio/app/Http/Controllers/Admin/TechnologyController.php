@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Technology;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\TechnologyRequest;
 
 class TechnologyController extends Controller
 {
-       /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -31,10 +31,10 @@ class TechnologyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\TechnologyRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TechnologyRequest $request)
     {
         $technology = Technology::create($request->all());
 
@@ -59,11 +59,11 @@ class TechnologyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\TechnologyRequest  $request
      * @param  \App\Models\Technology  $technology
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Technology $technology)
+    public function update(TechnologyRequest $request, Technology $technology)
     {
         $technology->update($request->all());
 

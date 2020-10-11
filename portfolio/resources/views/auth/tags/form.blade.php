@@ -2,7 +2,9 @@
 
 @section('content')
 
-@include('auth.layouts.lang-tabs')
+@isset($tag)
+    @include('auth.layouts.lang-tabs')
+@endisset
 
 <section class="content__block content__section section">
     @isset($tag)
@@ -22,9 +24,9 @@
         >
             @isset($tag)
                 @method('PUT')
+                <input type="hidden" name="lang" id="lang" value={{ $locale }}>
             @endisset
             @csrf
-            <input type="hidden" name="lang" id="lang" value={{ $locale }}>
 
             <div class="form__group">
                 <label for="name">Назва</label>

@@ -23,7 +23,7 @@ class AlterProjectsTableCreateLangTable extends Migration
             $table->id();
             $table->bigInteger('project_id')->unsigned()->index();
             $table->string('lang', 2);
-            $table->string('name', 60)->nullable();
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });

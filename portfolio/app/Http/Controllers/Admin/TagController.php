@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Tag;
-use Illuminate\Http\Request;
+use App\Http\Requests\TagRequest;
 use App\Classes\EditingLocalization;
 use App\Http\Controllers\Controller;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -18,8 +18,7 @@ class TagController extends Controller
     public function index()
     {
         $tags = Tag::all();
-        $locale = LaravelLocalization::getCurrentLocale();
-        return view('auth.tags.index', compact('tags', 'locale'));
+        return view('auth.tags.index', compact('tags'));
     }
 
     /**
@@ -36,14 +35,15 @@ class TagController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\TagRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TagRequest $request)
     {
         $tag = Tag::create($request->only('slug'));
         $locales = EditingLocalization::getSupportedLocales();
         
+
         foreach ($locales as $code => $locale) {
             $tag->localizations()
                 ->create($request->except('slug') + ['lang' => $code]);
@@ -73,11 +73,11 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\TagRequest   $request
      * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(TagRequest $request, Tag $tag)
     {
         $tag->update($request->only('slug'));
         $localization = $tag->localizations()->where('lang', $request->lang)->firstOrFail();

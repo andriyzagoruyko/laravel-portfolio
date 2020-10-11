@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Info;
-use Illuminate\Http\Request;
 use App\Classes\EditingLocalization;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TechnologyRequest;
 
 class InfoController extends Controller
 {
@@ -30,11 +30,11 @@ class InfoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\TechnologyRequest  $request
      * @param  \App\Models\Info  $info
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Info $info)
+    public function update(TechnologyRequest $request, Info $info)
     {
         $info->update($request->input('social'));
 
