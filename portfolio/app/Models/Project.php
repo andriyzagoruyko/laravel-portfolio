@@ -45,7 +45,7 @@ class Project extends LocalizedModel implements HasMedia
     /**
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      */
-    public function projects()
+    public function tag()
     {
         return $this->belongsTo(Tag::class);
     }

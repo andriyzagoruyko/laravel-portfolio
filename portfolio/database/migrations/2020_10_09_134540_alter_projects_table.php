@@ -15,6 +15,7 @@ class AlterProjectsTable extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             $table->bigInteger('tag_id')->unsigned()->index()->nullable();
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');;
         });
     }
 

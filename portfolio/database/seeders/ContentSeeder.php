@@ -39,11 +39,13 @@ class ContentSeeder extends Seeder
                 }
             });
 
-        Project::factory()->count(5)->create(['tag_id' => $tags[random_int(0, count($tags) - 1)]])
-            ->each(function($project) use ($locales, $technologies)
+        Project::factory()->count(5)->create()
+            ->each(function($project) use ($locales, $technologies, $tags)
             {
                 $project->addMediaFromUrl(url('/') . '/demo/project.jpg')->toMediaCollection('images');
-                $project->technologies()->attach($technologies[random_int(0, count($technologies) - 1)]->id);
+                $project->technologies()->attach($technologies->random());
+                $project->tag()->associate($tags->random());
+                $project->save();
 
                 foreach($locales as $lang => $locale) {
                     ProjectLocalization::factory()->create([ 
