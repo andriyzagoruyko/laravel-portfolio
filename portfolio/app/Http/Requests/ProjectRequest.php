@@ -27,7 +27,7 @@ class ProjectRequest extends FormRequest
             'slug' => 'required|min:3|max:60',
             'name' => 'required|max:255',
             'link' => 'required|max:255',
-            'image' => 'required',
+            'image' => 'required_without:_method',
         ];
     }
     
@@ -40,6 +40,7 @@ class ProjectRequest extends FormRequest
     {
         return [
             'required' => 'Поле :attribute обов`язкове',
+            'required_without' => 'Поле :attribute обов`язкове',
             'max' => 'Максимальна кількість символів для :attribute - :max',
             'min' => 'Мінімальна кількість символів для :attribute - :min',
         ];

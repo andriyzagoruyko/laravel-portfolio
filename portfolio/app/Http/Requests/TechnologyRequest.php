@@ -25,7 +25,7 @@ class TechnologyRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'image' => 'required',
+            'image' => 'required_without:_method',
         ];
     }
 
@@ -38,6 +38,7 @@ class TechnologyRequest extends FormRequest
     {
         return [
             'required' => 'Поле :attribute обов`язкове',
+            'required_without' => 'Поле :attribute обов`язкове',
             'max' => 'Максимальна кількість символів для :attribute - :max',
         ];
     }

@@ -26,7 +26,7 @@ class InfoRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'about' => 'required',
-            'photo' => 'required',
+            'photo' => 'required_without:_method',
         ];
     }
     
@@ -39,6 +39,7 @@ class InfoRequest extends FormRequest
     {
         return [
             'required' => 'Поле :attribute обов`язкове',
+            'required_without' => 'Поле :attribute обов`язкове',
             'max' => 'Максимальна кількість символів для :attribute - :max',
         ];
     }

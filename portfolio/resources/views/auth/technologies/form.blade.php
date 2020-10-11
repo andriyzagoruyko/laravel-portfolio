@@ -31,7 +31,7 @@
                 <input type="file" name="image" id="image">
             </div>
             <div class="form__group form__group-row">
-                <input type="checkbox" name="in_header" id="in_header" @if ($technology->in_header) checked @endif>
+                <input type="checkbox" name="in_header" id="in_header" @if (isset($technology) && $technology->in_header) checked @endif>
                 <label for="in_header">Показати в шапці</label>
             </div>
             <div class="form__group form__group-row">
