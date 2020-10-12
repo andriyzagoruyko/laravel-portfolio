@@ -54,8 +54,14 @@ p{
 .container{
     max-width: $md0+px;
     margin: 0 auto;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+
+    @media (max-width: $md3+px) {
+        padding-left: 20px;
+        padding-right: 20px;
+    
+    }
 }
 
 .page {
@@ -125,8 +131,8 @@ p{
         padding: 90px 0;
     }
 
-    @media (max-width: $md3+px) {
-        padding: 50px 0;
+    @media (max-width: $md4+px) {
+        padding: 60px 0;
     }
 
     &:last-child{
@@ -144,7 +150,7 @@ p{
         align-items: stretch;
         margin-top: 90px;
 
-        @media (max-width: $md1+px) {
+        @media (max-width: $md4+px) {
             margin-top: 40px;
         }
     }
@@ -210,8 +216,8 @@ p{
     align-self: center;
     display: flex;
     flex-wrap: wrap;
-    //justify-content: center;
     max-width: 1180px;
+    width: 100%;
     margin: 25px -10px 0 -10px;
 
     @media (max-width: $md5+px) {
@@ -269,6 +275,27 @@ p{
     box-shadow: $shadow_elem;
     overflow: hidden;
 
+    img {
+        transition: transform 0.7s;
+    }
+
+    &:hover {
+        img {
+            transform: scale(1.05);
+        }
+
+        .project__overlay {
+            transform: none;
+            opacity: 0.9;
+
+            span{
+                background: $color_text_main;
+                color: $color_bg_main;
+                box-shadow: $shadow_elem;
+            }
+        }
+    }
+
     &__overlay{
         position: absolute;
         top: 0;
@@ -283,16 +310,6 @@ p{
         opacity: 0;
         transition: transform 0.3s, opacity 0.3s;
 
-        &:hover{
-            transform: none;
-            opacity: 0.9;
-
-            span{
-                background: $color_text_main;
-                color: $color_bg_main;
-                box-shadow: $shadow_elem;
-            }
-        }
 
         span{
             border-radius: 4px;

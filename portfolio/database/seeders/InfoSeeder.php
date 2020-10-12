@@ -24,7 +24,7 @@ class InfoSeeder extends Seeder
         Info::factory()->create()
             ->each(function($info) use ($locales)
             {
-                $info->addMediaFromUrl(url('/') . '/demo/man.png')->toMediaCollection('photo');
+                $info->addMediaFromUrl(url('/demo/man.png'))->toMediaCollection('photo');
 
                 foreach($locales as $lang => $locale) {
                     InfoLocalization::factory()->create([ 

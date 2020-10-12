@@ -101,6 +101,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: space-between;
         box-sizing: border-box;
         padding: 35px;
         margin: 0 15px;
@@ -205,7 +206,7 @@
     width: 100%;
 
     @media (max-width: $md2+px) {
-        align-items: stretch;
+        align-items: center;
     }
 
     &:hover,  &.scrolled{
@@ -218,17 +219,20 @@
         display: flex;
         flex: 1 1 auto;
         justify-content: space-between;
-        align-items: center;
+        align-items: stretch;
         margin: 0 0 0 30px;
         padding: 0 0 15px 0;
         position: relative;
-
         transition: padding 0.3s;
 
-        @media (min-width: $md4+px) {
-            .scrolled & {
-                padding: 0 0 5px 0;
+        .scrolled & {
+            @media (min-width: $md4+px) {
+                padding: 0 0 8px 0;
             }
+        }
+
+        @media (max-width: $md1+px) {
+            padding: 0 0 12px 0;
         }
 
         @media (max-width: $md2+px) {
@@ -299,7 +303,8 @@
         .current-lang{
             display: flex;
             align-items: center;
-            
+            text-transform: uppercase;
+
             &:after{
                 content: ''; 
                 color: inherit;
@@ -320,7 +325,9 @@
     &__hamburger{
         position: relative;
         z-index: 110;
-        margin: 0 0 -3.5px 0;
+        display: flex;
+        align-items: center;
+        //margin: 0 0 -0.8px 0;
 
         @media (min-width: $md2 + 1 +px) {
             display: none;
@@ -343,21 +350,20 @@
 .logo {
     img, svg{
         transition: width 0.3s;
+        display: block;
 
-        @media (min-width: $md5+px) {
-            .scrolled &{
-                width: 110px;
+        .scrolled &{
+            @media (min-width: $md5+px) {
+                width: 135px;
             }
         }
-
-        display: block;
 
         @media (max-width: $md1+px) {
             width: 180px;
         }
 
         @media (max-width: $md5+px) {
-            width: 140px;
+            width: 130px;
         }
 
         @media (max-width: $md6+px) {

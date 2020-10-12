@@ -27,7 +27,10 @@ class AlterProjectsTable extends Migration
     public function down()
     {
         Schema::table('projects', function (Blueprint $table) {
+            
+            $table->dropForeign('projects_tag_id_foreign');
             $table->dropColumn('tag_id');
+
         });
     }
 }

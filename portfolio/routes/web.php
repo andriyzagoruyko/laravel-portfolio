@@ -6,11 +6,14 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\PortfolioController;
 
 Route::group([
-        'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-    ], function() { 
-        Route::get('/', [MainController::class, 'index'])->name('index');
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+], function() { 
+    Route::get('/', [MainController::class, 'index'])->name('index');
+    Route::get('/{tagSlug}', [MainController::class, 'index'])->name('tag');
 });
+
+Route::post('{locale}/projects/{tag?}', [MainController::class, 'getProjects'])->name('api.projects');
 
 Route::group([
     'middleware' => 'auth',
@@ -56,3 +59,5 @@ $disabled = [
 ];
 
 Auth::routes($disabled);
+
+

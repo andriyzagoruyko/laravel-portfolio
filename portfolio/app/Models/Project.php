@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Tag;
 use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
@@ -17,11 +18,17 @@ class Project extends LocalizedModel implements HasMedia
             'slug', 'link', 'tag_id'
     ];
 
+    protected $visible = [
+        'slug', 'link', 'tag_id', 'localization'
+    ];
+
+    protected $with = array('localization');
+
     public $timestamps = false;
 
     public function registerMediaConversions(Media $media = null): void
     {
-        /*$this->addMediaConversion('thumb')
+        $this->addMediaConversion('thumb')
             ->crop('crop-top', 800, 660)
             ->quality(70)
             ->withResponsiveImages();
@@ -31,16 +38,23 @@ class Project extends LocalizedModel implements HasMedia
             ->quality(70)
             ->withResponsiveImages();
 
-        $this->addMediaConversion('full-size');*/
+        /*  $this->addMediaConversion('full-size');
 
         $this->addMediaConversion('thumb')
-            ->crop('crop-top', 500, 415);
+            ->crop('crop-top', 500, 415);*/
     }
     
-    public function getThumbnail() {
+    public function getThumbnail($big = false) {
         $media = $this->getFirstMedia('images');
-        return($media->img('thumb', ['alt' => '']));
+
+        if ($big) {
+            return $media->img('thumb-big', ['alt' => '']);
+        }
+
+        return $media->img('thumb', ['alt' => '']);
     }
+
+    
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo
@@ -57,4 +71,5 @@ class Project extends LocalizedModel implements HasMedia
     {
         return $this->belongsToMany(Technology::class);
     }
+
 }

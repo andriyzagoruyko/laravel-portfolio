@@ -25,7 +25,7 @@ class ContentSeeder extends Seeder
         $technologies = Technology::factory()->count(3)->create()
             ->each(function($technology)
             {
-                $technology->addMediaFromUrl(url('/') . '/demo/technology/' . random_int(1, 3) . '.svg')->toMediaCollection('images');
+                $technology->addMediaFromUrl(url('/demo/technology'). '/' . random_int(1, 3) . '.svg')->toMediaCollection('images');
             });
 
         $tags = Tag::factory()->count(3)->create()
@@ -39,10 +39,10 @@ class ContentSeeder extends Seeder
                 }
             });
 
-        Project::factory()->count(5)->create()
+        Project::factory()->count(20)->create()
             ->each(function($project) use ($locales, $technologies, $tags)
             {
-                $project->addMediaFromUrl(url('/') . '/demo/project.jpg')->toMediaCollection('images');
+                $project->addMediaFromUrl(url('/demo/project.jpg'))->toMediaCollection('images');
                 $project->technologies()->attach($technologies->random());
                 $project->tag()->associate($tags->random());
                 $project->save();
