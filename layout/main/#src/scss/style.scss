@@ -252,6 +252,10 @@ p{
         }
 
         &-loadmore {
+            &.is-hidden {
+                display: none;
+            }
+            
             flex: 0 1 100%;
             width: 100%;
             margin-left: auto!important;

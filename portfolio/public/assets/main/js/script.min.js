@@ -95,8 +95,8 @@ $(function () {
                     .before(response.view)
                     .attr('data-page', (page += 1))
 
-                if (page >= response.max_pages) {
-                    $loadmore.remove();
+                if (page >= response.maxPages) {
+                    $loadmore.addClass('is-hidden');
                 }
             }
         });
@@ -118,17 +118,17 @@ $(function () {
             dataType: 'json',
 
             success: function (response) {
+                $('.tabs__item').removeClass('is-active');
                 $tab.addClass('is-active');
                 $('.project').remove()
-                $('.tabs__item').removeClass('is-active');
                 $('#loadmore')
+                    .toggleClass('is-hidden', !(response.maxPages > 1))
                     .before(response.view)
                     .attr('data-page', 1)
                     .attr('data-tag', tag_id);
             }
         });
     });
-
 
     $.ajaxSetup({
         headers: {

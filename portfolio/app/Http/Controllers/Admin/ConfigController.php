@@ -39,7 +39,7 @@ class ConfigController extends Controller
         $localization->update($request->all());
 
         return redirect()->route('config.index')->with([
-            'flash_message' => 'Конфігурація збережена',
+            'flash_message' => 'Налаштування збережено',
             'flash_message_type' => 'success'
         ]); 
     }

@@ -23,7 +23,7 @@
                 'firstWithLargeThumb' => true
             ])
 
-            <div class="portfolio__item portfolio__item-loadmore" 
+            <div class="portfolio__item portfolio__item-loadmore @if($maxPages <= 1) is-hidden @endif" 
                 id="loadmore" 
                 data-tag="{{ empty($tag->id) ? '' : $tag->id }}"
                 data-page ="1"

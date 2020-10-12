@@ -86,7 +86,7 @@ class TagController extends Controller
         $localization = $tag->localizations()->where('lang', $request->lang)->firstOrFail();
         $localization->update($request->except('slug'));
 
-        return redirect()->route('tags.index')->with([
+        return redirect()->route('tags.edit', $tag->id)->with([
             'flash_message' => 'Тег збережено',
             'flash_message_type' => 'success'
         ]);

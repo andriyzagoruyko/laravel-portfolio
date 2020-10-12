@@ -26,6 +26,7 @@ class MainController extends Controller
         }
 
         $projects = $projectQuery->limit(4)->get();
+        $projectMaxPages = ceil($projectQuery->count() / 4);
 
         $data = [
             'configLocalization' => ConfigLocalization::where('lang', $locale)->first(),
@@ -33,6 +34,7 @@ class MainController extends Controller
             'tagsLocalization' =>  TagLocalization::where('lang', $locale)->get(),
             'technologies' => Technology::where('in_header', 1)->get(),
             'projects' => $projects,
+            'maxPages' => $projectMaxPages,
             'tag' => $tag,
             'locale' => $locale
         ];
@@ -63,8 +65,8 @@ class MainController extends Controller
         $firstWithLargeThumb = !$request->has('page') || $request->page == 0;
 
         return response()->json([
+            'maxPages' => $maxPages,
             'data' => $projects,
-            'max_pages' => $maxPages,
             'view' => view('projects', compact('projects', 'firstWithLargeThumb'))->render(),
         ]);
     }

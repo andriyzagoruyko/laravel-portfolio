@@ -20,12 +20,6 @@
                     </a>
                     <nav class="sidebar__nav navigation">
                         <ul>
-                            <li class="navigation__item @navactive('config')">
-                                <a href="{{ route('config.index') }}"><div class="icon">
-                                    <img src="/assets/admin/img/icons/settings.svg" alt=""></div> 
-                                    <span class="navigation__label">Налаштування</span>
-                                </a>
-                            </li>
                             <li class="navigation__item @navactive('projects')">
                                 <a href="{{ route('projects.index') }}"><div class="icon">
                                     <img src="/assets/admin/img/icons/portfolio.svg" alt=""></div>
@@ -48,6 +42,12 @@
                                 <a href="{{ route('info.index') }}"><div class="icon">
                                     <img src="/assets/admin/img/icons/about.svg" alt=""></div>
                                     <span class="navigation__label">Інформація</span> 
+                                </a>
+                            </li>
+                            <li class="navigation__item @navactive('config')">
+                                <a href="{{ route('config.index') }}"><div class="icon">
+                                    <img src="/assets/admin/img/icons/settings.svg" alt=""></div> 
+                                    <span class="navigation__label">Налаштування</span>
                                 </a>
                             </li>
                         </ul>

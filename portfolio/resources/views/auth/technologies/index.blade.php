@@ -3,6 +3,7 @@
 @section('title', 'Технології')
 
 @section('content')
+
     <div class="content__block content__buttons">
         <a href="{{ route('technologies.create') }}" class="btn btn-success">Додати технологію</a>
     </div>
@@ -57,4 +58,5 @@
             </table>
         </div>
     </section>
+
 @endsection
