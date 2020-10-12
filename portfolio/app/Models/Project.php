@@ -44,17 +44,15 @@ class Project extends LocalizedModel implements HasMedia
             ->crop('crop-top', 500, 415);*/
     }
     
-    public function getThumbnail($big = false) {
+    public function getThumbnail($large = false) {
         $media = $this->getFirstMedia('images');
 
-        if ($big) {
+        if ($large) {
             return $media->img('thumb-big', ['alt' => '']);
         }
 
         return $media->img('thumb', ['alt' => '']);
     }
-
-    
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo

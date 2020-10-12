@@ -5,26 +5,24 @@
             <ul>
                 @foreach ($tagsLocalization as $localization)
                     @if ($loop->first)
-                        <li class="tabs__item @empty($tag) is-active @endempty"><a href="/">All</a></li>
+                        <li class="tabs__item @empty($tag) is-active @endempty" data-tag><a href="/">All</a></li>
                     @endif
 
                     <li class="tabs__item 
-                        @if(!empty($tag) && $localization->tag->id == $tag->id) 
-                            is-active 
-                        @endif
-                    ">
+                        @if(!empty($tag) && $localization->tag->id == $tag->id) is-active @endif"
+                        data-tag="{{  $localization->tag->id }}"
+                    >
                         <a href="{{ route('tag', $localization->tag->slug) }}">{{ $localization->name }}</a>
                     </li>
                 @endforeach
             </ul>
         </nav>
         <div class="section__content portfolio" id="portfolio">
-            @foreach ($projects as $index => $project)
-                @include('layouts.project-card', [
-                    'project' => $project,
-                    'bigThumbnail' => $index == 0
-                ])
-            @endforeach
+
+            @include('projects', [
+                'firstWithLargeThumb' => true
+            ])
+
             <div class="portfolio__item portfolio__item-loadmore" 
                 id="loadmore" 
                 data-tag="{{ empty($tag->id) ? '' : $tag->id }}"

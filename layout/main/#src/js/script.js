@@ -4,14 +4,14 @@
 
 $(function () {
     $('.navigation__hamburger').on("click", function () {
-        $(this).toggleClass("is-active");
         $('.navigation__list').toggleClass("is-active");
         $('.overlay').toggleClass("is-active");
+        $(this).toggleClass("is-active");
     });
 
     $(document).on("click", ".dropdown", function (e) {
-        let $dropdown_toggle = $(this).find(".dropdown__toggle");
-        let $target = $(e.target);
+        const $dropdown_toggle = $(this).find(".dropdown__toggle");
+        const $target = $(e.target);
 
         if ($target.is($dropdown_toggle) || !$dropdown_toggle.has($target) === 0) {
             e.preventDefault();
@@ -31,10 +31,9 @@ $(function () {
         });
     });
 
-    $(window).on("scroll", function () {
+    $(window).on("scroll load", function () {
         $(".navigation").toggleClass("scrolled", ($(window).scrollTop() > 100));
     });
-
 });
 
 $(function () {
@@ -48,8 +47,8 @@ $(function () {
         let page = +$loadmore.attr('data-page');
 
         const mobileWidth = (window.matchMedia("(max-width: 670px)").matches);
-        const shouldSkipOnFirstLoad = (!mobileWidth && page == 1)
         const loadCount = mobileWidth ? 4 : 3;
+        const shouldSkipOnFirstLoad = (!mobileWidth && page == 1)
 
         $.ajax({
             type: 'POST',
@@ -62,15 +61,44 @@ $(function () {
             dataType: 'json',
 
             success: function (response) {
-                
-                $loadmore.before(response.view).attr('data-page', (page += 1))
-                
+                $loadmore
+                    .before(response.view)
+                    .attr('data-page', (page += 1))
+
                 if (page >= response.max_pages) {
-                    $loadmore.remove(); 
+                    $loadmore.remove();
                 }
             }
         });
     });
+
+    $(document).on('click', '.tabs__item', function (e) {
+        e.preventDefault();
+
+        const $tab = $(this);
+        const tag_id = $tab.attr('data-tag');
+        const locale = $('body').attr('data-locale');
+
+        $.ajax({
+            type: 'POST',
+            url: '/' + locale + '/projects/' + tag_id,
+            data: {
+                count: 4,
+            },
+            dataType: 'json',
+
+            success: function (response) {
+                $tab.addClass('is-active');
+                $('.project').remove()
+                $('.tabs__item').removeClass('is-active');
+                $('#loadmore')
+                    .before(response.view)
+                    .attr('data-page', 1)
+                    .attr('data-tag', tag_id);
+            }
+        });
+    });
+
 
     $.ajaxSetup({
         headers: {

@@ -60,12 +60,12 @@ class MainController extends Controller
         }
 
         $projects = $projectQuery->get();
-        $largeThumbnail = !$request->has('page') || $request->page == 0;
+        $firstWithLargeThumb = !$request->has('page') || $request->page == 0;
 
         return response()->json([
             'data' => $projects,
             'max_pages' => $maxPages,
-            'view' => view('projects', compact('projects', 'largeThumbnail'))->render(),
+            'view' => view('projects', compact('projects', 'firstWithLargeThumb'))->render(),
         ]);
     }
 }
