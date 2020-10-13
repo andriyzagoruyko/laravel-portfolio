@@ -19,10 +19,11 @@ class Project extends LocalizedModel implements HasMedia
     ];
 
     protected $visible = [
-        'slug', 'link', 'tag_id', 'localization'
+        'slug', 'link', 'tag_id', 'localization', 'thumbnail'
     ];
 
-    protected $with = array('localization');
+    protected $appends = ['thumbnail'];
+    protected $with = ['localization'];
 
     public $timestamps = false;
 
@@ -30,12 +31,17 @@ class Project extends LocalizedModel implements HasMedia
     {
         $this->addMediaConversion('thumb')
             ->crop('crop-top', 800, 660)
-            ->quality(70)
+            //->quality(70)
             ->withResponsiveImages();
-            
+
+        $this->addMediaConversion('thumb-medium')
+            ->crop('crop-top', 900, 1155)
+            //->quality(70)
+            ->withResponsiveImages();    
+
         $this->addMediaConversion('thumb-big')
             ->crop('crop-top', 2280, 600)
-            ->quality(70)
+            //->quality(70)
             ->withResponsiveImages();
 
         /*  $this->addMediaConversion('full-size');
@@ -52,6 +58,15 @@ class Project extends LocalizedModel implements HasMedia
         }
 
         return $media->img('thumb', ['alt' => '']);
+    }
+
+    public function getThumbnailAttribute() {
+        $media = $this->getFirstMedia('images');
+
+        return [
+                'url' => $media->getUrl('thumb-medium'),
+                'srcset' =>  $media->getSrcset('thumb-medium')
+            ];
     }
 
     /**

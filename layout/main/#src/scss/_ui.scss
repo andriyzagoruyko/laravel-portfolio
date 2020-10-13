@@ -199,3 +199,25 @@
         }
     }
 }
+
+.clip{
+    background: linear-gradient(180deg, rgba(0, 159, 255, 0.8) 0%, rgba(252, 70, 107, 0.8) 100%);
+    background-clip: text;
+    display: inline-block;
+    color: transparent;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 3px;
+    left: 3px;
+    font-size: inherit;
+
+    @media (max-width: $md5+px) {
+        top: 2.2px;
+        left: 2.2px;
+    }
+
+    &:after{
+        pointer-events: none;
+    }
+}

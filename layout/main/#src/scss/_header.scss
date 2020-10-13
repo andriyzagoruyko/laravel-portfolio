@@ -1,6 +1,14 @@
 .header {
     display: flex;
-    background: linear-gradient(180deg, #000000 3.27%, rgba(0, 0, 0, 0.2) 43.75%, rgba(0, 0, 0, 0.2) 64.58%, #000000 100%, #000000 100%), url(/assets/main/img/head/bg.jpg) fixed;
+    background: linear-gradient(
+            180deg,
+            #000000 3.27%,
+            rgba(0, 0, 0, 0.2) 43.75%,
+            rgba(0, 0, 0, 0.2) 64.58%,
+            #000000 100%,
+            #000000 100%
+        ),
+        url(/assets/main/img/head/bg.jpg) fixed;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top;
@@ -31,7 +39,7 @@
         }
     }
 
-    &__wrapper{
+    &__wrapper {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -47,32 +55,10 @@
         }
     }
 
-    &__title-block{
+    &__title-block {
         position: relative;
         align-self: center;
         margin: 90px 0 0 0;
-
-        .clip{
-            background: linear-gradient(180deg, rgba(0, 159, 255, 0.8) 0%, rgba(252, 70, 107, 0.8) 100%);
-            background-clip: text;
-            display: inline-block;
-            color: transparent;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 3px;
-            left: 3px;
-            @extend .title;
-
-            @media (max-width: $md5+px) {
-                top: 2.2px;
-                left: 2.2px;
-            }
-
-            &:after{
-                pointer-events: none;
-            }
-        }
     }
 
     &__title {
@@ -93,8 +79,8 @@
     }
 
     &__item {
-        background: #FFFFFF;
-        border: 1px solid #C7C7C7;
+        background: #ffffff;
+        border: 1px solid #c7c7c7;
         box-sizing: border-box;
         box-shadow: $shadow_elem;
         border-radius: 5px;
@@ -123,7 +109,7 @@
             flex: 0 0 120px;
         }
 
-        img{
+        img {
             display: block;
             width: 80px;
 
@@ -136,7 +122,7 @@
             }
         }
 
-        span{
+        span {
             font-size: 24px;
             font-weight: 700;
             line-height: 130%;
@@ -147,20 +133,20 @@
                 font-size: 18px;
                 margin-top: 5px;
             }
-            
+
             @media (max-width: $md6+px) {
                 font-size: 16px;
             }
         }
 
         &-laravel {
-            span{
-                color: #FF2D20;
+            span {
+                color: #ff2d20;
             }
         }
 
-        &-wordpress{
-            span{
+        &-wordpress {
+            span {
                 color: #464342;
             }
         }
@@ -199,7 +185,7 @@
 
 .navigation {
     @extend .sticky;
-    
+
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -209,13 +195,14 @@
         align-items: center;
     }
 
-    &:hover,  &.scrolled{
-        .light{
-            opacity: 1!important;
+    &:hover,
+    &.scrolled {
+        .light {
+            opacity: 1 !important;
         }
     }
 
-    &__body{
+    &__body {
         display: flex;
         flex: 1 1 auto;
         justify-content: space-between;
@@ -276,7 +263,7 @@
         }
     }
 
-    &__item{
+    &__item {
         margin: 0 30px;
 
         @media (max-width: $md2+px) {
@@ -288,7 +275,7 @@
             }
         }
 
-        a{
+        a {
             @extend .light-on-hover;
         }
     }
@@ -296,19 +283,19 @@
     &__dropdown {
         margin: 0 10px 0 0;
 
-        .dropdown__toggle{
+        .dropdown__toggle {
             @extend .light-on-hover;
         }
 
-        .current-lang{
+        .current-lang {
             display: flex;
             align-items: center;
             text-transform: uppercase;
 
-            &:after{
-                content: ''; 
+            &:after {
+                content: "";
                 color: inherit;
-                border: 4px solid transparent; 
+                border: 4px solid transparent;
                 border-top: 8px solid;
                 transform: translateY(20%);
                 margin: 0 0 0 5px;
@@ -316,13 +303,13 @@
         }
 
         @media (max-width: $md2+px) {
-            .current-lang{
+            .current-lang {
                 display: none;
             }
         }
     }
 
-    &__hamburger{
+    &__hamburger {
         position: relative;
         z-index: 110;
         display: flex;
@@ -334,21 +321,23 @@
         }
     }
 
-    &__item, &__dropdown {
+    &__item,
+    &__dropdown {
         font-size: 24px;
         line-height: 123%;
         letter-spacing: -0.05em;
-        color: #FFFFFF;
+        color: #ffffff;
     }
 }
 
-.light{
+.light {
     opacity: 0;
     transition: opacity 0.4s ease-in-out;
 }
 
 .logo {
-    img, svg{
+    img,
+    svg {
         transition: width 0.3s;
         display: block;
 

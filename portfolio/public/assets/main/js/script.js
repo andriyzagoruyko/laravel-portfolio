@@ -31,7 +31,6 @@ const browser = {
 
 const isMobile = browser.isMobile();;
 
-
 $(function () {
     $('.navigation__hamburger').on("click", function () {
         $('.navigation__list').toggleClass("is-active");
@@ -66,31 +65,59 @@ $(function () {
     });
 });
 
+$(function(){
+
+    const effect = window.matchMedia("(max-width: 670px)").matches ? 'flip': 'coverflow';
+
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        speed: 600,
+        spaceBetween: 120,
+        grabCursor: true,
+        effect: effect,
+        coverflowEffect: {
+            rotate: 50,
+            stretch: 0,
+            depth: 200,
+            modifier: 1,
+            slideShadows: false,
+        },
+        flipEffect: {
+            slideShadows: false,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+})
+
 $(function () {
     $(document).on('click', '#loadmore', function (e) {
         e.preventDefault();
 
         const $loadmore = $(this);
-        const locale = $('body').attr('data-locale');
-        const tag_id = $loadmore.attr('data-tag');
 
         let page = +$loadmore.attr('data-page');
 
-        const mobileWidth = (window.matchMedia("(max-width: 670px)").matches);
-        const loadCount = mobileWidth ? 4 : 3;
-        const shouldSkipOnFirstLoad = (!mobileWidth && page == 1)
+        const isMobileWidth = window.matchMedia("(max-width: 670px)").matches;
+        const loadingCount = isMobileWidth ? 4 : 3;
+        const shouldSkipOnFirstLoad = (!isMobileWidth && page == 1)
+        const tagId = $loadmore.attr('data-tag');
+        const locale = $('body').attr('data-locale');
 
         $.ajax({
             type: 'POST',
-            url: '/' + locale + '/projects/' + tag_id,
+            url: '/' + locale + '/projects/' + tagId,
             data: {
-                count: loadCount,
+                count: loadingCount,
                 page: page,
                 skip: shouldSkipOnFirstLoad ? 1 : 0
             },
             dataType: 'json',
 
             success: function (response) {
+                console.log(response.data);
                 $loadmore
                     .before(response.view)
                     .attr('data-page', (page += 1))
@@ -106,12 +133,12 @@ $(function () {
         e.preventDefault();
 
         const $tab = $(this);
-        const tag_id = $tab.attr('data-tag');
+        const tagId = $tab.attr('data-tag');
         const locale = $('body').attr('data-locale');
 
         $.ajax({
             type: 'POST',
-            url: '/' + locale + '/projects/' + tag_id,
+            url: '/' + locale + '/projects/' + tagId,
             data: {
                 count: 4,
             },
@@ -120,12 +147,12 @@ $(function () {
             success: function (response) {
                 $('.tabs__item').removeClass('is-active');
                 $tab.addClass('is-active');
-                $('.project').remove()
+                $('.project').remove();
                 $('#loadmore')
-                    .toggleClass('is-hidden', !(response.maxPages > 1))
                     .before(response.view)
                     .attr('data-page', 1)
-                    .attr('data-tag', tag_id);
+                    .attr('data-tag', tagId)
+                    .toggleClass('is-hidden', response.maxPages <= 1);
             }
         });
     });

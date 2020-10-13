@@ -1,9 +1,9 @@
 <section class="section section-contact">
     <h2 class="section__title title">Contact</h2>
-    <div class="section__body container">
+    <div class="section__body">
         <div class="section__content contact">
-            {{ $infoLocalization->contact }}
-            <br><p><a href="">{{ $infoLocalization->info->mail }}</a>   <a href="">{{ $infoLocalization->info->phone }}</a></p>
+            <p>{{ $infoLocalization->contact }}</p>
+            <p><a href="">{{ $infoLocalization->info->mail }}</a>   <a href="">{{ $infoLocalization->info->phone }}</a></p>
             <form action="#" class="contact__form contact-form">
                 <div class="contact-form__row">
                     <input type="text" name="name" id="name" placeholder="Name">
