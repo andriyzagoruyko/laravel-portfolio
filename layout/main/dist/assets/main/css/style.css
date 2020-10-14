@@ -382,50 +382,6 @@ template {
   display: none;
 }
 
-/* ubuntu-300 - latin_cyrillic */
-
-@font-face {
-  font-family: 'Ubuntu';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: local("Ubuntu Light"), local("Ubuntu-Light"), url("/assets/main/fonts/ubuntu-v15-latin_cyrillic-300.woff2") format("woff2"), url("/assets/main/fonts/ubuntu-v15-latin_cyrillic-300.woff") format("woff");
-  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-
-/* ubuntu-regular - latin_cyrillic */
-
-@font-face {
-  font-family: 'Ubuntu';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local("Ubuntu Regular"), local("Ubuntu-Regular"), url("/assets/main/fonts/ubuntu-v15-latin_cyrillic-regular.woff2") format("woff2"), url("/assets/main/fonts/ubuntu-v15-latin_cyrillic-regular.woff") format("woff");
-  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-
-/* ubuntu-500 - latin_cyrillic */
-
-@font-face {
-  font-family: 'Ubuntu';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: local("Ubuntu Medium"), local("Ubuntu-Medium"), url("/assets/main/fonts/ubuntu-v15-latin_cyrillic-500.woff2") format("woff2"), url("/assets/main/fonts/ubuntu-v15-latin_cyrillic-500.woff") format("woff");
-  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-
-/* ubuntu-700 - latin_cyrillic */
-
-@font-face {
-  font-family: 'Ubuntu';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: local("Ubuntu Bold"), local("Ubuntu-Bold"), url("/assets/main/fonts/ubuntu-v15-latin_cyrillic-700.woff2") format("woff2"), url("/assets/main/fonts/ubuntu-v15-latin_cyrillic-700.woff") format("woff");
-  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-
 /*!
  * Hamburgers
  * @description Tasty CSS-animated hamburgers
@@ -578,50 +534,48 @@ template {
           transform: translate3d(0, 11px, 0) rotate(-45deg);
 }
 
-body {
-  font-family: "Ubuntu", sans-serif;
-  font-size: 16px;
-  color: #FFFFFF;
-  background-color: #000000;
+/* ubuntu-300 - latin_cyrillic */
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: local("Ubuntu Light"), local("Ubuntu-Light"), url("/assets/main/fonts/ubuntu-v15-latin_cyrillic-300.woff2") format("woff2"), url("/assets/main/fonts/ubuntu-v15-latin_cyrillic-300.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-a {
-  color: #FFFFFF;
-  text-decoration: none;
+/* ubuntu-regular - latin_cyrillic */
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Ubuntu Regular"), local("Ubuntu-Regular"), url("/assets/main/fonts/ubuntu-v15-latin_cyrillic-regular.woff2") format("woff2"), url("/assets/main/fonts/ubuntu-v15-latin_cyrillic-regular.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-button {
-  background: transparent;
-  border: none;
-  outline: none;
+/* ubuntu-500 - latin_cyrillic */
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local("Ubuntu Medium"), local("Ubuntu-Medium"), url("/assets/main/fonts/ubuntu-v15-latin_cyrillic-500.woff2") format("woff2"), url("/assets/main/fonts/ubuntu-v15-latin_cyrillic-500.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-ul {
-  margin: 0;
-  padding: 0;
-}
+/* ubuntu-700 - latin_cyrillic */
 
-li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-p {
-  font-size: 16px;
-  line-height: 150%;
-  text-indent: 10px;
-}
-
-.container {
-  max-width: 1530px;
-  margin: 0 auto;
-  padding-left: 40px;
-  padding-right: 40px;
-}
-
-.page {
-  overflow: hidden;
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local("Ubuntu Bold"), local("Ubuntu-Bold"), url("/assets/main/fonts/ubuntu-v15-latin_cyrillic-700.woff2") format("woff2"), url("/assets/main/fonts/ubuntu-v15-latin_cyrillic-700.woff") format("woff");
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
 /*Background attahcment fixed on Edge*/
@@ -1123,6 +1077,52 @@ p {
   -o-transition: width 0.3s;
   transition: width 0.3s;
   display: block;
+}
+
+body {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 16px;
+  color: #FFFFFF;
+  background-color: #000000;
+}
+
+a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+button {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+p {
+  font-size: 16px;
+  line-height: 150%;
+  text-indent: 10px;
+}
+
+.container {
+  max-width: 1530px;
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.page {
+  overflow: hidden;
 }
 
 .main {
@@ -1690,10 +1690,6 @@ p {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: black;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
   z-index: 1000;
   width: 100%;
   height: 100%;
@@ -1709,10 +1705,14 @@ p {
       -ms-transform: scale(1.8);
           transform: scale(1.8);
   visibility: hidden;
+  background-color: black;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal__wrapper:before {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   left: 0;
@@ -1761,19 +1761,19 @@ p {
   margin-bottom: auto;
 }
 
-.swiper-button-next,
-.swiper-button-prev {
+.modal .swiper-button-next,
+.modal .swiper-button-prev {
   color: white !important;
   outline: none;
 }
 
-.swiper-wrapper,
-.swiper-slide {
+.modal .swiper-wrapper,
+.modal .swiper-slide {
   height: auto !important;
 }
 
-.swiper-wrapper img,
-.swiper-slide img {
+.modal .swiper-wrapper img,
+.modal .swiper-slide img {
   max-width: 100%;
 }
 
@@ -2144,13 +2144,13 @@ p {
 }
 
 @media (max-width: 900px) {
+  .nav-button span {
+    font-size: 14px;
+  }
+
   .container {
     padding-left: 20px;
     padding-right: 20px;
-  }
-
-  .nav-button span {
-    font-size: 14px;
   }
 
   .section__tabs ul li {
@@ -2326,8 +2326,8 @@ p {
     padding: 30px 10px;
   }
 
-  .swiper-button-next,
-  .swiper-button-prev {
+  .modal .swiper-button-next,
+  .modal .swiper-button-prev {
     display: none !important;
   }
 

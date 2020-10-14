@@ -1,0 +1,112 @@
+.portfolio {
+    align-self: center;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1180px;
+    width: calc(100% + 20px);
+    margin: 25px -10px 0 -10px;
+
+    @media (max-width: $md5+px) {
+        justify-content: flex-start;
+    }
+
+    &__item {
+        &:first-child {
+            width: 100%;
+        }
+
+        width: calc(33.33333% - 50px);
+        margin: 25px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media (max-width: $md2+px) {
+            margin: 10px;
+            width: calc(33.33333% - 20px);
+        }
+
+        @media (max-width: $md5+px) {
+            margin: 5px;
+            width: calc(50% - 10px);
+        }
+
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        &-loadmore {
+            &.is-hidden {
+                display: none;
+            }
+
+            flex: 0 1 100%;
+            width: 100%;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            box-shadow: none;
+
+            @media (max-width: $md5+px) {
+                flex: 0 0 calc(50% - 10px);
+            }
+        }
+    }
+
+    &__button {
+        margin: 25px 0 0 0;
+    }
+}
+
+.project {
+    position: relative;
+    border-radius: 5px;
+    box-shadow: $shadow_elem;
+    overflow: hidden;
+
+    img {
+        transition: transform 0.7s;
+    }
+
+    &:hover {
+        img {
+            transform: scale(1.05);
+        }
+
+        .project__overlay {
+            transform: none;
+            opacity: 0.9;
+
+            span {
+                background: $color_text_main;
+                color: $color_bg_main;
+                box-shadow: $shadow_elem;
+            }
+        }
+    }
+
+    &__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.7);
+        transform: scale(5);
+        opacity: 0;
+        transition: transform 0.3s, opacity 0.3s;
+
+        span {
+            border-radius: 4px;
+            font-size: 16px;
+            padding: 10px 30px;
+            border: solid 0.5px $color_text_main;
+            transition: 0.4s;
+            transition-delay: 0.2s;
+        }
+    }
+}
