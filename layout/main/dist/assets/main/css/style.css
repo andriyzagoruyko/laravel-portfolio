@@ -474,7 +474,7 @@ template {
 
 .hamburger-box {
   width: 31px;
-  height: 23px;
+  height: 25px;
   display: inline-block;
   position: relative;
 }
@@ -513,11 +513,11 @@ template {
 }
 
 .hamburger-inner::before {
-  top: -10px;
+  top: -11px;
 }
 
 .hamburger-inner::after {
-  bottom: -10px;
+  bottom: -11px;
 }
 
 /*
@@ -532,7 +532,7 @@ template {
 }
 
 .hamburger--spring .hamburger-inner::before {
-  top: 10px;
+  top: 11px;
   -webkit-transition: top 0.1s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1), -webkit-transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19);
   transition: top 0.1s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1), -webkit-transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19);
   -o-transition: top 0.1s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1), transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19);
@@ -541,7 +541,7 @@ template {
 }
 
 .hamburger--spring .hamburger-inner::after {
-  top: 20px;
+  top: 22px;
   -webkit-transition: top 0.2s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1), -webkit-transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19);
   transition: top 0.2s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1), -webkit-transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19);
   -o-transition: top 0.2s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1), transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19);
@@ -563,8 +563,8 @@ template {
   -o-transition: top 0.1s 0.15s cubic-bezier(0.33333, 0, 0.66667, 0.33333), transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1);
   transition: top 0.1s 0.15s cubic-bezier(0.33333, 0, 0.66667, 0.33333), transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1);
   transition: top 0.1s 0.15s cubic-bezier(0.33333, 0, 0.66667, 0.33333), transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1), -webkit-transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1);
-  -webkit-transform: translate3d(0, 10px, 0) rotate(45deg);
-          transform: translate3d(0, 10px, 0) rotate(45deg);
+  -webkit-transform: translate3d(0, 11px, 0) rotate(45deg);
+          transform: translate3d(0, 11px, 0) rotate(45deg);
 }
 
 .hamburger--spring.is-active .hamburger-inner::after {
@@ -574,8 +574,8 @@ template {
   -o-transition: top 0.2s cubic-bezier(0.33333, 0, 0.66667, 0.33333), transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1);
   transition: top 0.2s cubic-bezier(0.33333, 0, 0.66667, 0.33333), transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1);
   transition: top 0.2s cubic-bezier(0.33333, 0, 0.66667, 0.33333), transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1), -webkit-transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1);
-  -webkit-transform: translate3d(0, 10px, 0) rotate(-45deg);
-          transform: translate3d(0, 10px, 0) rotate(-45deg);
+  -webkit-transform: translate3d(0, 11px, 0) rotate(-45deg);
+          transform: translate3d(0, 11px, 0) rotate(-45deg);
 }
 
 body {
@@ -1096,6 +1096,10 @@ p {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.navigation__hamburger span {
+  margin: -1px 0px;
 }
 
 .navigation__item,
@@ -1687,19 +1691,23 @@ p {
   top: 0;
   left: 0;
   background-color: black;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   z-index: 1000;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  max-height: 100vh;
+  max-width: 100vw;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  -webkit-transition: 0.2s ease-in-out;
-  -o-transition: 0.2s ease-in-out;
-  transition: 0.2s ease-in-out;
+  -webkit-transition: 0.4s ease-in-out;
+  -o-transition: 0.4s ease-in-out;
+  transition: 0.4s ease-in-out;
   opacity: 0;
-  -webkit-transform: scale(1.6);
-      -ms-transform: scale(1.6);
-          transform: scale(1.6);
+  -webkit-transform: scale(1.8);
+      -ms-transform: scale(1.8);
+          transform: scale(1.8);
   visibility: hidden;
 }
 
@@ -1717,16 +1725,8 @@ p {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top;
-  -webkit-transition: -webkit-filter 0.3s;
-  transition: -webkit-filter 0.3s;
-  -o-transition: filter 0.3s;
-  transition: filter 0.3s;
-  transition: filter 0.3s, -webkit-filter 0.3s;
-  -webkit-transition-delay: 0.3s;
-       -o-transition-delay: 0.3s;
-          transition-delay: 0.3s;
-  -webkit-filter: blur(0px);
-          filter: blur(0px);
+  -webkit-filter: blur(3px);
+          filter: blur(3px);
 }
 
 .is-active .modal__wrapper {
@@ -1737,30 +1737,8 @@ p {
           transform: none;
 }
 
-.is-active .modal__wrapper:before {
-  -webkit-filter: blur(3px);
-          filter: blur(3px);
-}
-
 .modal__header {
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  position: relative;
-  z-index: 10;
-  padding: 20px 50px;
-  /* padding: 30px 0 0 20px;
-        justify-content: flex-end;
-    
-        .logo {
-            display: none;
-        }*/
+  padding: 20px 0;
 }
 
 .modal__controll {
@@ -1770,7 +1748,12 @@ p {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
-  padding-bottom: 15px;
+  position: absolute;
+  right: 9px;
+}
+
+.modal__controll .hamburger {
+  padding: 0px;
 }
 
 .modal__body {
@@ -1784,19 +1767,14 @@ p {
   outline: none;
 }
 
-.swiper-slide-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center top;
-     object-position: center top;
-  -webkit-filter: blur(2px);
-          filter: blur(2px);
+.swiper-wrapper,
+.swiper-slide {
+  height: auto !important;
+}
+
+.swiper-wrapper img,
+.swiper-slide img {
+  max-width: 100%;
 }
 
 .modal-project {
@@ -1858,37 +1836,11 @@ p {
 
 .modal-project__image {
   position: relative;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-box-flex: 0;
       -ms-flex: 0 0 490px;
           flex: 0 0 490px;
   -ms-flex-item-align: start;
       align-self: flex-start;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.modal-project__image > img {
-  display: block;
-  max-width: 100%;
-  border-radius: 5px;
-  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.35), 0px 4px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.35), 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.modal-project__image a {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  padding: 10px 0;
-  z-index: 10;
 }
 
 .modal-project__image:after {
@@ -1899,13 +1851,33 @@ p {
   background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.6)), color-stop(38.02%, rgba(0, 0, 0, 0)));
   background: -o-linear-gradient(top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 38.02%);
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 38.02%);
-  z-index: 1;
   position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
   -webkit-transition: -webkit-transform 0.5s;
   transition: -webkit-transform 0.5s;
   -o-transition: transform 0.5s;
   transition: transform 0.5s;
   transition: transform 0.5s, -webkit-transform 0.5s;
+}
+
+.modal-project__image > img {
+  display: block;
+  border-radius: 5px;
+  max-width: 100%;
+  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.35), 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.35), 0px 4px 4px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.modal-project__image a {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding: 10px 0;
+  z-index: 10;
 }
 
 .modal-project__content {
@@ -2354,21 +2326,13 @@ p {
     padding: 30px 10px;
   }
 
-  .modal__header {
-    padding: 20px;
-  }
-
-  .modal__controll {
-    padding-bottom: 10px;
-  }
-
   .swiper-button-next,
   .swiper-button-prev {
     display: none !important;
   }
 
   .modal-project {
-    padding: 20px 10px;
+    padding: 20px 15px;
   }
 
   .modal-project__title {
@@ -2383,9 +2347,9 @@ p {
   }
 
   .modal-project__image {
-    -webkit-box-flex: 1;
-        -ms-flex: auto;
-            flex: auto;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
     -ms-flex-item-align: center;
         align-self: center;
   }
@@ -2497,14 +2461,6 @@ p {
 
   .social li {
     margin: 0 10px;
-  }
-
-  .modal__header {
-    padding: 15px 15px 0 15px;
-  }
-
-  .modal__controll {
-    padding-bottom: 8px;
   }
 
   .modal-project__title {

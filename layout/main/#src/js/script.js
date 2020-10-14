@@ -30,13 +30,22 @@ $(function () {
         });
     });
 
+    $(document).on("click", ".project", function (e) {
+        e.preventDefault();
+        $('.modal').addClass('is-active');
+    })
+
+    $(document).on("click", ".modal__close", function (e) {
+        e.preventDefault();
+        $('.modal').removeClass('is-active');
+    })
+
     $(window).on("scroll load", function () {
         $(".navigation").toggleClass("scrolled", ($(window).scrollTop() > 100));
     });
 });
 
 $(function(){
-
     const effect = window.matchMedia("(max-width: 670px)").matches ? 'flip': 'coverflow';
 
     var swiper = new Swiper('.swiper-container', {
@@ -126,6 +135,7 @@ $(function () {
             }
         });
     });
+
 
     $.ajaxSetup({
         headers: {

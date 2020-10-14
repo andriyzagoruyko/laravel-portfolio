@@ -675,12 +675,12 @@ p {
 
 $modal_size: 1270;
 
+
 .modal {
     display: flex;
     position: absolute;
     top: 0;
     left: 0;
-
 
     &__wrapper {
         display: flex;
@@ -689,14 +689,18 @@ $modal_size: 1270;
         top: 0;
         left: 0;
         background-color: black;
-        overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
         z-index: 1000;
         width: 100%;
-        height: 100vh;
+        height: 100%;
+        max-height: 100vh;
+        max-width: 100vw;
         box-sizing: border-box;
-        transition: 0.2s ease-in-out;
+        transition: 0.4s ease-in-out;
         opacity: 0;
-        transform: scale(1.6);
+        transform: scale(1.8);
         visibility: hidden;
 
         &:before {
@@ -719,62 +723,29 @@ $modal_size: 1270;
             background-repeat: no-repeat;
             background-size: cover;
             background-position: top;
-            transition: filter 0.3s;
-            transition-delay: 0.3s;
-            filter: blur(0px);
+            filter: blur(3px);
         }
 
         .is-active & {
             visibility: visible;
             opacity: 1;
             transform: none;
-
-            &:before {
-                filter: blur(3px);
-            }
         }
     }
 
     &__header {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        box-sizing: border-box;
-        position: relative;
-        z-index: 10;
-        padding: 20px 50px;
-
-        @media (max-width: $md5+px) {
-            padding: 20px;
-        }
-
-        @media (max-width: $md6+px) {
-            padding: 15px 15px 0 15px;
-        }
-
-       /* padding: 30px 0 0 20px;
-        justify-content: flex-end;
-    
-        .logo {
-            display: none;
-        }*/
+        padding: 20px 0;
     }
 
     &__controll {
         display: flex;
         align-items: flex-end;
-        padding-bottom: 15px;
+        position: absolute;
+        right: 9px;
 
-        @media (max-width: $md5+px) {
-            padding-bottom: 10px;
+        .hamburger {
+            padding: 0px;
         }
-
-        @media (max-width: $md6+px) {
-            padding-bottom: 8px;
-        }
-    }
-
-    &__logo {
     }
 
     &__body {
@@ -793,17 +764,11 @@ $modal_size: 1270;
     }
 }
 
-
-.swiper-slide-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    object-position: center top;
-    filter: blur(2px);
+.swiper-wrapper, .swiper-slide {
+    height: auto!important;
+    img {
+        max-width: 100%;
+    }
 }
 
 .modal-project {
@@ -813,11 +778,10 @@ $modal_size: 1270;
     margin: 0 auto;
     position: relative;
     padding: 20px 50px;
-
     box-sizing: border-box;
 
     @media (max-width: $md5+px) {
-        padding: 20px 10px;
+        padding: 20px 15px;
     }
 
     &__title-block {
@@ -894,17 +858,33 @@ $modal_size: 1270;
 
     &__image {
         position: relative;
-        display: inline-flex;
         flex: 0 0 490px;
         align-self: flex-start;
-        display: flex;
-        justify-content: center;
+
+        &:after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 38.02%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+
+            transition: transform 0.5s;
+
+            @media (max-width: $md2+px) {
+                display: none;
+            }
+        }
 
         > img {
             display: block;
-            max-width: 100%;
             border-radius: 5px;
+            max-width: 100%;
             box-shadow: $shadow_elem;
+            position: relative;
         }
 
         a {
@@ -914,21 +894,6 @@ $modal_size: 1270;
             left: 0;
             padding: 10px 0;
             z-index: 10;
-        }
-
-        &:after {
-            content: "";
-            display: block;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 38.02%);
-            z-index: 1;
-            position: absolute;
-            transition: transform 0.5s;
-
-            @media (max-width: $md2+px) {
-                display: none;
-            }
         }
 
         @media (max-width: $modal_size+px) {
@@ -948,7 +913,7 @@ $modal_size: 1270;
         }
 
         @media (max-width: $md5+px) {
-            flex: auto;
+            flex: 0 0 100%;
             align-self: center;
         }
     }
@@ -985,7 +950,6 @@ $modal_size: 1270;
 
     &__text {
         margin-top: auto;
-
         &,
         p {
             font-weight: 300;
