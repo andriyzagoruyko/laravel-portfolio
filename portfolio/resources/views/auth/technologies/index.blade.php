@@ -33,7 +33,7 @@
                         </td>
 
                         <td>
-                            <img src="{{  $technology->getLogoUrl() }}" alt="{{ $technology->name }}" width="30">
+                            <img src="{{  $technology->logo }}" alt="{{ $technology->name }}" width="30">
                         </td>
 
                         <td>

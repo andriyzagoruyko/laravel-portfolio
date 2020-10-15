@@ -1,0 +1,9 @@
+@include keyframes("processing"){
+    0% {
+        color: $color_text_main;
+    }
+    50% {
+        color: $color_yellow;
+        text-shadow: $shadow_light;
+    }
+}

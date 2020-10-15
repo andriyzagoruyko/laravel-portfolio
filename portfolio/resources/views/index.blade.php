@@ -1,16 +1,16 @@
 @extends('layouts.master')
 
 @section('header-content')
-    <div class="header__title-block">
-        <div class="header__title title"><h1>{{ $configLocalization->h1 }}</h1></div>
-        <style>.clip:after {content: '{{ $configLocalization->h1 }}';}</style>
-        <div class="clip"></div>
+    <div class="header__title title">
+        <div id="header-clip" class="clip"></div>
+        <h1>{{ $configLocalization->h1 }}</h1>
     </div>
+    <style>#header-clip:after {content: '{{ $configLocalization->h1 }}';}</style>
 
     <div class="header__content">
         @foreach ($technologies as $technology)
             <div class="header__item header__item-wordpress">
-                <img src="{{ $technology->getLogoUrl() }}" alt="{{ $technology->name }}">
+                <img src="{{ $technology->logo }}" alt="{{ $technology->name }}">
                 <span>{{ $technology->name }}</span>
             </div>
         @endforeach

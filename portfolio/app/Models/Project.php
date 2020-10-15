@@ -19,28 +19,33 @@ class Project extends LocalizedModel implements HasMedia
     ];
 
     protected $visible = [
-        'slug', 'link', 'tag_id', 'localization', 'thumbnail'
+        'slug', 'link', 'tag_id', 'localization', 'thumbnail', 'technologies'
     ];
 
-    protected $appends = ['thumbnail'];
-    protected $with = ['localization'];
+    protected $appends = [
+        'thumbnail'
+    ];
+
+    protected $with = [
+        'localization', 'technologies'
+    ];
 
     public $timestamps = false;
 
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-            ->crop('crop-top', 800, 660)
+            ->crop('crop-top', 470, 375)
             //->quality(70)
             ->withResponsiveImages();
 
         $this->addMediaConversion('thumb-medium')
-            ->crop('crop-top', 900, 1155)
+            ->crop('crop-top', 700, 900)
             //->quality(70)
             ->withResponsiveImages();    
 
         $this->addMediaConversion('thumb-big')
-            ->crop('crop-top', 2280, 600)
+            ->crop('crop-top', 1600, 420)
             //->quality(70)
             ->withResponsiveImages();
 
@@ -50,7 +55,8 @@ class Project extends LocalizedModel implements HasMedia
             ->crop('crop-top', 500, 415);*/
     }
     
-    public function getThumbnail($large = false) {
+    public function getThumbnail($large = false) 
+    {
         $media = $this->getFirstMedia('images');
 
         if ($large) {
@@ -60,7 +66,8 @@ class Project extends LocalizedModel implements HasMedia
         return $media->img('thumb', ['alt' => '']);
     }
 
-    public function getThumbnailAttribute() {
+    public function getThumbnailAttribute() 
+    {
         $media = $this->getFirstMedia('images');
 
         return [

@@ -6,6 +6,8 @@ $modal_size: 1270;
     top: 0;
     left: 0;
 
+    --swiper-theme-color: white;
+
     &__wrapper {
         display: flex;
         flex-direction: column;
@@ -77,21 +79,30 @@ $modal_size: 1270;
         margin-bottom: auto;
     }
 
+    &__preloader {
+        --swiper-theme-color: rgb(250, 49, 143);
+        position: fixed !important;
+        z-index: 10000 !important;
+    }
+
     .swiper-button-next,
     .swiper-button-prev {
-        color: white !important;
         outline: none;
-
         @media (max-width: $md5+px) {
             display: none !important;
         }
     }
 
-    .swiper-wrapper,
     .swiper-slide {
-        height: auto !important;
         img {
             max-width: 100%;
+        }
+    }
+    .swiper-wrapper {
+        align-items: center;
+        
+        @media (max-width: $md6+px) {
+            align-items: flex-start;
         }
     }
 }
@@ -183,8 +194,9 @@ $modal_size: 1270;
 
     &__image {
         position: relative;
-        flex: 0 0 490px;
         align-self: flex-start;
+        flex: 0 0 490px;
+        height: 100%;
 
         &:after {
             content: "";
@@ -294,12 +306,13 @@ $modal_size: 1270;
 
     &__technologies {
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         align-self: flex-end;
         margin-top: auto;
 
         @media (max-width: $md5+px) {
             align-self: center;
+            justify-content: center;
         }
 
         @media (max-width: $md6+px) {
@@ -309,6 +322,8 @@ $modal_size: 1270;
 
     &__technology {
         margin: 0 20px;
+        flex: 0 0 60px;
+
 
         img {
             display: block;

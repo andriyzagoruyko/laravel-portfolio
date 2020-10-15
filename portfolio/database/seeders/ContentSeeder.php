@@ -42,7 +42,7 @@ class ContentSeeder extends Seeder
         Project::factory()->count(20)->create()
             ->each(function($project) use ($locales, $technologies, $tags)
             {
-                $project->addMediaFromUrl(url('/demo/project.jpg'))->toMediaCollection('images');
+                $project->addMediaFromUrl(url('/demo/projects/'. random_int(1, 4) . '.jpg'))->toMediaCollection('images');
                 $project->technologies()->attach($technologies->random());
                 $project->tag()->associate($tags->random());
                 $project->save();

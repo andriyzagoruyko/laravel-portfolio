@@ -67,7 +67,10 @@ class MainController extends Controller
         return response()->json([
             'maxPages' => $maxPages,
             'data' => $projects,
-            'view' => view('projects', compact('projects', 'firstWithLargeThumb'))->render(),
+            'view' => [
+                'projects' => view('projects', compact('projects', 'firstWithLargeThumb'))->render(),
+                'slides' => view('slides', compact('projects', 'firstWithLargeThumb'))->render(),
+            ]
         ]);
     }
 }

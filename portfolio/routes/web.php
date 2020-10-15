@@ -5,20 +5,18 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\PortfolioController;
 
-Route::group([
-    'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-], function() { 
-    Route::get('/', [MainController::class, 'index'])->name('index');
-    Route::get('/{tagSlug}', [MainController::class, 'index'])->name('tag');
-});
+$disabled = [
+    'confirm' => false,
+    'email' => false,
+    'reset' => false,
+    'register' => false,
+];
 
-Route::post('{locale}/projects/{tag?}', [MainController::class, 'getProjects'])->name('api.projects');
+Auth::routes($disabled);
 
 Route::group([
-    'middleware' => 'auth',
+    'middleware' => ['auth', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ],
     'prefix' => LaravelLocalization::setLocale() . '/admin',
-    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function() {
         Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
         Route::get('/locale/{localeCode}', [App\Http\Controllers\AdminController::class, 'setEditingLocale'])->name('admin.locale');
@@ -51,13 +49,12 @@ Route::group([
         ]);
 });
 
-$disabled = [
-    'confirm' => false,
-    'email' => false,
-    'reset' => false,
-    'register' => false,
-];
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+], function() { 
+    Route::get('/', [MainController::class, 'index'])->name('index');
+    Route::get('/{tagSlug}', [MainController::class, 'index'])->name('tag');
+});
 
-Auth::routes($disabled);
-
-
+Route::post('{locale}/projects/{tag?}', [MainController::class, 'getProjects'])->name('api.projects');

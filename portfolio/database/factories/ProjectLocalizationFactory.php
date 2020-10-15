@@ -22,8 +22,8 @@ class ProjectLocalizationFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->domainWord,
-            'description' => $this->faker->text(100),
+            'name' => $this->faker->sentence(random_int(4, 7)),
+            'description' => $this->faker->text(300),
         ];
     }
 }

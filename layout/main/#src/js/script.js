@@ -1,11 +1,19 @@
 @@include('vendors.js');
 @@include('service.js');
 
+function toggleModal(state = true) {
+    $('body').toggleClass('scroll-locked', state);
+    $('.modal').toggleClass('is-active', state);
+}
+
 $(function () {
     $('.navigation__hamburger').on("click", function () {
-        $('.navigation__list').toggleClass("is-active");
-        $('.overlay').toggleClass("is-active");
-        $(this).toggleClass("is-active");
+        const state = !$(this).hasClass('is-active');
+
+        $(this).toggleClass('is-active', state);
+        $('.navigation__list').toggleClass('is-active', state);
+        $('.overlay').toggleClass('is-active', state);
+        $('body').toggleClass('scroll-locked', state);
     });
 
     $(document).on("click", ".dropdown", function (e) {
@@ -30,33 +38,44 @@ $(function () {
         });
     });
 
-    $(document).on("click", ".project", function (e) {
-        e.preventDefault();
-        $('.modal').addClass('is-active');
-    })
-
     $(document).on("click", ".modal__close", function (e) {
         e.preventDefault();
-        $('.modal').removeClass('is-active');
+        toggleModal(false);
     })
 
     $(window).on("scroll load", function () {
         $(".navigation").toggleClass("scrolled", ($(window).scrollTop() > 100));
     });
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 });
 
-$(function(){
-    const effect = window.matchMedia("(max-width: 670px)").matches ? 'flip': 'coverflow';
+$(function () {
+    const $loadmore = $('#loadmore');
+    const isMobileWidth = window.matchMedia("(max-width: 670px)").matches;
+    let isReqestBusy = false;
 
-    var swiper = new Swiper('.swiper-container', {
+    const swiper = new Swiper('.swiper-container', {
         slidesPerView: 1,
-        speed: 600,
+        speed: 400,
         spaceBetween: 120,
         grabCursor: true,
-        effect: effect,
+        preloadImages: false,
+        lazy: {
+            loadPrevNext: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        effect: isMobileWidth ? 'flip' : 'coverflow',
         coverflowEffect: {
             rotate: 50,
-            stretch: 0,
+            stretch: 100,
             depth: 200,
             modifier: 1,
             slideShadows: false,
@@ -64,82 +83,109 @@ $(function(){
         flipEffect: {
             slideShadows: false,
         },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
+        on: {
+            reachEnd: () => {
+                const slidesNum = swiper.slides.length
+                if (slidesNum > 0) {
+                    setTimeout(loadMore, 200);
+                }
+            },
+        }
     });
-})
 
-$(function () {
-    $(document).on('click', '#loadmore', function (e) {
-        e.preventDefault();
-
-        const $loadmore = $(this);
-
-        let page = +$loadmore.attr('data-page');
-
-        const isMobileWidth = window.matchMedia("(max-width: 670px)").matches;
-        const loadingCount = isMobileWidth ? 4 : 3;
-        const shouldSkipOnFirstLoad = (!isMobileWidth && page == 1)
-        const tagId = $loadmore.attr('data-tag');
+    function getProjects(tag, count, page, skip, onSuccess) {
         const locale = $('body').attr('data-locale');
 
         $.ajax({
             type: 'POST',
-            url: '/' + locale + '/projects/' + tagId,
+            url: '/' + locale + '/projects/' + tag,
             data: {
-                count: loadingCount,
+                count: count,
                 page: page,
-                skip: shouldSkipOnFirstLoad ? 1 : 0
+                skip: skip
             },
             dataType: 'json',
+            success: (response) => onSuccess(response),
+            beforeSend: () => {
+                isReqestBusy = true;
+                $loadmore.addClass('processing');
+                $('.modal__wrapper').append('<div class="modal__preloader swiper-lazy-preloader"></div>');
 
-            success: function (response) {
-                console.log(response.data);
-                $loadmore
-                    .before(response.view)
-                    .attr('data-page', (page += 1))
-
-                if (page >= response.maxPages) {
-                    $loadmore.addClass('is-hidden');
-                }
+            },
+            complete: () => {
+                isReqestBusy = false;
+                $loadmore.removeClass('processing');
+                $('.modal__preloader').remove();
             }
         });
-    });
+    }
+
+    function appendProjects(projects, slides, maxPages, empty = false) {
+        let page = +$loadmore.attr('data-page');
+
+        empty && $('.project').remove();
+        slides && appendSlides(slides, empty);
+
+        $loadmore
+            .before(projects)
+            .attr('data-page', empty ? 1 : (page += 1))
+
+        $loadmore.toggleClass('is-hidden', page >= maxPages || maxPages <= 1);
+    }
+
+    function appendSlides(slides, empty = false) {
+        empty && swiper.removeAllSlides();
+
+        swiper.appendSlide(slides);
+        swiper.update();
+        swiper.lazy.load();
+    }
+
+    function loadMore() {
+        if ($loadmore.is('.is-hidden') || isReqestBusy) {
+            return;
+        }
+
+        const tag = $loadmore.attr('data-tag');
+        const count = isMobileWidth ? 4 : 3;
+        const page = +$loadmore.attr('data-page');
+        const skip = isMobileWidth ? 0 : 1;
+
+        getProjects(tag, count, page, skip,
+            (response) => appendProjects(response.view.projects, response.view.slides, response.maxPages),
+        );
+    }
+
+    function changeTab($newTab) {
+        const $tabs = $('.tabs__item');
+        const tag = $newTab.attr('data-tag');
+
+        getProjects(tag, 4, 0, 0,
+            (response) => {
+                $tabs.removeClass('is-active');
+                $newTab.addClass('is-active');
+                $loadmore.attr('data-tag', tag);
+                appendProjects(response.view.projects, response.view.slides, response.maxPages, true);
+            });
+    }
+
+    function showProject(slideIndex) {
+        swiper.slideTo(slideIndex, 0);
+        toggleModal(true);
+    }
 
     $(document).on('click', '.tabs__item', function (e) {
         e.preventDefault();
-
-        const $tab = $(this);
-        const tagId = $tab.attr('data-tag');
-        const locale = $('body').attr('data-locale');
-
-        $.ajax({
-            type: 'POST',
-            url: '/' + locale + '/projects/' + tagId,
-            data: {
-                count: 4,
-            },
-            dataType: 'json',
-
-            success: function (response) {
-                $('.tabs__item').removeClass('is-active');
-                $tab.addClass('is-active');
-                $('.project').remove();
-                $('#loadmore')
-                    .before(response.view)
-                    .attr('data-page', 1)
-                    .attr('data-tag', tagId)
-                    .toggleClass('is-hidden', response.maxPages <= 1);
-            }
-        });
+        changeTab($(this));
     });
 
-
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+    $(document).on('click', '#loadmore', function (e) {
+        e.preventDefault();
+        loadMore();
     });
-})
+
+    $(document).on("click", ".project", function (e) {
+        e.preventDefault();
+        showProject($(this).index());
+    });
+});
