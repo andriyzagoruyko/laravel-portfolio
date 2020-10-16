@@ -20,7 +20,7 @@
                     <span class="icon">
                         <img src="/assets/main/img/icons/open-in-browser.svg" alt="">
                     </span>
-                    Wath live
+                    {{ __('main.button_live') }}
                 </a>
             </div>
             <div class="modal-project__content">

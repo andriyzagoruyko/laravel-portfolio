@@ -20,7 +20,7 @@ $modal_size: 1270;
         max-height: 100vh;
         max-width: 100vw;
         box-sizing: border-box;
-        transition: 0.4s ease-in-out;
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s;
         opacity: 0;
         transform: scale(1.8);
         visibility: hidden;
@@ -77,6 +77,10 @@ $modal_size: 1270;
     &__body {
         margin-top: auto;
         margin-bottom: auto;
+
+        @media (max-width: $md6+px) {
+            margin: 0;
+        }
     }
 
     &__preloader {
@@ -104,6 +108,10 @@ $modal_size: 1270;
         @media (max-width: $md6+px) {
             align-items: flex-start;
         }
+    }
+
+    .swiper-container-flip {
+        overflow: hidden !important;
     }
 }
 
@@ -203,7 +211,7 @@ $modal_size: 1270;
             display: block;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 38.02%);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 38.02%);
             position: absolute;
             top: 0;
             left: 0;
@@ -222,6 +230,11 @@ $modal_size: 1270;
             max-width: 100%;
             box-shadow: $shadow_elem;
             position: relative;
+            transition: opacity .2s;
+
+            &.swiper-lazy:not(.swiper-lazy-loaded) {
+                opacity: 0;
+            }
         }
 
         a {

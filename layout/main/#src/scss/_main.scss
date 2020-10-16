@@ -3,10 +3,7 @@ body {
     font-size: 16px;
     color: $color_text_main;
     background-color: $color_bg_main;
-
-    &.scroll-locked {
-        overflow: hidden;
-    }
+    width: 100%;
 }
 
 a {

@@ -1,11 +1,13 @@
 @extends('layouts.master')
 
 @section('header-content')
-    <div class="header__title title">
-        <div id="header-clip" class="clip"></div>
-        <h1>{{ $configLocalization->h1 }}</h1>
+    <div class="header__title-block">
+        <div class="header__title title">
+            <div id="header-clip" class="clip"></div>
+            <h1>{{ $configLocalization->h1 }}</h1>
+        </div>
+        <style>#header-clip:after {content: '{{ $configLocalization->h1 }}';}</style>
     </div>
-    <style>#header-clip:after {content: '{{ $configLocalization->h1 }}';}</style>
 
     <div class="header__content">
         @foreach ($technologies as $technology)
@@ -15,8 +17,8 @@
             </div>
         @endforeach
     </div>
-    <a href="#" class="header__nav-button nav-button">
-        <span>Portfolio</span>
+    <a href="#portfolio" class="header__nav-button nav-button">
+        <span>{{ __('main.nav_portfolio') }}</span>
         <div class="icon">
             <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M27 22.604v-6.562l-10.208 7.291-10.209-7.291v6.562l10.209 7.292L27 22.604z" fill="currentColor"/>
@@ -34,6 +36,5 @@
         @include('layouts.services')
         @include('layouts.about')
         @include('layouts.contact')
-
     </main>
 @endsection

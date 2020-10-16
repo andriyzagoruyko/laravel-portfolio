@@ -125,17 +125,18 @@ function css(params) {
                 cascade: true
             })
         )
-        /* .pipe(webpcss())
-        .pipe(dest(path.build.css))    
+       // .pipe(webpcss())
+        
+        .pipe(dest(path.build.css))
+        .pipe(browsersync.stream())
+        .pipe(dest(path.laravel.css))
+        .pipe(dest(path.laravel.css))    
         .pipe(clean_css())
         .pipe(
             rename({
                 extname:".min.css"
             })
-        )*/
-        .pipe(dest(path.build.css))
-        .pipe(browsersync.stream())
-        .pipe(dest(path.laravel.css))
+        )
 }
 
 function html() {

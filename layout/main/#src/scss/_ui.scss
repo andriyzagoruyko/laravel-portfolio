@@ -77,11 +77,13 @@
     flex-direction: column;
     align-items: center;
     align-self: center;
+    color: white;
+    cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     
     @extend .light-on-hover;
 
-    &:hover{
+    .mouse &:hover{
         .icon{
             transform: translate(0, 5px) scale(1.1);
         }
@@ -122,21 +124,20 @@
 }
 
 .button {
-    background: linear-gradient(180deg, rgba(0, 159, 255, 0.6) 25%, rgba(252, 70, 107, 0.6) 100%), #FC466B;
-    border-radius: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+    background: linear-gradient(180deg, rgba(0, 159, 255, 0.6) 25%, rgba(252, 70, 107, 0.6) 100%), #FC466B;
+    border-radius: 2px;
     box-shadow: $shadow_elem;
+    cursor: pointer;
     color: white;
     font-weight: bold;
     font-size: 15px;
     line-height: 150%;
-
     transition: box-shadow 0.3s;
 
-    &:hover{
+    .mouse &:hover{
         box-shadow: 0 0 20px $color_yellow;
     }
 
@@ -191,7 +192,7 @@
         transition: filter 0.5s ease-in-out;
     }
 
-    &:hover{
+    .mouse &:hover{
         color: $color_yellow;
         text-shadow:$shadow_light;
 

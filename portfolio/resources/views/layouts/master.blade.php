@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="/assets/main/css/style.css"> 
-    <title>@yield('title')</title>
+    <meta name="description" content="{{ $configLocalization->description }}">
+    <title>{{ $configLocalization->title }}</title>
+    <link rel="stylesheet" href="/assets/main/css/style.min.css"> 
 </head>
 <body data-locale="{{ $locale }}">
-
     <div class="page">
         <header id="header" class="header">
             <div class="header__wrapper">
@@ -59,10 +59,10 @@
                         </div>
                         <div class="navigation__body">
                             <ul class="navigation__list">
-                                <li class="navigation__item"><a href="">Portfolio</a></li>
-                                <li class="navigation__item"><a href="">Services</a></li>
-                                <li class="navigation__item"><a href="">About</a></li>
-                                <li class="navigation__item"><a href="">Contact</a></li>
+                                <li class="navigation__item"><a href="#portfolio">{{ __('main.nav_portfolio') }}</a></li>
+                                <li class="navigation__item"><a href="#services">{{ __('main.nav_services') }}</a></li>
+                                <li class="navigation__item"><a href="#about">{{ __('main.nav_about') }}</a></li>
+                                <li class="navigation__item"><a href="#contact">{{ __('main.nav_contact') }}</a></li>
                             </ul>
                             <div class="navigation__dropdown dropdown">
                                 <div class="dropdown__toggle" role="button" aria-label="language">

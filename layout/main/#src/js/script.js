@@ -1,21 +1,48 @@
 @@include('vendors.js');
 @@include('service.js');
 
-function toggleModal(state = true) {
-    $('body').toggleClass('scroll-locked', state);
-    $('.modal').toggleClass('is-active', state);
-}
-
+//Navigation
 $(function () {
-    $('.navigation__hamburger').on("click", function () {
-        const state = !$(this).hasClass('is-active');
-
-        $(this).toggleClass('is-active', state);
+    function toggleNav(state = -1) {
+        if (state == -1) {
+            state = !$('.navigation__hamburger').hasClass('is-active');
+        }
+    
+        toggleScrollock(state);
+        $('.navigation__hamburger').toggleClass('is-active', state);
         $('.navigation__list').toggleClass('is-active', state);
         $('.overlay').toggleClass('is-active', state);
-        $('body').toggleClass('scroll-locked', state);
+    }
+
+    $(document).on("click", ".navigation__hamburger", function (e) {
+        toggleNav();
     });
 
+    $(document).on("click", "a", function (e) {
+        const href = $(this).attr('href');
+
+        if (href[0] == '#') {
+            const $el = $(href);
+
+            if ($el.length) {
+                e.preventDefault();
+                toggleNav(false);
+                $("html, body")
+                    .stop()
+                    .animate({
+                        scrollTop: $el.offset().top - 20
+                    }, 600);
+            }
+        }
+    })
+
+    $(window).on("scroll load", function () {
+        $("#navigation").toggleClass("scrolled", ($(window).scrollTop() > 100));
+    });
+});
+
+//Dropdown
+$(function () {
     $(document).on("click", ".dropdown", function (e) {
         const $dropdown_toggle = $(this).find(".dropdown__toggle");
         const $target = $(e.target);
@@ -27,7 +54,7 @@ $(function () {
         $(this).toggleClass("is-active");
     });
 
-    $(document).mouseup(function (e) {
+    $(document).on('mousedown tocuh', function (e) {
         $(".dropdown").filter(".is-active").each(function () {
             let $dropdown = $(this);
             let $target = $(e.target);
@@ -37,33 +64,20 @@ $(function () {
             }
         });
     });
+})
 
-    $(document).on("click", ".modal__close", function (e) {
-        e.preventDefault();
-        toggleModal(false);
-    })
-
-    $(window).on("scroll load", function () {
-        $(".navigation").toggleClass("scrolled", ($(window).scrollTop() > 100));
-    });
-
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-});
-
+//Projects loading, tabs and modal window with slider 
 $(function () {
     const $loadmore = $('#loadmore');
-    const isMobileWidth = window.matchMedia("(max-width: 670px)").matches;
-    let isReqestBusy = false;
+    let isRequestBusy = false;
 
     const swiper = new Swiper('.swiper-container', {
         slidesPerView: 1,
         speed: 400,
         spaceBetween: 120,
         grabCursor: true,
+        autoHeight: true,
+        updateOnWindowResize: true,
         preloadImages: false,
         lazy: {
             loadPrevNext: true,
@@ -72,7 +86,7 @@ $(function () {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-        effect: isMobileWidth ? 'flip' : 'coverflow',
+        effect: 'coverflow',
         coverflowEffect: {
             rotate: 50,
             stretch: 100,
@@ -106,50 +120,52 @@ $(function () {
             },
             dataType: 'json',
             success: (response) => onSuccess(response),
-            beforeSend: () => {
-                isReqestBusy = true;
-                $loadmore.addClass('processing');
-                $('.modal__wrapper').append('<div class="modal__preloader swiper-lazy-preloader"></div>');
-
-            },
-            complete: () => {
-                isReqestBusy = false;
-                $loadmore.removeClass('processing');
-                $('.modal__preloader').remove();
-            }
+            beforeSend: () => lockLoading(true),
+            complete: ()  => lockLoading(false),
         });
     }
 
-    function appendProjects(projects, slides, maxPages, empty = false) {
-        let page = +$loadmore.attr('data-page');
-
-        empty && $('.project').remove();
-        slides && appendSlides(slides, empty);
-
-        $loadmore
-            .before(projects)
-            .attr('data-page', empty ? 1 : (page += 1))
-
-        $loadmore.toggleClass('is-hidden', page >= maxPages || maxPages <= 1);
+    function lockLoading(state = true) {
+        isRequestBusy = state;
+        $loadmore.toggleClass('processing', state);
+        
+        if (state) {
+            $('.modal__wrapper').append('<div class="modal__preloader swiper-lazy-preloader"></div>');
+        }else {
+            $('.modal__preloader').remove();
+        }
     }
 
-    function appendSlides(slides, empty = false) {
-        empty && swiper.removeAllSlides();
+    function appendProjects(projects, slides, maxPages, empty = false) {
+        let page = 0;
+
+        if (empty) {
+            $('.project').remove();
+            swiper.removeAllSlides();
+        } else {
+            page = +$loadmore.attr('data-page');
+        }
 
         swiper.appendSlide(slides);
         swiper.update();
         swiper.lazy.load();
+        $loadmore
+            .before(projects)
+            .attr('data-page', page += 1)
+            .toggleClass('is-hidden', page >= maxPages || maxPages <= 1);
     }
 
     function loadMore() {
-        if ($loadmore.is('.is-hidden') || isReqestBusy) {
+        if ($loadmore.is('.is-hidden') || isRequestBusy) {
             return;
         }
-
+        
         const tag = $loadmore.attr('data-tag');
-        const count = isMobileWidth ? 4 : 3;
         const page = +$loadmore.attr('data-page');
-        const skip = isMobileWidth ? 0 : 1;
+        
+        const isMobile = window.matchMedia("(max-width: 670px)").matches || window.matchMedia("(max-height: 480px)").matches
+        const count = isMobile ? 4 : 3;
+        const skip = isMobile ? 0 : 1;
 
         getProjects(tag, count, page, skip,
             (response) => appendProjects(response.view.projects, response.view.slides, response.maxPages),
@@ -169,23 +185,44 @@ $(function () {
             });
     }
 
-    function showProject(slideIndex) {
-        swiper.slideTo(slideIndex, 0);
-        toggleModal(true);
+    function toggleModal(state = true) {
+        toggleScrollock(state);
+        $('.modal').toggleClass('is-active', state);
     }
+    
+    $(document).on("click", ".project", function (e) {
+        e.preventDefault();
+        swiper.slideTo($(this).index(), 0);
+        toggleModal(true);
+    });
+
+    $(document).on("click", ".modal__close", function (e) {
+        e.preventDefault();
+        toggleModal(false);
+    });
 
     $(document).on('click', '.tabs__item', function (e) {
         e.preventDefault();
         changeTab($(this));
     });
 
-    $(document).on('click', '#loadmore', function (e) {
+    $loadmore.on('click', function (e) {
         e.preventDefault();
         loadMore();
     });
 
-    $(document).on("click", ".project", function (e) {
-        e.preventDefault();
-        showProject($(this).index());
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
 });
+
+function toggleScrollock(state) {
+    const $scrollable = $('.modal__wrapper, .navigation__list').get();
+    if (state) {
+        scrollLock.disablePageScroll($scrollable);
+    } else {
+        scrollLock.enablePageScroll($scrollable);
+    }
+}

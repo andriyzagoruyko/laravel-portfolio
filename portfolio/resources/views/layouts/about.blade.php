@@ -1,5 +1,5 @@
-<section class="section section-about">
-    <h2 class="section__title title">About me</h2>
+<section id="about" class="section section-about">
+    <h2 class="section__title title">{{ __('main.title_about') }}</h2>
     <div class="section__body ">
         <div class="section__content about">
             <div class="about__me">

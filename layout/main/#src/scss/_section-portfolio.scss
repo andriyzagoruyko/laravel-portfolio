@@ -25,6 +25,11 @@
         @media (max-width: $md2+px) {
             margin: 10px;
             width: calc(33.33333% - 20px);
+            
+            @media (max-height: $md6+px) {
+                margin: 5px;
+                width: calc(50% - 10px);
+            }
         }
 
         @media (max-width: $md5+px) {
@@ -70,6 +75,10 @@
             @media (max-width: $md5+px) {
                 flex: 0 0 calc(50% - 10px);
             }
+
+            @media (max-height: $md6+px) {
+                flex: 0 0 calc(50% - 10px);
+            }
         }
     }
 
@@ -88,7 +97,7 @@
         transition: transform 0.7s;
     }
 
-    &:hover {
+    .mouse &:hover {
         img {
             transform: scale(1.05);
         }
