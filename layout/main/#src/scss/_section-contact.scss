@@ -54,7 +54,6 @@
     &__social {
         margin: 90px 0 0 0;
         border-top: 0.5px solid #ffffff;
-        align-self: stretch;
 
         @media (max-width: $md5+px) {
             margin: 45px 0 0 0;
@@ -119,9 +118,11 @@
     display: flex;
     justify-content: center;
     padding: 50px 10px;
+    width: calc(100% - 40px);
 
     @media (max-width: $md5+px) {
         padding: 30px 10px;
+        width: calc(100% - 20px);
     }
 
     ul {

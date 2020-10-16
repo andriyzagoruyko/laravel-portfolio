@@ -53,8 +53,8 @@ Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function() { 
-    Route::get('/', [MainController::class, 'index'])->name('index');
-    Route::get('/{tagSlug}', [MainController::class, 'index'])->name('tag');
+    Route::get('/{tagSlug?}', [MainController::class, 'index'])->name('index');
+    Route::get('/project/{projectSlug}', [MainController::class, 'singleProject'])->name('single-project');
 });
 
 Route::post('{locale}/projects/{tag?}', [MainController::class, 'getProjects'])->name('api.projects');

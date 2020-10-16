@@ -5,21 +5,22 @@
             <ul>
                 @foreach ($tags as $tag)
                     @if ($loop->first)
-                        <li class="tabs__item @empty($mainTag) is-active @endempty" data-tag><a href="/">All</a></li>
+                        <li class="tabs__item @empty($mainTag) is-active @endempty" data-tag data-name="/"><a href="/">All</a></li>
                     @endif
 
                     <li class="tabs__item 
                         @if(!empty($mainTag) && $mainTag->id == $tag->id) is-active @endif"
-                        data-tag="{{  $tag->id }}"
+                        data-tag="{{ $tag->id }}"
+                        data-name="{{ $tag->slug }}"
                     >
-                        <a href="{{ route('tag', $tag->slug) }}">{{  $tag->localization->name }}</a>
+                        <a href="{{ route('index', $tag->slug) }}">{{  $tag->localization->name }}</a>
                     </li>
                 @endforeach
             </ul>
         </nav>
         <div class="section__content portfolio">
 
-            @include('projects', [
+            @include('layouts.projects', [
                 'firstWithLargeThumb' => true
             ])
 

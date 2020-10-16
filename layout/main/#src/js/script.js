@@ -163,7 +163,7 @@ $(function () {
         const tag = $loadmore.attr('data-tag');
         const page = +$loadmore.attr('data-page');
         
-        const isMobile = window.matchMedia("(max-width: 670px)").matches || window.matchMedia("(max-height: 480px)").matches
+        const isMobile = window.matchMedia("(max-width: 670px)").matches || window.matchMedia("(max-height: 480px)").matches;
         const count = isMobile ? 4 : 3;
         const skip = isMobile ? 0 : 1;
 

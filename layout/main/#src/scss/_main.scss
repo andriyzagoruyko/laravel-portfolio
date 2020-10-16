@@ -65,6 +65,34 @@ p {
             width: 130%;
         }
     }
+
+    &.single {
+        position: static;
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                    180deg,
+                    #000000 3.27%,
+                    rgba(0, 0, 0, 0.5) 43.75%,
+                    rgba(0, 0, 0, 0.5) 64.58%,
+                    #000000 100%,
+                    #000000 100%
+                ),
+                url(/assets/main/img/head/bg.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: top;
+
+            filter: blur(3px);
+        }
+    }
 }
 
 .title {
@@ -114,6 +142,12 @@ p {
         padding: 60px 0;
     }
 
+    &.fullpage{
+        display: flex;
+        padding: 0!important;
+        min-height: 100vh;
+    }
+
     &:last-child {
         padding-bottom: 0 !important;
     }
@@ -127,10 +161,22 @@ p {
         display: flex;
         flex-direction: column;
         align-items: stretch;
-        margin-top: 90px;
+        margin-top: 80px;
 
         @media (max-width: $md4+px) {
             margin-top: 40px;
+        }
+
+        .fullpage &{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            margin-top: 100px;
+
+            @media (max-width: $md4+px) {
+                margin-top: 60px;
+            }
         }
     }
 

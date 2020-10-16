@@ -43,6 +43,13 @@ class MainController extends Controller
         return view('index', $data);
     }
 
+    public function singleProject($projectSlug) {
+        $locale = LaravelLocalization::getCurrentLocale();
+        $project = Project::withLocalization($locale)->where('slug', $projectSlug)->firstOrFail();
+
+        return view('single-project', compact('locale', 'project'));
+    }
+
     public function getProjects($locale, Tag $tag = null, Request $request) {
         $projectQuery = Project::query()->withLocalization($locale)->with('media');
 
@@ -68,8 +75,8 @@ class MainController extends Controller
         return response()->json([
             'maxPages' => $maxPages,
             'view' => [
-                'projects' => view('projects', compact('projects', 'firstWithLargeThumb'))->render(),
-                'slides' => view('slides', compact('projects', 'firstWithLargeThumb'))->render(),
+                'projects' => view('layouts.projects', compact('projects', 'firstWithLargeThumb'))->render(),
+                'slides' => view('layouts.slides', compact('projects', 'firstWithLargeThumb'))->render(),
             ]
         ]);
     }

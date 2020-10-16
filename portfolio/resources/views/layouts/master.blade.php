@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="{{ $configLocalization->description }}">
-    <title>{{ $configLocalization->title }}</title>
+    <meta name="description" content="@yield('meta-description')">
+    <title>@yield('title')</title>
     <link rel="stylesheet" href="/assets/main/css/style.min.css"> 
 </head>
 <body data-locale="{{ $locale }}">
     <div class="page">
-        <header id="header" class="header">
+        <header id="header" class="header {{ Route::current()->named('index') ? 'mainpage' : '' }}">
             <div class="header__wrapper">
                 <div class="header__nav-block">
                     <nav id="navigation" class="header__navigation navigation">
                         <div class="navigation__logo logo">
-                            <a href="#header">
+                            <a href="{{ Route::current()->named('index') ? '#header' : '/' }}">
                                 <svg width="204" viewBox="0 0 204 93" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0)">
                                     <path d="M100.66 72.1334V22.044H111.611C117.335 22.044 121.975 26.684 121.975 32.4078V61.7696C121.975 67.4934 117.335 72.1334 111.611 72.1334H100.66Z" fill="#FC466B" stroke="#FC466B"/>
@@ -59,10 +59,26 @@
                         </div>
                         <div class="navigation__body">
                             <ul class="navigation__list">
-                                <li class="navigation__item"><a href="#portfolio">{{ __('main.nav_portfolio') }}</a></li>
-                                <li class="navigation__item"><a href="#services">{{ __('main.nav_services') }}</a></li>
-                                <li class="navigation__item"><a href="#about">{{ __('main.nav_about') }}</a></li>
-                                <li class="navigation__item"><a href="#contact">{{ __('main.nav_contact') }}</a></li>
+                                <li class="navigation__item">
+                                    <a href="{{ Route::current()->named('index') ? '#portfolio' : '/#portfolio' }}">
+                                        {{ __('main.nav_portfolio') }}
+                                    </a>
+                                </li>
+                                <li class="navigation__item">
+                                    <a href="{{ Route::current()->named('index') ? '#services' : '/#services' }}">
+                                        {{ __('main.nav_services') }}
+                                    </a>
+                                </li>
+                                <li class="navigation__item">
+                                    <a href="{{ Route::current()->named('index') ? '#about' : '/#about' }}">
+                                        {{ __('main.nav_about') }}
+                                    </a>
+                                </li>
+                                <li class="navigation__item">
+                                    <a href="{{ Route::current()->named('index') ? '#contact' : '/#contact' }}">
+                                        {{ __('main.nav_contact') }}
+                                    </a>
+                                </li>
                             </ul>
                             <div class="navigation__dropdown dropdown">
                                 <div class="dropdown__toggle" role="button" aria-label="language">
@@ -96,11 +112,8 @@
         </header>
         @yield('content')
     </div>
-
-    @include('layouts.modal')
-
     <div class="overlay"></div>
-    
+    @yield('modal')
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="/assets/main/js/script.js"></script>

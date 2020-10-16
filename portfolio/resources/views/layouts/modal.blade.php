@@ -12,7 +12,7 @@
         <div class="modal__body">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    @include('slides')
+                    @include('layouts.slides')
                 </div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>

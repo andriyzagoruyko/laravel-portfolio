@@ -1,5 +1,8 @@
 @extends('layouts.master')
 
+@section('title', $configLocalization->title)
+@section('meta-description', $configLocalization->description)
+
 @section('header-content')
     <div class="header__title-block">
         <div class="header__title title">
@@ -8,7 +11,6 @@
         </div>
         <style>#header-clip:after {content: '{{ $configLocalization->h1 }}';}</style>
     </div>
-
     <div class="header__content">
         @foreach ($technologies as $technology)
             <div class="header__item header__item-wordpress">
@@ -31,10 +33,13 @@
 @section('content')
     <main class="main">
         <img src="{{ url('/assets/main/img/projects/bg.svg') }}" alt="" class="main-bg">
-
         @include('layouts.portfolio')
         @include('layouts.services')
         @include('layouts.about')
         @include('layouts.contact')
     </main>
+@endsection
+
+@section('modal')
+    @include('layouts.modal')
 @endsection
