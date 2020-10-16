@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Info extends LocalizedModel implements HasMedia
@@ -28,8 +29,18 @@ class Info extends LocalizedModel implements HasMedia
         $this->addMediaConversion('thumb')
             ->crop('crop-top', 600, 600)
             ->quality(70)
-            ->withResponsiveImages();
-            
-        $this->addMediaConversion('full-size');
+            ->withResponsiveImages()
+            ->format(Manipulations::FORMAT_PNG);
+    }
+
+    public function getThumbnail($alt) 
+    {
+        $media = $this->getFirstMedia('images');
+
+        if (!is_null($media)) {
+            return $media->img('thumb', ['alt' => $alt]);
+        }
+
+        return '';
     }
 }

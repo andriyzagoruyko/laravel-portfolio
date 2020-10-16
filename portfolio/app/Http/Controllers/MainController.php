@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
+use App\Models\Info;
 use App\Models\Project;
 use App\Models\Technology;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class MainController extends Controller
         $locale = LaravelLocalization::getCurrentLocale();
         $tag = null;
 
-        $projectQuery = Project::query()->withLocalization($locale);
+        $projectQuery = Project::with('media')->withLocalization($locale);
 
         if (!is_null($tagSlug)) {
             $tag = Tag::where('slug', $tagSlug)->firstOrFail();
@@ -30,12 +31,12 @@ class MainController extends Controller
 
         $data = [
             'configLocalization' => ConfigLocalization::where('lang', $locale)->first(),
-            'infoLocalization' => InfoLocalization::where('lang', $locale)->first(),
-            'tagsLocalization' =>  TagLocalization::where('lang', $locale)->get(),
-            'technologies' => Technology::where('in_header', 1)->get(),
+            'info' => Info::withLocalization($locale)->first(),
+            'tags' =>  Tag::withLocalization($locale)->get(),
+            'technologies' => Technology::where('in_header', 1)->with('media')->get(),
             'projects' => $projects,
             'maxPages' => $projectMaxPages,
-            'tag' => $tag,
+            'mainTag' => $tag,
             'locale' => $locale
         ];
 
@@ -43,7 +44,7 @@ class MainController extends Controller
     }
 
     public function getProjects($locale, Tag $tag = null, Request $request) {
-        $projectQuery = Project::query()->withLocalization($locale);
+        $projectQuery = Project::query()->withLocalization($locale)->with('media');
 
         if (!is_null($tag)) {
             $projectQuery->where('tag_id', $tag->id);
@@ -52,7 +53,7 @@ class MainController extends Controller
         $maxPages = 0;
 
         if ($request->has('count')) {
-            $maxPages = ceil($projectQuery->count() / $request->count);
+            $maxPages = round($projectQuery->count() / $request->count);
 
             if ($request->has('page')) {
                 $projectQuery->skip($request->count * $request->page + $request->skip);
@@ -66,7 +67,6 @@ class MainController extends Controller
 
         return response()->json([
             'maxPages' => $maxPages,
-            'data' => $projects,
             'view' => [
                 'projects' => view('projects', compact('projects', 'firstWithLargeThumb'))->render(),
                 'slides' => view('slides', compact('projects', 'firstWithLargeThumb'))->render(),

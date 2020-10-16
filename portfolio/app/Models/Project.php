@@ -19,11 +19,7 @@ class Project extends LocalizedModel implements HasMedia
     ];
 
     protected $visible = [
-        'slug', 'link', 'tag_id', 'localization', 'thumbnail', 'technologies'
-    ];
-
-    protected $appends = [
-        'thumbnail'
+        'slug', 'link', 'tag_id', 'localization', 'technologies'
     ];
 
     protected $with = [
@@ -36,44 +32,26 @@ class Project extends LocalizedModel implements HasMedia
     {
         $this->addMediaConversion('thumb')
             ->crop('crop-top', 470, 375)
-            //->quality(70)
             ->withResponsiveImages();
 
         $this->addMediaConversion('thumb-medium')
             ->crop('crop-top', 700, 900)
-            //->quality(70)
             ->withResponsiveImages();    
 
         $this->addMediaConversion('thumb-big')
             ->crop('crop-top', 1600, 420)
-            //->quality(70)
             ->withResponsiveImages();
-
-        /*  $this->addMediaConversion('full-size');
-
-        $this->addMediaConversion('thumb')
-            ->crop('crop-top', 500, 415);*/
     }
     
-    public function getThumbnail($large = false) 
+    public function getThumbnail($large = false, $alt = '') 
     {
         $media = $this->getFirstMedia('images');
 
         if ($large) {
-            return $media->img('thumb-big', ['alt' => '']);
+            return $media->img('thumb-big', ['alt' => $alt]);
         }
 
-        return $media->img('thumb', ['alt' => '']);
-    }
-
-    public function getThumbnailAttribute() 
-    {
-        $media = $this->getFirstMedia('images');
-
-        return [
-                'url' => $media->getUrl('thumb-medium'),
-                'srcset' =>  $media->getSrcset('thumb-medium')
-            ];
+        return $media->img('thumb', ['alt' => $alt]);
     }
 
     /**
@@ -89,7 +67,7 @@ class Project extends LocalizedModel implements HasMedia
      */
     public function technologies()
     {
-        return $this->belongsToMany(Technology::class);
+        return $this->belongsToMany(Technology::class)->with('media');
     }
 
 }

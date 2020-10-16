@@ -3,16 +3,16 @@
     <div class="section__body container">
         <nav class="section__tabs tabs">
             <ul>
-                @foreach ($tagsLocalization as $localization)
+                @foreach ($tags as $tag)
                     @if ($loop->first)
-                        <li class="tabs__item @empty($tag) is-active @endempty" data-tag><a href="/">All</a></li>
+                        <li class="tabs__item @empty($mainTag) is-active @endempty" data-tag><a href="/">All</a></li>
                     @endif
 
                     <li class="tabs__item 
-                        @if(!empty($tag) && $localization->tag->id == $tag->id) is-active @endif"
-                        data-tag="{{  $localization->tag->id }}"
+                        @if(!empty($mainTag) && $mainTag->id == $tag->id) is-active @endif"
+                        data-tag="{{  $tag->id }}"
                     >
-                        <a href="{{ route('tag', $localization->tag->slug) }}">{{ $localization->name }}</a>
+                        <a href="{{ route('tag', $tag->slug) }}">{{  $tag->localization->name }}</a>
                     </li>
                 @endforeach
             </ul>
@@ -25,7 +25,7 @@
 
             <div class="portfolio__item portfolio__item-loadmore @if($maxPages <= 1) is-hidden @endif" 
                 id="loadmore" 
-                data-tag="{{ empty($tag->id) ? '' : $tag->id }}"
+                data-tag="{{ empty($mainTag->id) ? '' : $mainTag->id }}"
                 data-page ="1"
                 >
                 <button class="portfolio__button nav-button">

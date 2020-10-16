@@ -3,10 +3,12 @@
     <div class="section__body ">
         <div class="section__content about">
             <div class="about__me">
-                <img src="/assets/main/img/about/me.png" alt="">
-                <div class="about__name">{{ $infoLocalization->name }}</div>
+                <div class="about__image">
+                    {{ $info->getThumbnail($info->localization->name) }}
+                </div>
+                <div class="about__name">{{ $info->localization->name }}</div>
                 <div class="about__text">
-                    {{ $infoLocalization->about }}
+                    {{ $info->localization->about }}
                 </div>
             </div>
         </div>

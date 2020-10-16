@@ -14,8 +14,12 @@
         </div>
         <div class="modal-project__body">
             <div class="modal-project__image">
-                {{-- $project->getFirstMedia('images')->img('thumb-medium',['alt'=>'']) --}}
-                <img data-src="{{ $project->getFirstMedia('images')->getUrl('thumb-medium') }}" src="/assets/main/img/modal/placeholder.png" class="swiper-lazy" alt="{{ $project->localization->name }}">
+                <img 
+                    data-src="{{ $project->getFirstMedia('images')->getUrl('thumb-medium') }}" 
+                    src="/assets/main/img/modal/placeholder.png" 
+                    class="swiper-lazy" 
+                    alt="{{ $project->localization->name }}
+                ">
                 <a href="{{ $project->link }}" class="modal-project__link button" target="_blank">
                     <span class="icon">
                         <img src="/assets/main/img/icons/open-in-browser.svg" alt="">

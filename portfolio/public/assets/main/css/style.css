@@ -1214,7 +1214,7 @@ p {
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
-  margin-top: 90px;
+  margin-top: 80px;
 }
 
 .section__tabs ul {
@@ -1544,6 +1544,14 @@ p {
   z-index: 10;
 }
 
+.about__image {
+  max-width: 300px;
+}
+
+.about__image img {
+  max-width: 100%;
+}
+
 .about__name {
   font-size: 18px;
   line-height: 123%;
@@ -1615,8 +1623,6 @@ p {
 .contact__social {
   margin: 90px 0 0 0;
   border-top: 0.5px solid #ffffff;
-  -ms-flex-item-align: stretch;
-      align-self: stretch;
 }
 
 .contact-form {
@@ -1693,6 +1699,7 @@ p {
       -ms-flex-pack: center;
           justify-content: center;
   padding: 50px 10px;
+  width: calc(100% - 40px);
 }
 
 .social ul {
@@ -2401,6 +2408,7 @@ p {
 
   .social {
     padding: 30px 10px;
+    width: calc(100% - 20px);
   }
 
   .modal .swiper-button-next,

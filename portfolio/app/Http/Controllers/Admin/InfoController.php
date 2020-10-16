@@ -42,8 +42,8 @@ class InfoController extends Controller
         $localization->update($request->all());
 
         if($request->hasFile('photo') && $request->file('photo')->isValid()) {
-            $info->clearMediaCollection('photos');
-            $info->addMediaFromRequest('photo')->toMediaCollection('photo');
+            $info->clearMediaCollection('images');
+            $info->addMediaFromRequest('photo')->toMediaCollection('images');
         }
 
         return redirect()->route('info.index')->with([
