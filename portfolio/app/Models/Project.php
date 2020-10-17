@@ -26,8 +26,6 @@ class Project extends LocalizedModel implements HasMedia
         'localization', 'technologies'
     ];
 
-    public $timestamps = false;
-
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
@@ -67,7 +65,7 @@ class Project extends LocalizedModel implements HasMedia
      */
     public function technologies()
     {
-        return $this->belongsToMany(Technology::class)->with('media');
+        return $this->belongsToMany(Technology::class)->with('media')->orderBy('order');
     }
 
 }

@@ -23,6 +23,7 @@ class TechnologyFactory extends Factory
     {
         return [
             'name' => $this->faker->domainWord,
+            'color' => $this->faker->hexcolor,
             'in_header' => random_int(0, 1)
         ];  
     }

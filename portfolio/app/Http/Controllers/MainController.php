@@ -33,7 +33,7 @@ class MainController extends Controller
             'configLocalization' => ConfigLocalization::where('lang', $locale)->first(),
             'info' => Info::withLocalization($locale)->first(),
             'tags' =>  Tag::withLocalization($locale)->get(),
-            'technologies' => Technology::where('in_header', 1)->with('media')->get(),
+            'technologies' => Technology::where('in_header', 1)->orderBy('order')->with('media')->get(),
             'projects' => $projects,
             'maxPages' => $projectMaxPages,
             'mainTag' => $tag,

@@ -13,7 +13,7 @@ class Technology extends Model implements HasMedia
     use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
-        'name', 'in_header'
+        'name', 'in_header', 'order', 'color'
     ];
 
     protected $appends = [

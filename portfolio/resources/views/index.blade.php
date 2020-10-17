@@ -15,7 +15,7 @@
         @foreach ($technologies as $technology)
             <div class="header__item header__item-wordpress">
                 <img src="{{ $technology->logo }}" alt="{{ $technology->name }}">
-                <span>{{ $technology->name }}</span>
+                <span style="color: {{ $technology->color }}">{{ $technology->name }}</span>
             </div>
         @endforeach
     </div>
