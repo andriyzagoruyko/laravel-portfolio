@@ -1686,21 +1686,94 @@ p {
           flex-direction: column;
 }
 
+.contact-form.disabled {
+  pointer-events: none;
+}
+
+.contact-form.disabled input,
+.contact-form.disabled textarea,
+.contact-form.disabled button {
+  opacity: 0.4;
+}
+
+.contact-form p {
+  position: relative;
+}
+
+.contact-form span.error,
+.contact-form span.success {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #FFFFFF;
+  font-size: 0.9em;
+  text-align: center;
+  line-height: 150%;
+  border-radius: 0 0 3px 3px;
+  z-index: 10;
+  font-weight: bold;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.contact-form span.error {
+  background: rgba(255, 91, 91, 0.7);
+  -webkit-box-shadow: 0 0 10px rgba(255, 91, 91, 0.8);
+          box-shadow: 0 0 10px rgba(255, 91, 91, 0.8);
+  -webkit-transform: translateY(100%);
+      -ms-transform: translateY(100%);
+          transform: translateY(100%);
+}
+
+.contact-form span.success {
+  background: rgba(83, 231, 140, 0.7);
+  -webkit-box-shadow: 0 0 10px rgba(83, 231, 140, 0.7);
+          box-shadow: 0 0 10px rgba(83, 231, 140, 0.7);
+  border-radius: 3px;
+  padding: 5px;
+  position: relative;
+}
+
 .contact-form__row {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  position: relative;
+  margin: 15px;
+}
+
+.contact-form__row.success {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.contact-form__row input.error,
+.contact-form__row textarea.error {
+  border-color: rgba(255, 91, 91, 0.7);
+  -webkit-box-shadow: 0 0 10px rgba(255, 91, 91, 0.7);
+          box-shadow: 0 0 10px rgba(255, 91, 91, 0.7);
+}
+
+.contact-form__row p {
+  margin: 0;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 calc(50% - 30px);
+          flex: 1 1 calc(50% - 30px);
+}
+
+.contact-form__row p:first-child {
+  margin: 0 30px 0 0;
 }
 
 .contact-form__row input,
 .contact-form__row textarea {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 calc(50% - 30px);
-          flex: 1 1 calc(50% - 30px);
+      -ms-flex: 1 1 calc(50%);
+          flex: 1 1 calc(50%);
   width: 100%;
-  margin: 15px;
   padding: 10px;
   background: transparent;
   color: #ffffff;
@@ -2594,12 +2667,22 @@ p {
     margin: 25px -5px 0 -5px;
   }
 
+  .contact-form__row {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 calc(50% - 10px);
+            flex: 1 1 calc(50% - 10px);
+    margin: 15px 5px;
+  }
+
+  .contact-form__row p:first-child {
+    margin: 0 10px 0 0;
+  }
+
   .contact-form__row input,
   .contact-form__row textarea {
     -webkit-box-flex: 1;
         -ms-flex: 1 1 calc(50% - 10px);
             flex: 1 1 calc(50% - 10px);
-    margin: 15px 5px;
   }
 
   .contact-form__row textarea {

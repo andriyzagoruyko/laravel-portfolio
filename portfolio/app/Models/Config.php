@@ -10,4 +10,6 @@ class Config extends LocalizedModel
     use HasFactory;
     
     public $timestamps = false;
+
+    protected $fillable = ['email'];
 }

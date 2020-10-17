@@ -27,9 +27,8 @@ class Info extends LocalizedModel implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-            ->crop('crop-top', 600, 600)
+            ->crop('crop-top', 500, 500)
             ->quality(70)
-            ->withResponsiveImages()
             ->format(Manipulations::FORMAT_PNG);
     }
 

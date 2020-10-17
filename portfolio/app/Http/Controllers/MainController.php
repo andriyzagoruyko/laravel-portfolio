@@ -46,7 +46,6 @@ class MainController extends Controller
     public function singleProject($projectSlug) {
         $locale = LaravelLocalization::getCurrentLocale();
         $project = Project::withLocalization($locale)->where('slug', $projectSlug)->firstOrFail();
-
         return view('single-project', compact('locale', 'project'));
     }
 

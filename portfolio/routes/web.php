@@ -1,9 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Admin\PortfolioController;
 
 $disabled = [
     'confirm' => false,
@@ -53,8 +50,9 @@ Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function() { 
-    Route::get('/{tagSlug?}', [MainController::class, 'index'])->name('index');
-    Route::get('/project/{projectSlug}', [MainController::class, 'singleProject'])->name('single-project');
+    Route::get('/{tagSlug?}', [App\Http\Controllers\MainController::class, 'index'])->name('index');
+    Route::get('/project/{projectSlug}', [App\Http\Controllers\MainController::class, 'singleProject'])->name('single-project');
+    Route::post('/feedback', [App\Http\Controllers\FeedbackController::class, 'send'])->name('feedback');
 });
 
-Route::post('{locale}/projects/{tag?}', [MainController::class, 'getProjects'])->name('api.projects');
+Route::post('{locale}/projects/{tag?}', [App\Http\Controllers\MainController::class, 'getProjects'])->name('api.projects');

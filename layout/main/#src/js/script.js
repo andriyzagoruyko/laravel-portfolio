@@ -21,7 +21,7 @@ $(function () {
     $(document).on("click", "a", function (e) {
         const href = $(this).attr('href');
 
-        if (href[0] == '#') {
+        if (href.length && href[0] == '#') {
             const $el = $(href);
 
             if ($el.length) {
@@ -65,6 +65,92 @@ $(function () {
         });
     });
 })
+
+//Feedback form
+$(function (){
+    const $form = $('#feedback');
+    const locale = $('body').attr('data-locale');
+    const messages = {
+        "en" : {
+            name: "Please specify your name",
+            email: {
+                required: "Need your email address to contact you",
+                email: "Your email address must be in the format of name@domain.com"
+            },
+            subject: {
+                required: "Please specify subject",
+            },
+            message: {
+                required: "Please write your message",
+            }
+        },
+        "uk" : {
+            name: "Будь ласка, вкажіть ім'я",
+            email: {
+                required: "Потрібен Ваш email для зв’язку",
+                email: "Електронна адреса повинна бути правильного формату name@domain.com"
+            },
+            subject: {
+                required: "Будь ласка, вкажіть тему повідомлення",
+            },
+            message: {
+                required: "Будь ласка, напишіть повідомлення",
+            }
+        },
+        "ru" : {
+            name: "Пожалуйста, укажите имя",
+            email: {
+                required: "Нужен Ваш email для связи",
+                email: "Электронная почта должна быть правильного формата name@domain.com"
+            },
+            subject: {
+                required: "Пожалуйста, укажите тему сообщения",
+            },
+            message: {
+                required: "Пожалуйста, напишите сообщение",
+            }
+        }
+    }
+
+    $form .validate({ 
+        errorElement: "span",
+        rules: {
+            name: {
+                required: true,
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            subject: {
+                required: true
+            },
+            message: {
+                required: true
+            }
+        },
+        messages:messages[locale],
+
+        submitHandler: function() {
+            $data = $form.serialize();
+            $.ajax({
+                type: 'POST',
+                url: '/' + locale + '/feedback',
+                data: $data,
+                dataType: 'json',
+                success: (response) => {
+                    console.log(response);
+                    $form.prepend('<div class="contact-form__row"><span class="success">'+ response.message +'</span></div>')
+                    .addClass('disabled')
+                },
+            });
+        }
+    });
+
+    $form.on("submit", function (e) {
+        e.preventDefault();
+    });
+});
 
 //Projects loading, tabs and modal window with slider 
 $(function () {
@@ -219,10 +305,13 @@ $(function () {
 });
 
 function toggleScrollock(state) {
+    
     const $scrollable = $('.modal__wrapper, .navigation__list').get();
+
     if (state) {
         scrollLock.disablePageScroll($scrollable);
     } else {
         scrollLock.enablePageScroll($scrollable);
     }
 }
+

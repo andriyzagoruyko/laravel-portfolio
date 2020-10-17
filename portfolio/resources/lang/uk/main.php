@@ -31,4 +31,7 @@ return [
     'contact_email' => 'Почта',
     'contact_subject' => 'Тема',
     'contact_message' => 'Повідомлення',
+
+    'mail_from' => 'Повідомлення від',
+    'mail_sent' => 'Дякую, Ваше повідомлення відправлено',
 ];

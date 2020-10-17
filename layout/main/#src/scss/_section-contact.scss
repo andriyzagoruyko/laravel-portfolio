@@ -65,15 +65,86 @@
     display: flex;
     flex-direction: column;
 
+    &.disabled {
+        input, textarea, button{
+            opacity: 0.4;
+        }
+        pointer-events: none;
+    }
+
+    p {
+        position: relative;
+    }
+
+    span.error, span.success {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: $color_text_main;
+        font-size: 0.9em;
+        text-align: center;
+        line-height: 150%;
+        border-radius: 0 0 3px 3px;
+        z-index: 10;
+        font-weight: bold;
+        box-sizing: border-box;
+    }
+
+    span.error {
+        background: rgba(255, 91, 91, 0.7);
+        box-shadow: 0 0 10px rgba(255, 91, 91, 0.8);
+        transform: translateY(100%);
+    }
+
+    span.success {
+        background: rgba(83, 231, 140, 0.7);
+        box-shadow: 0 0 10px rgba(83, 231, 140, 0.7);
+        border-radius: 3px;
+        padding: 5px;
+        position: relative;
+    }
+
     &__row {
         display: flex;
         flex-wrap: wrap;
+        position: relative;
+
+        margin: 15px;
+
+        &.success {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: $md6+px) {
+            flex: 1 1 calc(50% - 10px);
+            margin: 15px 5px;
+        }
+
+        input.error, textarea.error {
+            border-color: rgba(255, 91, 91, 0.7);
+            box-shadow: 0 0 10px rgba(255, 91, 91, 0.7);
+        }
+
+        p {
+            margin: 0;
+
+            flex: 1 1 calc(50% - 30px);
+
+            &:first-child {
+                margin: 0 30px 0 0;
+
+                @media (max-width: $md6+px) {
+                    margin: 0 10px 0 0;
+                }
+            }
+        }
 
         input,
         textarea {
-            flex: 1 1 calc(50% - 30px);
+            flex: 1 1 calc(50%);
             width: 100%;
-            margin: 15px;
             padding: 10px;
             background: transparent;
             color: #ffffff;
@@ -87,7 +158,6 @@
 
             @media (max-width: $md6+px) {
                 flex: 1 1 calc(50% - 10px);
-                margin: 15px 5px;
             }
         }
 

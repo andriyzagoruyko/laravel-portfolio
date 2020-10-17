@@ -4,13 +4,19 @@
         <div class="section__content contact">
             <p>{{ $info->localization->contact }}</p>
             <p>
-                <a href="">{{ $info->mail }}</a>  
-                <a href="">{{ $info->phone }}</a>
+                @isset($info->mail)
+                    <a href="mailto:{{ $info->mail }}" target="_blank">{{ $info->mail }}</a>
+                @endisset
+
+                @isset($info->mail)
+                    <a href="tel:{{ $info->phone }}" target="_blank">{{ $info->phone }}</a>
+                @endisset
             </p>
-            <form action="#" class="contact__form contact-form">
+            <form id="feedback" action="{{ route('feedback') }}" method="POST" class="contact__form contact-form">
+                @csrf
                 <div class="contact-form__row">
-                    <input type="text" name="name" id="name" placeholder="{{ __('main.contact_name') }}">
-                    <input type="email" name="email" id="email" placeholder="{{ __('main.contact_email') }}">
+                    <p><input type="text" name="name" id="name" placeholder="{{ __('main.contact_name') }}"></p>
+                    <p><input type="email" name="email" id="email" placeholder="{{ __('main.contact_email') }}"></p>
                 </div>
                 <div class="contact-form__row">
                     <input type="text" name="subject" id="subject" placeholder="{{ __('main.contact_subject') }}">

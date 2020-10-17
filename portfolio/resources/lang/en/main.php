@@ -31,4 +31,7 @@ return [
     'contact_email' => 'Email',
     'contact_subject' => 'Subject',
     'contact_message' => 'Your message',
+
+    'mail_from' => 'Message from',
+    'mail_sent' => 'Thank you, message has been sent',
 ];

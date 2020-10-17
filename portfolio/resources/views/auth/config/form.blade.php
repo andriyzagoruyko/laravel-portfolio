@@ -25,6 +25,10 @@
                     <label for="description">Мета тег description</label>
                     <textarea name="description" id="description" cols="30" rows="10">{{ $localization->description }}</textarea>
                 </div>
+                <div class="form__group">
+                    <label for="title">Email для сповіщення</label>
+                    <input type="text" name="email" id="email" value="{{ $config->email }}">
+                </div>
                 <div class="form__group form__group-row">
                     <button type="submit" class="btn btn-success form__submit">Зберегти </button>
                 </div>

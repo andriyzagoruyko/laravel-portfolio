@@ -35,6 +35,7 @@ class ConfigController extends Controller
      */
     public function update(ConfigRequest $request, Config $config)
     {
+        $config->update(['email' => $request->email]);
         $localization = $config->localizations()->where('lang', $request->lang)->firstOrFail();
         $localization->update($request->all());
 
