@@ -2591,6 +2591,7 @@ p {
 
   .header {
     padding: 0 15px;
+    background-attachment: scroll !important;
   }
 
   .mainpage .header__nav-block {

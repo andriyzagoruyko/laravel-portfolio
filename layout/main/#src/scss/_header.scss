@@ -28,6 +28,7 @@
 
     @media (max-width: $md6+px) {
         padding: 0 15px;
+        background-attachment: scroll!important;
     }
 
     &__nav-block {
