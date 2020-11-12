@@ -52,7 +52,7 @@ class MainController extends Controller
     public function getProjects($locale, $tagId = null, Request $request) {
         $projectQuery = Project::query()->withLocalization($locale)->with('media');
 
-        if (!empty($tag)) {
+        if (!is_null($tagId)) {
             $projectQuery->where('tag_id', $tagId);
         }
 
