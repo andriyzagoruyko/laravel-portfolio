@@ -240,10 +240,11 @@ $(function () {
 
     function getProjects(tag, count, page, skip, onSuccess) {
         const locale = $('body').attr('data-locale');
+        tag = tag.length ? '/' + tag : ''
 
         $.ajax({
             type: 'POST',
-            url: '/' + locale + '/projects/' + tag,
+            url: '/' + locale + '/projects' + tag,
             data: {
                 count: count,
                 page: page,
