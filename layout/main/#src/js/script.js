@@ -139,8 +139,8 @@ $(function (){
                 data: $data,
                 dataType: 'json',
                 success: (response) => {
-                    console.log(response);
-                    $form.prepend('<div class="contact-form__row"><span class="success">'+ response.message +'</span></div>')
+                    
+                    $form.prepend('<div class="contact-form__row"><span class="'+ response.status +'">' + response.message +'</span></div>')
                     .addClass('disabled')
                 },
             });
