@@ -15,7 +15,10 @@ class FeedbackController extends Controller
         $mailTo = Config::first()->email;
 
         if (empty($mailTo)) {
-            return;
+            return response()->json([
+                'status' => 'error',
+                'message' => __('main.mail_error'),
+            ]);
         }
 
         Mail::to($mailTo)
