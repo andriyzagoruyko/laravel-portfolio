@@ -49,11 +49,11 @@ class MainController extends Controller
         return view('single-project', compact('locale', 'project'));
     }
 
-    public function getProjects($locale, Tag $tag = null, Request $request) {
+    public function getProjects($locale, $tagId = null, Request $request) {
         $projectQuery = Project::query()->withLocalization($locale)->with('media');
 
         if (!empty($tag)) {
-            $projectQuery->where('tag_id', $tag->id);
+            $projectQuery->where('tag_id', $tagId);
         }
 
         $maxPages = 0;

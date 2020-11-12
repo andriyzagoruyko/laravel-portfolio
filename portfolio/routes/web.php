@@ -55,4 +55,4 @@ Route::group([
     Route::post('/feedback', [App\Http\Controllers\FeedbackController::class, 'send'])->name('feedback');
 });
 
-Route::post('{locale}/projects/{tag?}', [App\Http\Controllers\MainController::class, 'getProjects'])->name('api.projects');
+Route::post('{locale}/projects/{tagId?}', [App\Http\Controllers\MainController::class, 'getProjects'])->name('api.projects');
