@@ -27,7 +27,17 @@ class MainController extends Controller
         }
 
         $projects = $projectQuery->limit(4)->get();
-        $projectMaxPages = ceil($projectQuery->count() / 4);
+
+        $count = $projectQuery->count();
+        $num = 4;
+        $i = 0; 
+        $projectMaxPages = 0; 
+        
+        while($i < $count)
+        {
+            $i += $num;
+            $projectMaxPages++;
+        }
 
         $data = [
             'configLocalization' => ConfigLocalization::where('lang', $locale)->first(),
@@ -59,7 +69,16 @@ class MainController extends Controller
         $maxPages = 0;
 
         if ($request->has('count')) {
-            $maxPages = round($projectQuery->count() / $request->count);
+            $count = $projectQuery->count();
+            $num = $request->count;
+            $i = 0; 
+            $maxPages = 0; 
+            
+            while($i < $count)
+            {
+                $i += $num;
+                $maxPages++;
+            }
 
             if ($request->has('page')) {
                 $projectQuery->skip($request->count * $request->page + $request->skip);
