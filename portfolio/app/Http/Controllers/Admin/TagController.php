@@ -100,6 +100,10 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
+        foreach($tag->localizations as $item) {
+            $item->delete();
+        }
+        
         $tag->delete();
 
         return redirect()->route('tags.index')->with([

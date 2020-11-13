@@ -120,6 +120,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        foreach($project->localizations as $item) {
+            $item->delete();
+        }
+
         $project->technologies()->detach();
         $project->delete();
 
