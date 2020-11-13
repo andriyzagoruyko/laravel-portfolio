@@ -35,4 +35,6 @@ return [
     'mail_from' => 'Message from',
     'mail_sent' => 'Thank you, message has been sent',
     'mail_error' => 'Technical problem',
+
+    'tabs_all' => 'All',
 ];

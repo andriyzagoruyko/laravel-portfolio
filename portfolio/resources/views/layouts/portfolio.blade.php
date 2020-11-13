@@ -5,7 +5,7 @@
             <ul>
                 @foreach ($tags as $tag)
                     @if ($loop->first)
-                        <li class="tabs__item @empty($mainTag) is-active @endempty" data-tag data-name="/"><a href="/#portfolio">All</a></li>
+                        <li class="tabs__item @empty($mainTag) is-active @endempty" data-tag data-name="/"><a href="/#portfolio">{{ __('main.tabs_all') }}</a></li>
                     @endif
 
                     <li class="tabs__item 
