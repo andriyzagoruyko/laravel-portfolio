@@ -337,7 +337,8 @@ $modal_size: 1270;
     &__technology {
         margin: 0 20px;
         flex: 0 0 60px;
-
+        display: flex;
+        align-items: center;
 
         img {
             display: block;
