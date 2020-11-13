@@ -22,13 +22,13 @@ class ContentSeeder extends Seeder
     {
         $locales = EditingLocalization::getSupportedLocales();
         
-        $technologies = Technology::factory()->count(3)->create()
+        $technologies = Technology::factory()->count(2)->create()
             ->each(function($technology)
             {
                 $technology->addMediaFromUrl(url('/demo/technology'). '/' . random_int(1, 3) . '.svg')->toMediaCollection('images');
             });
 
-        $tags = Tag::factory()->count(3)->create()
+        $tags = Tag::factory()->count(2)->create()
             ->each(function($tag) use ($locales) 
             {
                 foreach($locales as $lang => $locale) {
@@ -39,7 +39,7 @@ class ContentSeeder extends Seeder
                 }
             });
 
-        Project::factory()->count(20)->create()
+        Project::factory()->count(6)->create()
             ->each(function($project) use ($locales, $technologies, $tags)
             {
                 $project->addMediaFromUrl(url('/demo/projects/'. random_int(1, 4) . '.jpg'))->toMediaCollection('images');

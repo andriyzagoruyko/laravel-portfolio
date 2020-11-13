@@ -5,7 +5,7 @@
             <ul>
                 @foreach ($tags as $tag)
                     @if ($loop->first)
-                        <li class="tabs__item @empty($mainTag) is-active @endempty" data-tag data-name="/"><a href="/">All</a></li>
+                        <li class="tabs__item @empty($mainTag) is-active @endempty" data-tag data-name="/"><a href="/#portfolio">All</a></li>
                     @endif
 
                     <li class="tabs__item 
@@ -13,7 +13,7 @@
                         data-tag="{{ $tag->id }}"
                         data-name="{{ $tag->slug }}"
                     >
-                        <a href="{{ route('index', $tag->slug) }}">{{  $tag->localization->name }}</a>
+                        <a href="{{ route('index', $tag->slug) }}#portfolio">{{  $tag->localization->name }}</a>
                     </li>
                 @endforeach
             </ul>

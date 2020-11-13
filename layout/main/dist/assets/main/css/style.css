@@ -957,7 +957,6 @@ template {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 230px;
           flex: 0 0 230px;
-  cursor: pointer;
 }
 
 .header__item img {

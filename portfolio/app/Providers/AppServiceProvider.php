@@ -25,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if($this->app->environment('production'))
+        {
+            $this->app['request']->server->set('HTTPS','on');
+        }
+
         Blade::directive('navactive', function($route){
             return "<?php echo strpos(Route::currentRouteName(), $route) !== false  ? 'is-active' : '' ?>";
         });
