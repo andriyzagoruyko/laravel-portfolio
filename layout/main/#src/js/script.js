@@ -84,10 +84,10 @@ $(function (){
                 required: "Please write your message",
             }
         },
-        "uk" : {
+        "ua" : {
             name: "Будь ласка, вкажіть ім'я",
             email: {
-                required: "Потрібен Ваш email для зв’язку",
+                required: "Будь ласка, вкажіть email",
                 email: "Електронна адреса повинна бути правильного формату name@domain.com"
             },
             subject: {
