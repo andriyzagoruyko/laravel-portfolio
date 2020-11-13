@@ -65,7 +65,7 @@
                     <select name="tag_id" id="tag_id">
                         @foreach ($tags as $tag)
                             <option value="{{ $tag->id }}"
-                                @if(isset($project) && $project->tag_id === $tag->id) 
+                                @if(isset($project) && $project->tag_id == $tag->id) 
                                     selected 
                                 @endif>
                                 {{ $tag->defaultLocalization->name }}
