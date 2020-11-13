@@ -114,8 +114,8 @@
     </div>
     <div class="overlay"></div>
     @yield('modal')
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="/assets/main/css/swiper-bundle.min.css">
+    <script src="/assets/main/js/swiper-bundle.min.js"></script>
     <script src="/assets/main/js/script.js"></script>
 </body>
 </html>
