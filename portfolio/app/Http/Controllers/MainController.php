@@ -19,7 +19,7 @@ class MainController extends Controller
         $locale = LaravelLocalization::getCurrentLocale();
         $tag = null;
 
-        $projectQuery = Project::with('media')->withLocalization($locale);
+        $projectQuery = Project::orderBy('created_at', 'desc')->with('media')->withLocalization($locale);
 
         if (!is_null($tagSlug)) {
             $tag = Tag::where('slug', $tagSlug)->firstOrFail();
@@ -50,7 +50,7 @@ class MainController extends Controller
     }
 
     public function getProjects($locale, $tagId = null, Request $request) {
-        $projectQuery = Project::query()->withLocalization($locale)->with('media');
+        $projectQuery = Project::query()->orderBy('created_at', 'desc')->withLocalization($locale)->with('media');
 
         if (!is_null($tagId)) {
             $projectQuery->where('tag_id', $tagId);
