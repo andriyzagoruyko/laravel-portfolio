@@ -42,7 +42,7 @@ class MainController extends Controller
             'tags' =>  Tag::withLocalization($locale)->get(),
             'technologies' => Technology::where('in_header', 1)->orderBy('order')->with('media')->get(),
             'projects' => $projects,
-            'maxPages' => $projectMaxPages,
+            'maxPages' => $projects->lastPage(),
             'mainTag' => $tag,
             'locale' => $locale
         ];
@@ -81,7 +81,6 @@ class MainController extends Controller
             $projectQuery->take($request->count);
         }
 
-        $projects = $projectQuery->get();
         $firstWithLargeThumb = !$request->has('page') || $request->page == 0;
 
         return response()->json([
