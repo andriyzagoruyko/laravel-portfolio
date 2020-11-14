@@ -30,7 +30,7 @@ class MainController extends Controller
         $resultCount = $projectQuery->count();
         $projectMaxPages = floor($resultCount/$resultPerPage);
 
-        if ($resultCount % $resultPerPage >= 2){
+        if ($resultCount % $resultPerPage > 0){
             $projectMaxPages++;
         };
 
@@ -70,7 +70,7 @@ class MainController extends Controller
             $resultCount = $projectQuery->count();
             $projectMaxPages = floor($resultCount/$resultPerPage);
     
-            if ($resultCount % $resultPerPage >= 2){
+            if ($resultCount % $resultPerPage > 0){
                 $projectMaxPages++;
             };
     
