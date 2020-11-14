@@ -26,18 +26,15 @@ class MainController extends Controller
             $projectQuery->where('tag_id', $tag->id);
         }
 
-        $projects = $projectQuery->limit(4)->get();
+        $resultPerPage = 4;
+        $resultCount = $projectQuery->count();
+        $projectMaxPages = floor($resultCount/$resultPerPage);
 
-        $count = $projectQuery->count();
-        $num = 4;
-        $i = 0; 
-        $projectMaxPages = 0; 
-        
-        while($i < $count)
-        {
-            $i += $num;
+        if ($resultCount % $resultPerPage >= 2){
             $projectMaxPages++;
-        }
+        };
+
+        $projects = $projectQuery->limit($resultPerPage)->get();
 
         $data = [
             'configLocalization' => ConfigLocalization::where('lang', $locale)->first(),
@@ -66,20 +63,17 @@ class MainController extends Controller
             $projectQuery->where('tag_id', $tagId);
         }
 
-        $maxPages = 0;
+        $projectMaxPages = 0;
 
         if ($request->has('count')) {
-            $count = $projectQuery->count();
-            $num = $request->count;
-            $i = 0; 
-            $maxPages = 0; 
-            
-            while($i < $count)
-            {
-                $i += $num;
-                $maxPages++;
-            }
-
+            $resultPerPage = $request->count;
+            $resultCount = $projectQuery->count();
+            $projectMaxPages = floor($resultCount/$resultPerPage);
+    
+            if ($resultCount % $resultPerPage >= 2){
+                $projectMaxPages++;
+            };
+    
             if ($request->has('page')) {
                 $projectQuery->skip($request->count * $request->page + $request->skip);
             }
@@ -91,7 +85,7 @@ class MainController extends Controller
         $firstWithLargeThumb = !$request->has('page') || $request->page == 0;
 
         return response()->json([
-            'maxPages' => $maxPages,
+            'maxPages' => $projectMaxPages,
             'view' => [
                 'projects' => view('layouts.projects', compact('projects', 'firstWithLargeThumb'))->render(),
                 'slides' => view('layouts.slides', compact('projects', 'firstWithLargeThumb'))->render(),

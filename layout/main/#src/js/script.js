@@ -240,6 +240,8 @@ $(function () {
             .before(projects)
             .attr('data-page', page += 1)
             .toggleClass('is-hidden', page >= maxPages || maxPages <= 1);
+
+        console.log(maxPages);
     }
 
     function loadMore() {
