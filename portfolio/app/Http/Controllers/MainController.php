@@ -26,26 +26,17 @@ class MainController extends Controller
             $projectQuery->where('tag_id', $tag->id);
         }
 
-        $projects = $projectQuery->limit(4)->get();
+        $projects = $projectQuery->paginate(4);
 
-        $count = $projectQuery->count();
-        $num = 4;
-        $i = 0; 
-        $projectMaxPages = 0; 
+       // dd($projects->nextPageUrl());
         
-        while($i < $count)
-        {
-            $i += $num;
-            $projectMaxPages++;
-        }
-
         $data = [
             'configLocalization' => ConfigLocalization::where('lang', $locale)->first(),
             'info' => Info::withLocalization($locale)->first(),
             'tags' =>  Tag::withLocalization($locale)->get(),
             'technologies' => Technology::where('in_header', 1)->orderBy('order')->with('media')->get(),
             'projects' => $projects,
-            'maxPages' => $projectMaxPages,
+            'maxPages' => $projects->lastPage(),
             'mainTag' => $tag,
             'locale' => $locale
         ];
@@ -66,20 +57,7 @@ class MainController extends Controller
             $projectQuery->where('tag_id', $tagId);
         }
 
-        $maxPages = 0;
-
         if ($request->has('count')) {
-            $count = $projectQuery->count();
-            $num = $request->count;
-            $i = 0; 
-            $maxPages = 0; 
-            
-            while($i < $count)
-            {
-                $i += $num;
-                $maxPages++;
-            }
-
             if ($request->has('page')) {
                 $projectQuery->skip($request->count * $request->page + $request->skip);
             }
@@ -87,11 +65,11 @@ class MainController extends Controller
             $projectQuery->take($request->count);
         }
 
-        $projects = $projectQuery->get();
+        $projects = $projectQuery->paginate(4);
         $firstWithLargeThumb = !$request->has('page') || $request->page == 0;
 
         return response()->json([
-            'maxPages' => $maxPages,
+            'maxPages' => $projects->lastPage(),
             'view' => [
                 'projects' => view('layouts.projects', compact('projects', 'firstWithLargeThumb'))->render(),
                 'slides' => view('layouts.slides', compact('projects', 'firstWithLargeThumb'))->render(),

@@ -199,10 +199,9 @@ $(function () {
 
         $.ajax({
             type: 'POST',
-            url: '/' + locale + '/projects' + tag,
+            url: '/' + locale + '/projects' + tag + '?page=' + page,
             data: {
                 count: count,
-                page: page,
                 skip: skip
             },
             dataType: 'json',
@@ -248,7 +247,7 @@ $(function () {
         }
         
         const tag = $loadmore.attr('data-tag');
-        const page = +$loadmore.attr('data-page');
+        const page = +$loadmore.attr('data-page') + 1;
         
         const isMobile = window.matchMedia("(max-width: 670px)").matches || window.matchMedia("(max-height: 480px)").matches;
         const count = isMobile ? 4 : 3;
