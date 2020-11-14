@@ -42,7 +42,7 @@ class MainController extends Controller
             'tags' =>  Tag::withLocalization($locale)->get(),
             'technologies' => Technology::where('in_header', 1)->orderBy('order')->with('media')->get(),
             'projects' => $projects,
-            'maxPages' => $projects->lastPage(),
+            'maxPages' => $projectMaxPages,
             'mainTag' => $tag,
             'locale' => $locale
         ];
@@ -64,9 +64,9 @@ class MainController extends Controller
         }
 
         $projectMaxPages = 0;
+        $resultPerPage = $request->count;
 
         if ($request->has('count')) {
-            $resultPerPage = $request->count;
             $resultCount = $projectQuery->count();
             $projectMaxPages = floor($resultCount/$resultPerPage);
     
@@ -77,10 +77,9 @@ class MainController extends Controller
             if ($request->has('page')) {
                 $projectQuery->skip($request->count * $request->page + $request->skip);
             }
-
-            $projectQuery->take($request->count);
         }
 
+        $projects = $projectQuery->limit($resultPerPage)->get();
         $firstWithLargeThumb = !$request->has('page') || $request->page == 0;
 
         return response()->json([
