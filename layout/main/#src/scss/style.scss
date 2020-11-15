@@ -1,10 +1,11 @@
-@import "libs/_normalize";
-@import "hamburgers/hamburgers";
+@import "libs/swiper";
+@import "libs/normalize";
+@import "libs/hamburgers/hamburgers";
 
-@import "_vars";
-@import "_utils";
-@import "_fonts";
-@import "_anim";
+@import "common/vars";
+@import "common/utils";
+@import "common/fonts";
+@import "common/anim";
 
 $md0: 1530;
 $md1: 1400;
@@ -15,11 +16,11 @@ $md5: 670;
 $md6: 480;
 $md7: 350;
 
-@import "_ui";
-@import "_header";
-@import "_main";
-@import "_section-portfolio";
-@import "_section-services";
-@import "_section-about";
-@import "_section-contact";
-@import "_modal";
+@import "common/ui";
+@import "parts/header";
+@import "parts/main";
+@import "parts/section-portfolio";
+@import "parts/section-services";
+@import "parts/section-about";
+@import "parts/section-contact";
+@import "parts/modal";

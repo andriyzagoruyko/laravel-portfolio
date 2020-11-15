@@ -7,7 +7,7 @@
     <meta name="description" content="@yield('meta-description')">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="/assets/main/css/style.min.css"> 
-    <link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="/assets/favicon.png" type="image/png">
 </head>
 <body data-locale="{{ $locale }}">
     <div class="page">
@@ -115,8 +115,6 @@
     </div>
     <div class="overlay"></div>
     @yield('modal')
-    <link rel="stylesheet" href="/assets/main/css/swiper-bundle.min.css">
-    <script src="/assets/main/js/swiper-bundle.min.js"></script>
-    <script src="/assets/main/js/script.js"></script>
+    <script src="/assets/main/js/script.min.js"></script>
 </body>
 </html>
