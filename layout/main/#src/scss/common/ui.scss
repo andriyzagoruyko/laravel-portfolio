@@ -223,3 +223,15 @@
         pointer-events: none;
     }
 }
+
+.hamburger-inner {
+    &:before, &:after {
+        background: #ffff!important;
+    }
+}
+
+.swiper-button-prev, .swiper-button-next {
+    &:after {
+        background: #ffff!important;
+    }
+}

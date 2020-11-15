@@ -115,7 +115,7 @@ __webpack_require__.r(__webpack_exports__);
 
     jquery__WEBPACK_IMPORTED_MODULE_2___default()(this).toggleClass("is-active");
   });
-  jquery__WEBPACK_IMPORTED_MODULE_2___default()(document).on('mousedown tocuh', function (e) {
+  jquery__WEBPACK_IMPORTED_MODULE_2___default()(document).on('mousedown tocuh', function () {
     jquery__WEBPACK_IMPORTED_MODULE_2___default()(".dropdown").filter(".is-active").each(function () {
       var $dropdown = jquery__WEBPACK_IMPORTED_MODULE_2___default()(this);
       var $target = jquery__WEBPACK_IMPORTED_MODULE_2___default()(e.target);
