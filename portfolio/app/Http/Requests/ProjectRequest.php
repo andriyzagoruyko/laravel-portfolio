@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Project;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProjectRequest extends FormRequest
@@ -23,12 +24,23 @@ class ProjectRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'slug' => 'required|min:3|max:60',
+        $rules = [
+            'slug' => 'required|min:3|max:60|unique:projects',
             'name' => 'required|max:255',
             'link' => 'required|max:255',
             'image' => 'required_without:_method',
         ];
+
+        if ($this->route()->named('projects.update')) {
+            $project = Project::where('slug', $this->slug)->first();
+            $routeId = $this->route()->parameter('project')->id;
+
+            if (!is_null($project) && $project->id === $routeId) {
+                $rules['slug'] .=  ',id,' . $routeId;
+            }
+        }
+
+        return $rules;
     }
     
     /**

@@ -66,7 +66,7 @@ $(function () {
     $(document).on("click", "a", function (e) {
         const href = $(this).attr('href');
 
-        if (href.length && href[0] == '#') {
+        if (href && href.length && href[0] == '#') {
             const $el = $(href);
 
             if ($el.length) {
@@ -244,7 +244,7 @@ $(function () {
 
         $.ajax({
             type: 'POST',
-            url: '/' + locale + '/projects' + tag + '?page=' + page,
+            url: '/' + locale + '/projects' + tag,
             data: {
                 count: count,
                 page: page,
@@ -277,6 +277,8 @@ $(function () {
         } else {
             page = +$loadmore.attr('data-page');
         }
+
+        console.log(maxPages);
 
         swiper.appendSlide(slides);
         swiper.update();

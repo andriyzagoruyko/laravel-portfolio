@@ -28,11 +28,11 @@ class MainController extends Controller
 
         $resultPerPage = 4;
         $resultCount = $projectQuery->count();
-        $projectMaxPages = floor($resultCount/$resultPerPage);
+        $projectMaxPages = ceil($resultCount/$resultPerPage);
 
-        if ($resultCount % $resultPerPage > 0){
-            $projectMaxPages++;
-        };
+        /*\Debugbar::info("resultCount: " . $resultCount
+                        . " resultPerPage: " . $resultPerPage 
+                        . " projectMaxPages: " .$projectMaxPages);*/
 
         $projects = $projectQuery->limit($resultPerPage)->get();
 
@@ -67,13 +67,14 @@ class MainController extends Controller
         $resultPerPage = $request->count;
 
         if ($request->has('count')) {
-            $resultCount = $projectQuery->count();
-            $projectMaxPages = floor($resultCount/$resultPerPage);
-    
-            if (($resultCount - $request->skip) % $resultPerPage > 0){
-                $projectMaxPages++;
-            };
-    
+            $resultCount = $projectQuery->count() - ($request->has('skip') ? $request->skip : 0);
+            $projectMaxPages = ceil($resultCount/$resultPerPage);
+
+            /*\Debugbar::info("resultCount: " . $resultCount
+                            . " resultPerPage: " . $resultPerPage 
+                            . " projectMaxPages: " .$projectMaxPages
+                            . " div: " . $resultCount/$resultPerPage);*/
+
             if ($request->has('page')) {
                 $projectQuery->skip($request->count * $request->page + $request->skip);
             }
