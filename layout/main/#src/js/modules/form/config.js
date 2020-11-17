@@ -1,7 +1,6 @@
 const rules = {
     name: {
-        required: true,
-        min: 2
+        required: true
     },
     email: {
         required: true,

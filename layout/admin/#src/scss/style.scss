@@ -1,4 +1,4 @@
-@import "libs/_normalize";
+@import "libs/normalize";
 
 $md1: 1600;
 $md2: 1400;
@@ -9,12 +9,11 @@ $md6: 670;
 $md7: 480;
 $md8: 350;
 
-@import "_vars";
-@import "_utils";
-@import "_fonts";
-@import "_ui";
+@import "common/vars";
+@import "common/utils";
+@import "common/fonts";
+@import "common/ui";
 
-@import "_part-main";
-@import "_part-sidebar";
-
-@import "_page-portfolio";
+@import "parts/part-main";
+@import "parts/part-sidebar";
+@import "parts/page-portfolio";

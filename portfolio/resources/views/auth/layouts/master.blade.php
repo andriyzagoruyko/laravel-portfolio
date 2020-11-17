@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/admin/css/style.css"> 
-	<script src="/assets/admin/js/script.js"></script>
+    <link rel="stylesheet" href="/assets/admin/css/style.min.css"> 
     <title>Панель управления: @yield('title')</title>
 </head>
 <body>
@@ -94,5 +93,6 @@
             </div>
         </main>
     </div>
+	<script src="/assets/admin/js/script.min.js"></script>
 </body>
 </html>

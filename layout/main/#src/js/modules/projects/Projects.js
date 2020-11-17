@@ -76,14 +76,14 @@ export default class {
         });
 
         this.append(result, true);
-        tabs.forEach(item => item.classList.remove('is-active'))
+        tabs.forEach(item => item.classList.remove('is-active'));
         newTab.classList.add('is-active');
         loadmore.setAttribute('data-tag', tag);
     }
 
     toggleSlider = (slide = -1) => {
         const state = slide != -1;
-        
+
         scrollLock(state);
         document.querySelector('.modal').classList.toggle('is-active', state);
         state && this.slider.slideTo(slide, 0);

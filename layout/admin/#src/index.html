@@ -1,24 +1,54 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/admin/css/style.css"> 
-	<script src="assets/admin/js/script.js"></script>
-    <title>Admin</title>
-</head>
+@@include('parts/head.html')
+
 <body>
     <div class="page">
-        @@include('_sidebar.html')
+        @@include('parts/sidebar.html')
         <main class="main">
-            @@include('_header.html')
-
+            @@include('parts/header.html')
             <div class="container ">
                 <div class="content">
-                    @@include('_page-configuration.html')
+                    <nav class="content__block content__tabs tabs">
+                        <ul>
+                            <li class="tabs__item is-active"><a href="#">UA</a></li>
+                            <li class="tabs__item"><a href="#">EN</a></li>
+                        </ul>
+                    </nav>
+                    <div class="content__block section message message-danger">
+                        <div class="message__body">
+                            <ul>
+                                <li>Помилка валідації 1</li>
+                                <li>Помилка валідації 2</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <section class="content__block content__section section">
+                        <div class="section__header">
+                            <h2>SEO</h2>
+                        </div>
+                        <div class="section__body">
+                            <form action="#" class="form">
+                                <div class="form__group">
+                                    <label for="title">Заголовок title</label>
+                                    <input type="text" name="title" id="title">
+                                </div>
+                                <div class="form__group">
+                                    <label for="h1">Заголовок h1</label>
+                                    <input type="text" name="h1" id="h1">
+                                </div>
+                                <div class="form__group">
+                                    <label for="metadesc">Заголовок h1</label>
+                                    <textarea name="metadesc" id="metadesc" cols="30" rows="10"></textarea>
+                                </div>
+                                <div class="form__group form__group-row">
+                                    <button type="submit" class="btn btn-success form__submit">Зберегти</button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
                 </div>
             </div>
         </main>
     </div>
 </body>
+
 </html>
