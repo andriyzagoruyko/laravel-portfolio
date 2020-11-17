@@ -25,8 +25,9 @@ function js() {
                                     ['@babel/preset-env', {
                                         debug: true,
                                         corejs: 3,
+                                        loose:true,
+                                        modules:false,
                                         useBuiltIns: "usage",
-                                        targets: "> 1%, not dead"
                                     }],
                                 ],
                                 plugins:[
@@ -60,8 +61,9 @@ function jsProduction() {
                                 presets: [
                                     ['@babel/preset-env', {
                                         corejs: 3,
+                                        loose:true,
+                                        modules:false,
                                         useBuiltIns: "usage",
-                                        targets: "> 1%, not dead"
                                     }],
                                 ],
                                 plugins:[

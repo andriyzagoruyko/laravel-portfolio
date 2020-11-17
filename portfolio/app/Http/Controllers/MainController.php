@@ -29,11 +29,6 @@ class MainController extends Controller
         $resultPerPage = 4;
         $resultCount = $projectQuery->count();
         $projectMaxPages = ceil($resultCount/$resultPerPage);
-
-        /*\Debugbar::info("resultCount: " . $resultCount
-                        . " resultPerPage: " . $resultPerPage 
-                        . " projectMaxPages: " .$projectMaxPages);*/
-
         $projects = $projectQuery->limit($resultPerPage)->get();
 
         $data = [
@@ -62,26 +57,22 @@ class MainController extends Controller
         if (!is_null($tagId)) {
             $projectQuery->where('tag_id', $tagId);
         }
-
+        
         $projectMaxPages = 0;
-        $resultPerPage = $request->count;
+        $data = $request->json()->all();
 
-        if ($request->has('count')) {
-            $resultCount = $projectQuery->count() - ($request->has('skip') ? $request->skip : 0);
+        if (array_key_exists('count', $data)) {
+            $resultPerPage = $data['count'];
+            $resultCount = $projectQuery->count() - (array_key_exists('skip', $data) ? $data['skip'] : 0);
             $projectMaxPages = ceil($resultCount/$resultPerPage);
 
-            /*\Debugbar::info("resultCount: " . $resultCount
-                            . " resultPerPage: " . $resultPerPage 
-                            . " projectMaxPages: " .$projectMaxPages
-                            . " div: " . $resultCount/$resultPerPage);*/
-
-            if ($request->has('page')) {
-                $projectQuery->skip($request->count * $request->page + $request->skip);
+            if (array_key_exists('page', $data)) {
+                $projectQuery->skip($data['count'] * $data['page'] + (array_key_exists('skip', $data) ? $data['skip'] : 0));
             }
         }
 
         $projects = $projectQuery->limit($resultPerPage)->get();
-        $firstWithLargeThumb = !$request->has('page') || $request->page == 0;
+        $firstWithLargeThumb = !array_key_exists('page', $data) ||$data['page'] == 0;
 
         return response()->json([
             'maxPages' => $projectMaxPages,

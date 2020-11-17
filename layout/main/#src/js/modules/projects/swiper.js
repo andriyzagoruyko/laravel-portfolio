@@ -4,6 +4,7 @@ export default () =>{
     return new Swiper('.swiper-container', {
         slidesPerView: 1,
         speed: 400,
+        threshold: 6,
         spaceBetween: 120,
         grabCursor: true,
         autoHeight: true,

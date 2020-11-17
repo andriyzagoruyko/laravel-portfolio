@@ -8,6 +8,19 @@ $modal_size: 1270;
 
     --swiper-theme-color: white;
 
+    &.processing{
+        .modal__wrapper{
+            &:after {
+                content: '';
+                @extend .swiper-lazy-preloader;
+                --swiper-theme-color: rgb(250, 49, 143);
+                position: fixed !important;
+                z-index: 10000 !important;
+            }
+        }
+    }
+
+
     &__wrapper {
         display: flex;
         flex-direction: column;
@@ -81,12 +94,6 @@ $modal_size: 1270;
         @media (max-width: $md6+px) {
             margin: 0;
         }
-    }
-
-    &__preloader {
-        --swiper-theme-color: rgb(250, 49, 143);
-        position: fixed !important;
-        z-index: 10000 !important;
     }
 
     .swiper-button-next,

@@ -1,25 +1,26 @@
-import $ from 'jquery';
-
 export default () => {
-    $(document).on("click", ".dropdown", function(e) {
-        const $dropdown_toggle = $(this).find(".dropdown__toggle");
-        const $target = $(e.target);
+    const dropdowns = document.querySelectorAll('.dropdown');
 
-        if ($target.is($dropdown_toggle) || !$dropdown_toggle.has($target) === 0) {
-            e.preventDefault();
-        }
+    dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('click', (e) => {
+            let target = e.target,
+                toggle = dropdown.querySelector('.dropdown__toggle');
 
-        $(this).toggleClass("is-active");
+            if (toggle.contains(target)) {
+                e.preventDefault();
+            }
+
+            dropdown.classList.toggle('is-active');
+        });
     });
 
-    $(document).on('mousedown tocuh', function() {
-        $(".dropdown").filter(".is-active").each(function () {
-            let $dropdown = $(this);
-            let $target = $(e.target);
+    document.addEventListener('click', (e) => {
+        let target = e.target;
 
-            if (!$dropdown.is($target) && !$dropdown.has($target).length) {
-                $dropdown.removeClass("is-active");
+        dropdowns.forEach(dropdown => {
+            if (dropdown.matches('.is-active') && !dropdown.contains(target)) {
+                dropdown.classList.remove('is-active');
             }
         });
     });
-}
+};

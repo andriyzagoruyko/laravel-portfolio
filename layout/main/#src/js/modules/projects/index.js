@@ -1,32 +1,39 @@
-import $ from 'jquery';
-import Api from './api'
+import Projects from './Projects'
 
 export default () => {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+    const projects = new Projects();
+    const tabs = document.querySelectorAll('.tabs__item');
+    const modalClose = document.querySelector('.modal__close')
+    const loadmore = document.querySelector('#loadmore');
+
+    function getSlideIndex(item) {
+        const projectItems = document.querySelectorAll('.project');
+        return Array.prototype.indexOf.call(projectItems, item);
+    }
+
+    document.addEventListener('click', (e) => {
+        let target = e.target;
+
+        if (target.matches('.project') || (target = target.closest('.project'))) {
+            e.preventDefault();
+            projects.toggleSlider(getSlideIndex(target));
+        }  
     });
 
-    const api = new Api();
-
-    $(document).on("click", ".project",  function(e) {
+    modalClose && modalClose.addEventListener('click', (e) => {
         e.preventDefault();
-        api.toggleSlider($(this).index());
+        projects.toggleSlider();
     });
 
-    $(document).on("click", ".modal__close", (e) => {
+    loadmore && loadmore.addEventListener('click', (e) => {
         e.preventDefault();
-        api.toggleSlider();
+        projects.load();
     });
 
-    $(document).on('click', '#loadmore', (e) => {
-        e.preventDefault();
-        api.loadMore();
-    });
-
-    $('.tabs__item').on('click', function(e) {
-        e.preventDefault();
-        api.changeTab($(this));
+    tabs.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            projects.changeTab(item);
+        })
     });
 };

@@ -1,4 +1,4 @@
-<div class="modal">
+<div id="modal" class="modal">
     <div class="modal__wrapper">
         <div class="modal__header">
             <div class="modal__controll">

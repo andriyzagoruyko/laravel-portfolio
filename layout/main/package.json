@@ -10,7 +10,8 @@
   "license": "ISC",
   "browserslist": [
     "> 1%",
-    "not dead"
+    "not dead",
+    "not IE > 0"
   ],
   "devDependencies": {
     "@babel/core": "^7.12.3",
@@ -35,9 +36,8 @@
   },
   "dependencies": {
     "core-js": "^3.7.0",
-    "jquery": "^3.5.1",
-    "jquery-validation": "^1.19.2",
     "scroll-lock": "^2.1.4",
-    "swiper": "^6.3.5"
+    "swiper": "^6.3.5",
+    "validator": "^13.1.17"
   }
 }
