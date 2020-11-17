@@ -1,5 +1,9 @@
+import smoothscroll from 'smoothscroll-polyfill';
+
 export default () => {
     const links = document.querySelectorAll('a[href*="#"]');
+
+    smoothscroll.polyfill();
 
     links.forEach(item => {
         item.addEventListener('click', (e) => {
