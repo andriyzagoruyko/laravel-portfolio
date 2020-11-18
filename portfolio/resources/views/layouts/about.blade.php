@@ -1,4 +1,4 @@
-<section id="about" class="section section-about">
+<section id="about" class="section section-about fixed-bg">
     <h2 class="section__title title">{{ __('main.title_about') }}</h2>
     <div class="section__body ">
         <div class="section__content about">

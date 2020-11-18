@@ -1,3 +1,4 @@
+"use strict";
 import anchors from './modules/anchors';
 import navigation from './modules/navigation';
 import dropdown from './modules/dropdown';
@@ -8,7 +9,6 @@ import scrolledHeader from './modules/scrolledHeader';
 import mobileDisableFixedBackground from './modules/mobileDisableFixedBackground'
 
 document.addEventListener('DOMContentLoaded', () => {
-    "use strict";
     navigation();
     anchors();
     dropdown();

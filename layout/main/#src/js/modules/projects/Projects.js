@@ -86,6 +86,10 @@ export default class {
 
         scrollLock(state);
         document.querySelector('.modal').classList.toggle('is-active', state);
-        state && this.slider.slideTo(slide, 0);
+
+        if (state) {
+            this.slider.update();
+            this.slider.slideTo(slide, 0);
+        }
     }
 }

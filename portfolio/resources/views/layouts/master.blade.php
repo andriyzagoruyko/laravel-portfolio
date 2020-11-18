@@ -15,7 +15,7 @@
 </head>
 <body data-locale="{{ $locale }}">
     <div class="page">
-        <header id="header" class="header {{ Route::current()->named('index') ? 'mainpage' : '' }}">
+        <header id="header" class="header fixed-bg {{ Route::current()->named('index') ? 'mainpage' : '' }}">
             <div class="header__wrapper">
                 <div class="header__nav-block">
                     <nav id="navigation" class="header__navigation navigation">

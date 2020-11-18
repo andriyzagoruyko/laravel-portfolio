@@ -505,7 +505,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       const state = slide != -1;
       Object(_helpers_scrolLock__WEBPACK_IMPORTED_MODULE_3__["default"])(state);
       document.querySelector('.modal').classList.toggle('is-active', state);
-      state && this.slider.slideTo(slide, 0);
+
+      if (state) {
+        this.slider.update();
+        this.slider.slideTo(slide, 0);
+      }
     });
 
     this.isRequestBusy = false;
@@ -602,7 +606,7 @@ __webpack_require__.r(__webpack_exports__);
       slideShadows: false
     },
     on: {
-      init: () => document.querySelector('.modal').style.display = 'block'
+      init: () => document.querySelector('.modal').style.display = 'flex'
     }
   });
 });
@@ -818,9 +822,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  "use strict";
 
+
+document.addEventListener('DOMContentLoaded', () => {
   Object(_modules_navigation__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_modules_anchors__WEBPACK_IMPORTED_MODULE_0__["default"])();
   Object(_modules_dropdown__WEBPACK_IMPORTED_MODULE_2__["default"])();

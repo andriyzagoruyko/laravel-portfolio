@@ -26,7 +26,7 @@ export default () =>{
             slideShadows: false,
         },
         on: {
-            init: () => document.querySelector('.modal').style.display = 'block',
+            init: () => document.querySelector('.modal').style.display = 'flex',
         }
     });
 } 
