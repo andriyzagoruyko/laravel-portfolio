@@ -31,7 +31,6 @@ dist_folder.forEach((dist, i) => {
 
 function clean(cb) {
     del.sync(dist_folder[0]);
-
     cb();
 }
 

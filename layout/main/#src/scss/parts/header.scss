@@ -108,7 +108,6 @@
         padding: 35px;
         margin: 0 15px;
         flex: 0 0 230px;
-        //cursor: pointer;
 
         @media (max-width: $md5+px) {
             flex: 0 0 175px;
@@ -140,9 +139,8 @@
 
         span {
             font-size: 24px;
-            font-weight: 700;
+            font-weight: 500;
             line-height: 130%;
-            letter-spacing: -0.05em;
             margin-top: 15px;
 
             @media (max-width: $md5+px) {
