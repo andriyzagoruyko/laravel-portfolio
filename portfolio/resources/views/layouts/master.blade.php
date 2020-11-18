@@ -20,7 +20,7 @@
             <div class="header__wrapper">
                 <div class="header__nav-block">
                     <nav id="navigation" class="header__navigation navigation">
-                        <div class="navigation__logo logo">
+                        <div style="display: none;" class="navigation__logo logo">
                             <a href="{{ Route::current()->named('index') ? '#header' : '/' }}">
                                 <svg viewBox="0 0 204 93" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0)">

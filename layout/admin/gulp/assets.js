@@ -19,7 +19,7 @@ function assetsProduction(cb) {
         .pipe(dest(path.build.img))
         .pipe(
             webp({
-                quality: 90
+                quality: 70
             })
         )
         .pipe(dest(path.build.img))
@@ -42,7 +42,6 @@ function assetsProduction(cb) {
             ])
         )
         .pipe(dest(path.build.img))
-        .pipe(browsersync.stream())
 
     cb();
 }
