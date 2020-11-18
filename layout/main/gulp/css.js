@@ -6,7 +6,8 @@ const { src } = require('gulp'),
     group_media = require('gulp-group-css-media-queries'),
     autoprefixer = require('gulp-autoprefixer'),
     rename = require('gulp-rename'),
-    clean_css = require('gulp-clean-css');
+    clean_css = require('gulp-clean-css'),
+    critical_css = require('gulp-critical-css');
 
 function css() {
     return src(path.src.css)

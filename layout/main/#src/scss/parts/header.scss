@@ -364,6 +364,7 @@
     svg {
         transition: width 0.3s;
         display: block;
+        width: 204px;
 
         .scrolled & {
             @media (min-width: $md5+px) {
