@@ -25,5 +25,8 @@ export default () =>{
             modifier: 1,
             slideShadows: false,
         },
+        on: {
+            init: () => document.querySelector('.modal').style.display = 'block',
+        }
     });
 } 

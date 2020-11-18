@@ -295,24 +295,12 @@ const onSubmit = (form, locale) => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 const browser = {
-  Android: function () {
-    return navigator.userAgent.match(/Android/i);
-  },
-  BlackBerry: function () {
-    return navigator.userAgent.match(/BlackBerry/i);
-  },
-  iOS: function () {
-    return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-  },
-  Opera: function () {
-    return navigator.userAgent.match(/Opera Mini/i);
-  },
-  Windows: function () {
-    return navigator.userAgent.match(/IEMobile/i);
-  },
-  isMobile: function () {
-    return browser.Android() || browser.BlackBerry() || browser.iOS() || browser.Opera() || browser.Windows();
-  }
+  Android: () => navigator.userAgent.match(/Android/i),
+  BlackBerry: () => navigator.userAgent.match(/BlackBerry/i),
+  iOS: () => navigator.userAgent.match(/iPhone|iPad|iPod/i),
+  Opera: () => navigator.userAgent.match(/Opera Mini/i),
+  Windows: () => navigator.userAgent.match(/IEMobile/i),
+  isMobile: () => (browser.Android() || browser.BlackBerry() || browser.iOS() || browser.Opera() || browser.Windows()) != null
 };
 /* harmony default export */ __webpack_exports__["default"] = (browser);
 
@@ -362,6 +350,26 @@ __webpack_require__.r(__webpack_exports__);
     scroll_lock__WEBPACK_IMPORTED_MODULE_0___default.a.disablePageScroll(scrollable);
   } else {
     scroll_lock__WEBPACK_IMPORTED_MODULE_0___default.a.enablePageScroll(scrollable);
+  }
+});
+
+/***/ }),
+
+/***/ "./#src/js/modules/mobileDisableFixedBackground.js":
+/*!*********************************************************!*\
+  !*** ./#src/js/modules/mobileDisableFixedBackground.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helpers_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers/browser */ "./#src/js/modules/helpers/browser.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (() => {
+  if (_helpers_browser__WEBPACK_IMPORTED_MODULE_0__["default"].isMobile()) {
+    const items = document.querySelectorAll('.fixed-bg');
+    items.forEach(item => item.classList.remove('fixed-bg'));
   }
 });
 
@@ -592,6 +600,9 @@ __webpack_require__.r(__webpack_exports__);
       depth: 200,
       modifier: 1,
       slideShadows: false
+    },
+    on: {
+      init: () => document.querySelector('.modal').style.display = 'block'
     }
   });
 });
@@ -798,6 +809,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_projects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/projects */ "./#src/js/modules/projects/index.js");
 /* harmony import */ var _modules_touchMouse__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/touchMouse */ "./#src/js/modules/touchMouse.js");
 /* harmony import */ var _modules_scrolledHeader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/scrolledHeader */ "./#src/js/modules/scrolledHeader.js");
+/* harmony import */ var _modules_mobileDisableFixedBackground__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mobileDisableFixedBackground */ "./#src/js/modules/mobileDisableFixedBackground.js");
+
 
 
 
@@ -815,6 +828,7 @@ document.addEventListener('DOMContentLoaded', () => {
   Object(_modules_projects__WEBPACK_IMPORTED_MODULE_4__["default"])();
   Object(_modules_touchMouse__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_scrolledHeader__WEBPACK_IMPORTED_MODULE_6__["default"])();
+  Object(_modules_mobileDisableFixedBackground__WEBPACK_IMPORTED_MODULE_7__["default"])();
 });
 
 /***/ }),

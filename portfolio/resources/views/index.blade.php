@@ -32,7 +32,6 @@
 
 @section('content')
     <main class="main">
-        <img src="{{ url('/assets/main/img/projects/bg.svg') }}" alt="" class="main-bg">
         @include('layouts.portfolio')
         @include('layouts.services')
         @include('layouts.about')

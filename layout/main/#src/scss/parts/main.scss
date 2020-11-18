@@ -52,23 +52,28 @@ p {
 
 .main {
     position: relative;
-
-    .main-bg {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        z-index: 5;
-        width: 100%;
-        transform: translate(-50%);
-
-        @media (max-width: $md5+px) {
-            width: 130%;
+    &:not(.single) {
+        &:before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: 5;
+            width: 100%;
+            transform: translate(-50%);
+            background: url(/assets/main/img/projects/bg.svg) no-repeat top;
+            background-size: contain;
+            height: 100%;
+            width: 100%;
+    
+            @media (max-width: $md5+px) {
+                width: 130%;
+            }
         }
     }
 
     &.single {
         position: static;
-
         &:before {
             content: "";
             display: block;
@@ -85,11 +90,8 @@ p {
                     #000000 100%,
                     #000000 100%
                 ),
-                url(/assets/main/img/head/bg.jpg);
-            background-repeat: no-repeat;
+                url(/assets/main/img/head/bg.jpg)  no-repeat top;
             background-size: cover;
-            background-position: top;
-
             filter: blur(3px);
         }
     }

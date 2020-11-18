@@ -5,6 +5,7 @@ import form from './modules/form';
 import projects from './modules/projects';
 import touchMouse from './modules/touchMouse';
 import scrolledHeader from './modules/scrolledHeader';
+import mobileDisableFixedBackground from './modules/mobileDisableFixedBackground'
 
 document.addEventListener('DOMContentLoaded', () => {
     "use strict";
@@ -15,4 +16,5 @@ document.addEventListener('DOMContentLoaded', () => {
     projects();
     touchMouse();
     scrolledHeader();
+    mobileDisableFixedBackground();
 })

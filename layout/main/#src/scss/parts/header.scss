@@ -3,23 +3,27 @@
     padding: 0 50px;
 
     &.mainpage {
-        background: linear-gradient(
+        $gradient: linear-gradient(
             180deg,
             #000000 3.27%,
             rgba(0, 0, 0, 0.2) 43.75%,
             rgba(0, 0, 0, 0.2) 64.58%,
             #000000 100%,
             #000000 100%
-        ),
-        url(/assets/main/img/head/bg.jpg) fixed;
-        background-repeat: no-repeat;
+        );
+        $image: url(/assets/main/img/head/bg.jpg);
+
+        background: $gradient, $image no-repeat top;
         background-size: cover;
-        background-position: top;
+
+        &.fixed-bg {
+            background: $gradient, $image no-repeat top fixed;
+            background-size: cover;
+        }
     }
 
     @media (max-width: $md1+px) {
         padding: 0 30px;
-        background-attachment: initial;
     }
 
     @media (max-width: $md4+px) {
@@ -28,7 +32,6 @@
 
     @media (max-width: $md6+px) {
         padding: 0 15px;
-        background-attachment: scroll!important;
     }
 
     &__nav-block {
