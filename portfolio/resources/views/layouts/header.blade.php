@@ -1,4 +1,4 @@
-<header id="header" class="header {{ Route::current()->named('index') ? 'mainpage fixed-bg' : '' }}">
+<header id="header" class="header {{ Route::current()->named('index') ? 'mobile-fullscreen mainpage fixed-bg' : '' }}">
     <div class="header__wrapper">
         <div class="header__nav-block">
             <div  id="navigation" class="header__navigation navigation">
