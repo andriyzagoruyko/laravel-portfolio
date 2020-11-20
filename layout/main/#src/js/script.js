@@ -7,6 +7,9 @@ import projects from './modules/projects';
 import touchMouse from './modules/touchMouse';
 import scrolledHeader from './modules/scrolledHeader';
 import mobileFixes from './modules/mobileFixes'
+import webp from './modules/webp'
+
+webp(window, document);
 
 document.addEventListener('DOMContentLoaded', () => {
     mobileFixes();

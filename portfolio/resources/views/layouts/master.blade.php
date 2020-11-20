@@ -10,9 +10,13 @@
     <link rel="preload" href="/assets/main/fonts/ubuntu-v15-latin_cyrillic-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/main/fonts/ubuntu-v15-latin_cyrillic-500.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/main/fonts/ubuntu-v15-latin_cyrillic-700.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/main/img/head/bg.jpg" as="image">
     <link rel="stylesheet" href="/assets/main/css/style.min.css"> 
     <link rel="shortcut icon" href="/assets/favicon.png" type="image/png">
+    <style>
+        a {
+            color: white;
+        }
+    </style>
 </head>
 <body data-locale="{{ $locale }}">
     <div class="page">

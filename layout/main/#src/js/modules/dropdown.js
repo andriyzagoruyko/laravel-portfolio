@@ -11,6 +11,7 @@ export default () => {
             }
 
             dropdown.classList.toggle('is-active');
+            toggle.setAttribute('aria-expanded', dropdown.classList.contains('is-active'));
         });
     });
 

@@ -24,7 +24,10 @@
                 </div>
             </div>
             <div class="services__column services__column-image">
-                <img src="/assets/main/img/services/laptop.png" alt="">
+                <picture>
+                    <source srcset="/assets/main/img/services/laptop.webp" type="image/webp">
+                    <img src="/assets/main/img/services/laptop.png" alt="">
+                </picture>
             </div>
             <div class="services__column">
                 <div class="services__item service">

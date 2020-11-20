@@ -1,5 +1,6 @@
 .section-contact {
-    background: linear-gradient(
+    .no-webp & {
+        background: linear-gradient(
             180deg,
             #000000 0%,
             rgba(0, 0, 0, 0.3) 28.13%,
@@ -7,8 +8,22 @@
             rgba(0, 0, 0, 0.1) 100%
         ),
         url(/assets/main/img/contacts/bg.jpg);
-    background-size: cover;
-    background-position: center;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .webp & {
+        background: linear-gradient(
+            180deg,
+            #000000 0%,
+            rgba(0, 0, 0, 0.3) 28.13%,
+            rgba(0, 0, 0, 0.2) 99.99%,
+            rgba(0, 0, 0, 0.1) 100%
+        ),
+        url(/assets/main/img/contacts/bg.webp);
+        background-size: cover;
+        background-position: center;
+    }
 }
 
 .contact {

@@ -4,7 +4,14 @@
     position: relative;
 
     &.mainpage {
-        background: url(/assets/main/img/head/bg.jpg) no-repeat top;
+        .no-webp & {
+            background: url(/assets/main/img/head/bg.jpg) no-repeat top;
+        }
+
+        .webp & {
+            background: url(/assets/main/img/head/bg.webp) no-repeat top;
+        }
+
         background-size: cover;
 
         &:after {
@@ -235,6 +242,7 @@
     }
 
     &__overlay {
+        display: block!important;
         position: fixed;
         z-index: 50;
         width: 100vw;

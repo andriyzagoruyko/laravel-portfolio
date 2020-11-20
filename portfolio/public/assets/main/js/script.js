@@ -144,6 +144,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       dropdown.classList.toggle('is-active');
+      toggle.setAttribute('aria-expanded', dropdown.classList.contains('is-active'));
     });
   });
   document.addEventListener('click', e => {
