@@ -6,9 +6,10 @@ import form from './modules/form';
 import projects from './modules/projects';
 import touchMouse from './modules/touchMouse';
 import scrolledHeader from './modules/scrolledHeader';
-import mobileDisableFixedBackground from './modules/mobileDisableFixedBackground'
+import mobileFixes from './modules/mobileFixes'
 
 document.addEventListener('DOMContentLoaded', () => {
+    mobileFixes();
     navigation();
     anchors();
     dropdown();
@@ -16,5 +17,4 @@ document.addEventListener('DOMContentLoaded', () => {
     projects();
     touchMouse();
     scrolledHeader();
-    mobileDisableFixedBackground();
-})
+});

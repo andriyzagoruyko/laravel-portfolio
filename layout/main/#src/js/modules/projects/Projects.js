@@ -78,6 +78,7 @@ export default class {
         this.append(result, true);
         tabs.forEach(item => item.classList.remove('is-active'));
         newTab.classList.add('is-active');
+        newTab.blur();
         loadmore.setAttribute('data-tag', tag);
     }
 

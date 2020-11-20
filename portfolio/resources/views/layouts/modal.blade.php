@@ -2,7 +2,7 @@
     <div class="modal__wrapper">
         <div class="modal__header">
             <div class="modal__controll">
-                <button class="modal__close hamburger hamburger--spring is-active">
+                <button class="modal__close hamburger hamburger--spring is-active" aria-label="close">
                     <span class="hamburger-box">
                         <span class="hamburger-inner"></span>
                     </span>

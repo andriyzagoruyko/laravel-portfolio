@@ -192,6 +192,10 @@
         padding: 10px 130px;
         margin-top: 15px;
 
+        .icon {
+            padding: 0 5px;
+        }
+
         @media (max-width: $md6+px) {
             margin-top: 15px;
         }

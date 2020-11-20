@@ -23,4 +23,4 @@ function watchFiles() {
 const build = series(clean, parallel(html, css, js, assets));
 
 exports.default = parallel(build, watchFiles);
-exports.production = series(clean, parallel(html, cssProduction, jsProduction, assetsProduction));
+exports.production = series(clean, parallel(cssProduction, jsProduction, assetsProduction));

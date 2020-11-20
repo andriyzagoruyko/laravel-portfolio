@@ -1,7 +1,7 @@
 import scrollLock from './helpers/scrolLock'
 
 export default () => {
-    let selectors = ['.navigation__hamburger', '.navigation__list', '.overlay'],
+    let selectors = ['.navigation__hamburger', '.navigation'],
         elements = selectors.map(item => document.querySelector(item)),
         menuEnabled = false;
 

@@ -355,21 +355,26 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./#src/js/modules/mobileDisableFixedBackground.js":
-/*!*********************************************************!*\
-  !*** ./#src/js/modules/mobileDisableFixedBackground.js ***!
-  \*********************************************************/
+/***/ "./#src/js/modules/mobileFixes.js":
+/*!****************************************!*\
+  !*** ./#src/js/modules/mobileFixes.js ***!
+  \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers/browser */ "./#src/js/modules/helpers/browser.js");
+ //Disable fixed background on mobile and fix 100vh bug 
 
 /* harmony default export */ __webpack_exports__["default"] = (() => {
   if (_helpers_browser__WEBPACK_IMPORTED_MODULE_0__["default"].isMobile()) {
     const items = document.querySelectorAll('.fixed-bg');
+    const mobileFullscreen = document.querySelectorAll('.mobile-fullscreen');
+    const vh = window.innerHeight * 0.01;
     items.forEach(item => item.classList.remove('fixed-bg'));
+    mobileFullscreen.forEach(item => item.style.minHeight = 'calc(var(--vh, 1vh) * 100)');
+    document.documentElement.style.setProperty('--vh', vh + "px");
   }
 });
 
@@ -387,7 +392,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_scrolLock__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers/scrolLock */ "./#src/js/modules/helpers/scrolLock.js");
 
 /* harmony default export */ __webpack_exports__["default"] = (() => {
-  let selectors = ['.navigation__hamburger', '.navigation__list', '.overlay'],
+  let selectors = ['.navigation__hamburger', '.navigation'],
       elements = selectors.map(item => document.querySelector(item)),
       menuEnabled = false;
 
@@ -498,6 +503,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.append(result, true);
       tabs.forEach(item => item.classList.remove('is-active'));
       newTab.classList.add('is-active');
+      newTab.blur();
       loadmore.setAttribute('data-tag', tag);
     });
 
@@ -813,7 +819,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_projects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/projects */ "./#src/js/modules/projects/index.js");
 /* harmony import */ var _modules_touchMouse__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/touchMouse */ "./#src/js/modules/touchMouse.js");
 /* harmony import */ var _modules_scrolledHeader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/scrolledHeader */ "./#src/js/modules/scrolledHeader.js");
-/* harmony import */ var _modules_mobileDisableFixedBackground__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mobileDisableFixedBackground */ "./#src/js/modules/mobileDisableFixedBackground.js");
+/* harmony import */ var _modules_mobileFixes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mobileFixes */ "./#src/js/modules/mobileFixes.js");
 
 
 
@@ -825,6 +831,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 document.addEventListener('DOMContentLoaded', () => {
+  Object(_modules_mobileFixes__WEBPACK_IMPORTED_MODULE_7__["default"])();
   Object(_modules_navigation__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_modules_anchors__WEBPACK_IMPORTED_MODULE_0__["default"])();
   Object(_modules_dropdown__WEBPACK_IMPORTED_MODULE_2__["default"])();
@@ -832,7 +839,6 @@ document.addEventListener('DOMContentLoaded', () => {
   Object(_modules_projects__WEBPACK_IMPORTED_MODULE_4__["default"])();
   Object(_modules_touchMouse__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_scrolledHeader__WEBPACK_IMPORTED_MODULE_6__["default"])();
-  Object(_modules_mobileDisableFixedBackground__WEBPACK_IMPORTED_MODULE_7__["default"])();
 });
 
 /***/ }),

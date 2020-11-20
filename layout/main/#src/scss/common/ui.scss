@@ -150,38 +150,6 @@
     padding: 0 5px;
 }
 
-.overlay{
-    position: fixed;
-    z-index: 50;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    background: #000000;
-    transition: opacity 0.3s, transform 0.3s;
-
-    &:not(.is-active) {
-        opacity: 0;
-        pointer-events: none;
-        transform: scale(1.2);
-    }
-
-    &:after{
-        content: '';
-        background: url(/assets/main/img/logo.svg);
-        background-repeat: no-repeat;
-        background-size: 95%;
-        background-position: center;
-        max-width: $md0+px;
-        height: 100vh;
-        width: 100vw;
-        opacity: 0.1;
-        position: fixed;
-        z-index: 51;
-        top: 0;
-        left: 0;
-    }
-}
 
 .light-on-hover {
     transition: color 0.3s, text-shadow 0.5s ease-in-out;

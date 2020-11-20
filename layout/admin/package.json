@@ -11,7 +11,8 @@
   "browserslist": [
     "> 1%",
     "not dead",
-    "not IE > 0"
+    "not IE > 0",
+    "iOS >= 12"
   ],
   "devDependencies": {
     "@babel/core": "^7.12.3",
