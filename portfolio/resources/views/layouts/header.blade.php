@@ -1,10 +1,10 @@
-<header id="header" class="header {{ Route::current()->named('index') ? 'mobile-fullscreen mainpage fixed-bg' : '' }}">
-    <div class="header__wrapper">
+<header id="header" class="header {{ isset($homepage) ? 'mainpage fixed-bg' : '' }}">
+    <div class="header__wrapper {{ isset($homepage) ? 'mobile-fullscreen' : '' }}">
         <div class="header__nav-block">
-            <div  id="navigation" class="header__navigation navigation">
+            <div id="navigation" class="header__navigation navigation">
                 <div style="display: none;" class="navigation__overlay"></div>
                 <div style="display: none;" class="navigation__logo logo">
-                    <a href="{{ Route::current()->named('index') ? '#header' : '/' }}">
+                    <a href="{{ isset($homepage) ? '#header' : '/' }}">
                         <svg viewBox="0 0 204 93" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0)">
                             <path d="M100.66 72.1334V22.044H111.611C117.335 22.044 121.975 26.684 121.975 32.4078V61.7696C121.975 67.4934 117.335 72.1334 111.611 72.1334H100.66Z" fill="#FC466B" stroke="#FC466B"/>
@@ -49,22 +49,22 @@
                 <nav class="navigation__body">
                     <ul id="menu" class="navigation__list">
                         <li class="navigation__item">
-                            <a href="{{ Route::current()->named('index') ? '#portfolio' : '/#portfolio' }}">
+                            <a href="{{ isset($homepage) ? '#portfolio' : '/#portfolio' }}">
                                 {{ __('main.nav_portfolio') }}
                             </a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{ Route::current()->named('index') ? '#services' : '/#services' }}">
+                            <a href="{{ isset($homepage) ? '#services' : '/#services' }}">
                                 {{ __('main.nav_services') }}
                             </a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{ Route::current()->named('index') ? '#about' : '/#about' }}">
+                            <a href="{{ isset($homepage) ? '#about' : '/#about' }}">
                                 {{ __('main.nav_about') }}
                             </a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{ Route::current()->named('index') ? '#contact' : '/#contact' }}">
+                            <a href="{{ isset($homepage) ? '#contact' : '/#contact' }}">
                                 {{ __('main.nav_contact') }}
                             </a>
                         </li>

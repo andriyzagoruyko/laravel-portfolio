@@ -39,7 +39,8 @@ class MainController extends Controller
             'projects' => $projects,
             'maxPages' => $projectMaxPages,
             'mainTag' => $tag,
-            'locale' => $locale
+            'locale' => $locale,
+            'homepage' => true
         ];
 
         return view('index', $data);
