@@ -6,13 +6,13 @@
     &.mainpage {
         .no-webp & {
             background: url(/assets/main/img/head/bg.jpg) no-repeat top;
+            background-size: cover;
         }
 
         .webp & {
             background: url(/assets/main/img/head/bg.webp) no-repeat top;
+            background-size: cover;
         }
-
-        background-size: cover;
 
         &:after {
             content: "";
