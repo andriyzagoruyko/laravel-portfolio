@@ -30,7 +30,7 @@ const messages = {
             required: "Please write your message"
         }
     },
-    ua: {
+    uk: {
         name: {
             required: "Будь ласка, вкажіть ім'я"
         },
