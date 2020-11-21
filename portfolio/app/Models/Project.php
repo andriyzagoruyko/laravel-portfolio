@@ -34,10 +34,12 @@ class Project extends LocalizedModel implements HasMedia
 
         $this->addMediaConversion('thumb-medium')
             ->crop('crop-top', 700, 900)
+            ->quality(70)
             ->withResponsiveImages();    
 
         $this->addMediaConversion('thumb-big')
             ->crop('crop-top', 1600, 420)
+            ->quality(70)
             ->withResponsiveImages();
     }
     
