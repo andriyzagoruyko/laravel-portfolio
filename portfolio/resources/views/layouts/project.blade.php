@@ -34,7 +34,7 @@
         <div class="single-project__content">
             <div class="single-project__info-block">
                 <div class="single-project__text">
-                    <p>{{ $project->localization->description }}</p>
+                    {!! strip_tags($project->localization->description , '<b><a><p><br>') !!}
                 </div>
                 <div class="single-project__technologies">
                     @foreach ($project->technologies as $technology)

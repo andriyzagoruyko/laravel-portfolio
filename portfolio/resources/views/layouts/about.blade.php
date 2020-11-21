@@ -8,7 +8,7 @@
                 </div>
                 <div class="about__name">{{ $info->localization->name }}</div>
                 <div class="about__text">
-                    {{ $info->localization->about }}
+                    {!! strip_tags($info->localization->about, '<b><a><p><br>') !!}
                 </div>
             </div>
         </div>
