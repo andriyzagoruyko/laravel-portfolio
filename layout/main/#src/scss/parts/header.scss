@@ -128,6 +128,11 @@
         margin: 0 15px;
         flex: 0 0 230px;
 
+        @media (max-width: $md1+px) {
+            flex: 0 0 190px;
+            padding: 35px;
+        }
+
         @media (max-width: $md5+px) {
             flex: 0 0 175px;
             padding: 35px;
@@ -147,7 +152,11 @@
             display: block;
             width: 80px;
 
-            @media (max-width: $md5+px) {
+            @media (max-width: $md1+px) {
+                width: 50px;
+            }
+
+            @media (max-width: $md1+px) {
                 width: 50px;
             }
 
@@ -161,6 +170,10 @@
             font-weight: 500;
             line-height: 130%;
             margin-top: 15px;
+
+            @media (max-width: $md1+px) {
+                font-size: 21px;
+            }
 
             @media (max-width: $md5+px) {
                 font-size: 18px;
@@ -242,7 +255,7 @@
     }
 
     &__overlay {
-        display: block!important;
+        display: block !important;
         position: fixed;
         z-index: 50;
         width: 100vw;
@@ -259,7 +272,7 @@
         .is-active & {
             visibility: visible;
             opacity: 1;
-            transform: scale(1.0);
+            transform: scale(1);
         }
 
         &:after {
@@ -344,6 +357,10 @@
         margin: 0 30px;
 
         @media (max-width: $md2+px) {
+            margin: 0 20px;
+        }
+
+        @media (max-width: $md2+px) {
             margin: 20px 0;
             font-size: 40px;
 
@@ -354,6 +371,18 @@
 
         a {
             @extend .light-on-hover;
+        }
+    }
+
+    &__item,
+    &__dropdown {
+        font-size: 24px;
+        line-height: 123%;
+        letter-spacing: -0.05em;
+        color: #ffffff;
+
+        @media (max-width: $md1+px) {
+            font-size: 21px;
         }
     }
 
@@ -401,14 +430,6 @@
         }
     }
 
-    &__item,
-    &__dropdown {
-        font-size: 24px;
-        line-height: 123%;
-        letter-spacing: -0.05em;
-        color: #ffffff;
-    }
-
     &__logo {
         display: block !important;
     }
@@ -425,7 +446,8 @@
         transition: width 0.3s;
         display: block;
         width: 204px;
-
+        overflow: visible !important;
+        
         .scrolled & {
             @media (min-width: $md5+px) {
                 width: 135px;

@@ -17,14 +17,6 @@ export default () =>{
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-        effect: 'coverflow',
-        coverflowEffect: {
-            rotate: 50,
-            stretch: 100,
-            depth: 200,
-            modifier: 1,
-            slideShadows: false,
-        },
         on: {
             init: () => document.querySelector('.modal').style.display = 'flex',
         }

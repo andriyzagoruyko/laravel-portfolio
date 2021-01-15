@@ -107,8 +107,8 @@
         text-align: left;
         text-transform: uppercase;
 
-        @media (max-width: $md2+px) {
-            font-size: 22px;
+        @media (max-width: $md1+px) {
+            font-size: 18px;
         }
 
         @media (max-width: $md3+px) {

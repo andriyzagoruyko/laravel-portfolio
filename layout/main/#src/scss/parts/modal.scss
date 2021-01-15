@@ -228,7 +228,7 @@ $modal_size: 1270;
     &__image {
         position: relative;
         align-self: flex-start;
-        flex: 0 0 490px;
+        flex: 0 0 40%;
         height: 100%;
 
         &:after {
@@ -271,12 +271,16 @@ $modal_size: 1270;
             z-index: 10;
         }
 
-        @media (max-width: $modal_size+px) {
-            flex: 0 0 400px;
+       /* @media (max-width: $modal_size+px) {
+            //flex: 0 0 400px;
 
             @media (max-height: 650px) {
-                flex: 0 0 340px;
+               // flex: 0 0 340px;
             }
+        }*/
+
+        @media (max-width: $md1+px) {
+            flex: 0 0 35%;
         }
 
         @media (max-width: $md2+px) {
