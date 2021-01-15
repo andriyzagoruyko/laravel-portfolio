@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\TagLocalization;
 use App\Models\InfoLocalization;
 use App\Models\ConfigLocalization;
+use Illuminate\Support\Facades\App;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class MainController extends Controller
@@ -74,6 +75,8 @@ class MainController extends Controller
 
         $projects = $projectQuery->limit($resultPerPage)->get();
         $firstWithLargeThumb = !array_key_exists('page', $data) ||$data['page'] == 0;
+
+        App::setLocale($locale);
 
         return response()->json([
             'maxPages' => $projectMaxPages,
