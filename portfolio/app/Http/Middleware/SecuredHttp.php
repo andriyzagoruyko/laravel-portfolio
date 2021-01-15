@@ -16,7 +16,7 @@ class SecuredHttp
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->secure() && env('APP_DEBUG', 'local') === 'production') {
+        if (!$request->secure() && env('APP_ENV', 'local') === 'production') {
             return redirect()->secure($request->path());
         }
 

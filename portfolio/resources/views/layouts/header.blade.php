@@ -86,7 +86,7 @@
                                     hreflang="{{ $localeCode }}" 
                                     href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
                                     >
-                                        {{ mb_strtoupper($localeCode) }} ({{ ucfirst($properties['native']) }})
+                                        {{ $properties['renamed'] }} ({{ ucfirst($properties['native']) }})
                                 </a>
                             </li>
                             @endforeach

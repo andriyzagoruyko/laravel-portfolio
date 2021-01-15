@@ -22,10 +22,10 @@ return [
     'service_title_cms' => 'Інтеграція CMS',
     'service_title_ecommerce' => 'Комерція',
 
-    'service_text_forntend' => 'Розробка адаптивних сторінок з використанням HTML, CSS і JavaScript native або jQuery',
+    'service_text_forntend' => 'Розробка адаптивних сторінок з використанням HTML, CSS і JavaScript native, React або jQuery',
     'service_text_backend' => 'Розробка RESTful веб-додатків з використанням PHP-фреймворка Laravel',
-    'service_text_cms' => 'Створення сайтів WordPress за допомогою конструкторів. Інтеграція верстки, розробка тем та плагінів',
-    'service_text_ecommerce' => 'Створення лендінгів та інтернет-магазинів за допомогою Woocommerce або Laravel',
+    'service_text_cms' => 'Інтеграція верстки, розробка тем та плагінів для WordPress. Створення сайтів за допомогою плагінів конструкторів',
+    'service_text_ecommerce' => 'Створення лендінгів та інтернет-магазинів за допомогою Wordpress або Laravel',
 
     'contact_name' => "Ім'я",
     'contact_email' => 'Почта',
