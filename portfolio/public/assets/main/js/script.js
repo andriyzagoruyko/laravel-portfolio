@@ -610,7 +610,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   });
   swiper.on('slideChange', function () {
-    setTimeout(() => swiper.updateAutoHeight(5), 200);
+    const modalWrapper = document.querySelector('.modal__wrapper');
+    modalWrapper.style.overflow = 'auto';
+    setTimeout(() => {
+      modalWrapper.style.overflow = '';
+      swiper.updateAutoHeight(5);
+    }, 200);
   });
   return swiper;
 });
