@@ -39,7 +39,7 @@
     "core-js": "^3.7.0",
     "scroll-lock": "^2.1.4",
     "smoothscroll-polyfill": "^0.4.4",
-    "swiper": "^6.3.5",
+    "swiper": "^6.4.5",
     "validator": "^13.1.17"
   }
 }

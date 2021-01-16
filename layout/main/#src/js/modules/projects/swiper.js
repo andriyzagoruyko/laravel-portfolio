@@ -1,13 +1,14 @@
 import Swiper from 'swiper/bundle';
 
-export default () =>{
-    return new Swiper('.swiper-container', {
+export default () => {
+    const swiper = new Swiper('.swiper-container', {
         slidesPerView: 1,
         speed: 400,
-        threshold: 6,
+        threshold: 10,
         spaceBetween: 120,
         grabCursor: true,
         autoHeight: true,
+        roundLengths: true,
         updateOnWindowResize: true,
         preloadImages: false,
         lazy: {
@@ -21,4 +22,10 @@ export default () =>{
             init: () => document.querySelector('.modal').style.display = 'flex',
         }
     });
+
+    swiper.on('slideChange', function () {
+        setTimeout(() => swiper.updateAutoHeight(5), 200)
+    });
+
+    return swiper;
 } 

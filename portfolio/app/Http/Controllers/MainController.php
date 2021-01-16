@@ -31,7 +31,7 @@ class MainController extends Controller
         $resultCount = $projectQuery->count();
         $projectMaxPages = ceil($resultCount/$resultPerPage);
         $projects = $projectQuery->limit($resultPerPage)->get();
-
+        
         $data = [
             'configLocalization' => ConfigLocalization::where('lang', $locale)->first(),
             'info' => Info::withLocalization($locale)->first(),
@@ -41,6 +41,7 @@ class MainController extends Controller
             'maxPages' => $projectMaxPages,
             'mainTag' => $tag,
             'locale' => $locale,
+            'localizations' => LaravelLocalization::getSupportedLocales(),
             'homepage' => true
         ];
 
@@ -50,7 +51,9 @@ class MainController extends Controller
     public function singleProject($projectSlug) {
         $locale = LaravelLocalization::getCurrentLocale();
         $project = Project::withLocalization($locale)->where('slug', $projectSlug)->firstOrFail();
-        return view('single-project', compact('locale', 'project'));
+        $localizations = LaravelLocalization::getSupportedLocales();
+
+        return view('single-project', compact('locale', 'localizations', 'project'));
     }
 
     public function getProjects($locale, $tagId = null, Request $request) {

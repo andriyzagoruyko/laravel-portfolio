@@ -588,13 +588,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var swiper_bundle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiper/bundle */ "./node_modules/swiper/swiper-bundle.esm.js");
 
 /* harmony default export */ __webpack_exports__["default"] = (() => {
-  return new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__["default"]('.swiper-container', {
+  const swiper = new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__["default"]('.swiper-container', {
     slidesPerView: 1,
     speed: 400,
-    threshold: 6,
+    threshold: 10,
     spaceBetween: 120,
     grabCursor: true,
     autoHeight: true,
+    roundLengths: true,
     updateOnWindowResize: true,
     preloadImages: false,
     lazy: {
@@ -608,6 +609,10 @@ __webpack_require__.r(__webpack_exports__);
       init: () => document.querySelector('.modal').style.display = 'flex'
     }
   });
+  swiper.on('slideChange', function () {
+    setTimeout(() => swiper.updateAutoHeight(5), 200);
+  });
+  return swiper;
 });
 
 /***/ }),
@@ -6523,7 +6528,7 @@ var A11y = {
       }
     }
 
-    if (swiper.pagination && $targetEl.is("." + swiper.params.pagination.bulletClass)) {
+    if (swiper.pagination && $targetEl.is("." + swiper.params.pagination.bulletClass.replace(/ /g, '.'))) {
       $targetEl[0].click();
     }
   },
@@ -6653,7 +6658,7 @@ var A11y = {
 
 
     if (swiper.pagination && swiper.params.pagination.clickable && swiper.pagination.bullets && swiper.pagination.bullets.length) {
-      swiper.pagination.$el.on('keydown', "." + swiper.params.pagination.bulletClass, swiper.a11y.onEnterKey);
+      swiper.pagination.$el.on('keydown', "." + swiper.params.pagination.bulletClass.replace(/ /g, '.'), swiper.a11y.onEnterKey);
     }
   },
   destroy: function destroy() {
@@ -6680,7 +6685,7 @@ var A11y = {
 
 
     if (swiper.pagination && swiper.params.pagination.clickable && swiper.pagination.bullets && swiper.pagination.bullets.length) {
-      swiper.pagination.$el.off('keydown', "." + swiper.params.pagination.bulletClass, swiper.a11y.onEnterKey);
+      swiper.pagination.$el.off('keydown', "." + swiper.params.pagination.bulletClass.replace(/ /g, '.'), swiper.a11y.onEnterKey);
     }
   }
 };
@@ -6703,7 +6708,7 @@ var A11y = {
   create: function create() {
     var swiper = this;
     Object(_utils_utils__WEBPACK_IMPORTED_MODULE_1__["bindModuleMethods"])(swiper, {
-      a11y: _extends(_extends({}, A11y), {}, {
+      a11y: _extends({}, A11y, {
         liveRegion: Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["default"])("<span class=\"" + swiper.params.a11y.notificationClass + "\" aria-live=\"assertive\" aria-atomic=\"true\"></span>")
       })
     });
@@ -6879,7 +6884,7 @@ var Autoplay = {
   create: function create() {
     var swiper = this;
     Object(_utils_utils__WEBPACK_IMPORTED_MODULE_1__["bindModuleMethods"])(swiper, {
-      autoplay: _extends(_extends({}, Autoplay), {}, {
+      autoplay: _extends({}, Autoplay, {
         running: false,
         paused: false
       })
@@ -8282,11 +8287,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (self.eventsListeners && self.eventsListeners[event]) {
-        var handlers = [];
         self.eventsListeners[event].forEach(function (eventHandler) {
-          handlers.push(eventHandler);
-        });
-        handlers.forEach(function (eventHandler) {
           eventHandler.apply(context, data);
         });
       }
@@ -9215,7 +9216,7 @@ function onTouchStart(event) {
   var edgeSwipeDetection = params.edgeSwipeDetection || params.iOSEdgeSwipeDetection;
   var edgeSwipeThreshold = params.edgeSwipeThreshold || params.iOSEdgeSwipeThreshold;
 
-  if (edgeSwipeDetection && (startX <= edgeSwipeThreshold || startX >= window.screen.width - edgeSwipeThreshold)) {
+  if (edgeSwipeDetection && (startX <= edgeSwipeThreshold || startX >= window.innerWidth - edgeSwipeThreshold)) {
     return;
   }
 
@@ -9244,7 +9245,7 @@ function onTouchStart(event) {
 
     var shouldPreventDefault = preventDefault && swiper.allowTouchMove && params.touchStartPreventDefault;
 
-    if (params.touchStartForcePreventDefault || shouldPreventDefault) {
+    if ((params.touchStartForcePreventDefault || shouldPreventDefault) && !$targetEl[0].isContentEditable) {
       e.preventDefault();
     }
   }
@@ -11118,7 +11119,7 @@ function updateSize() {
     width = $el[0].clientWidth;
   }
 
-  if (typeof swiper.params.height !== 'undefined' && swiper.params.width !== null) {
+  if (typeof swiper.params.height !== 'undefined' && swiper.params.height !== null) {
     height = swiper.params.height;
   } else {
     height = $el[0].clientHeight;
@@ -11195,7 +11196,7 @@ function updateSlides() {
   }
 
   var previousSnapGridLength = swiper.snapGrid.length;
-  var previousSlidesGridLength = swiper.snapGrid.length;
+  var previousSlidesGridLength = swiper.slidesGrid.length;
   var spaceBetween = params.spaceBetween;
   var slidePosition = -offsetBefore;
   var prevSlideSize = 0;
@@ -12594,6 +12595,8 @@ var Keyboard = {
         var point = swiperCoord[i];
 
         if (point[0] >= 0 && point[0] <= windowWidth && point[1] >= 0 && point[1] <= windowHeight) {
+          if (point[0] === 0 && point[1] === 0) continue; // eslint-disable-line
+
           inView = true;
         }
       }
@@ -12677,9 +12680,11 @@ var Keyboard = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _utils_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/dom */ "./node_modules/swiper/esm/utils/dom.js");
-/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/utils */ "./node_modules/swiper/esm/utils/utils.js");
+/* harmony import */ var ssr_window__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ssr-window */ "./node_modules/ssr-window/ssr-window.esm.js");
+/* harmony import */ var _utils_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/dom */ "./node_modules/swiper/esm/utils/dom.js");
+/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/utils */ "./node_modules/swiper/esm/utils/utils.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 
 
 
@@ -12703,7 +12708,7 @@ var Lazy = {
 
     if ($images.length === 0) return;
     $images.each(function (imageEl) {
-      var $imageEl = Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["default"])(imageEl);
+      var $imageEl = Object(_utils_dom__WEBPACK_IMPORTED_MODULE_1__["default"])(imageEl);
       $imageEl.addClass(params.loadingClass);
       var background = $imageEl.attr('data-background');
       var src = $imageEl.attr('data-src');
@@ -12729,7 +12734,7 @@ var Lazy = {
 
           if ($pictureEl.length) {
             $pictureEl.children('source').each(function (sourceEl) {
-              var $source = Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["default"])(sourceEl);
+              var $source = Object(_utils_dom__WEBPACK_IMPORTED_MODULE_1__["default"])(sourceEl);
 
               if ($source.attr('data-srcset')) {
                 $source.attr('srcset', $source.attr('data-srcset'));
@@ -12794,17 +12799,17 @@ var Lazy = {
 
     function slideIndex(slideEl) {
       if (isVirtual) {
-        return Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["default"])(slideEl).attr('data-swiper-slide-index');
+        return Object(_utils_dom__WEBPACK_IMPORTED_MODULE_1__["default"])(slideEl).attr('data-swiper-slide-index');
       }
 
-      return Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["default"])(slideEl).index();
+      return Object(_utils_dom__WEBPACK_IMPORTED_MODULE_1__["default"])(slideEl).index();
     }
 
     if (!swiper.lazy.initialImageLoaded) swiper.lazy.initialImageLoaded = true;
 
     if (swiper.params.watchSlidesVisibility) {
       $wrapperEl.children("." + swiperParams.slideVisibleClass).each(function (slideEl) {
-        var index = isVirtual ? Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["default"])(slideEl).attr('data-swiper-slide-index') : Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["default"])(slideEl).index();
+        var index = isVirtual ? Object(_utils_dom__WEBPACK_IMPORTED_MODULE_1__["default"])(slideEl).attr('data-swiper-slide-index') : Object(_utils_dom__WEBPACK_IMPORTED_MODULE_1__["default"])(slideEl).index();
         swiper.lazy.loadInSlide(index);
       });
     } else if (slidesPerView > 1) {
@@ -12837,16 +12842,50 @@ var Lazy = {
         if (prevSlide.length > 0) swiper.lazy.loadInSlide(slideIndex(prevSlide));
       }
     }
+  },
+  checkInViewOnLoad: function checkInViewOnLoad() {
+    var window = Object(ssr_window__WEBPACK_IMPORTED_MODULE_0__["getWindow"])();
+    var swiper = this;
+    if (!swiper || swiper.destroyed) return;
+    var $scrollElement = swiper.params.lazy.scrollingElement ? Object(_utils_dom__WEBPACK_IMPORTED_MODULE_1__["default"])(swiper.params.lazy.scrollingElement) : Object(_utils_dom__WEBPACK_IMPORTED_MODULE_1__["default"])(window);
+    var isWindow = $scrollElement[0] === window;
+    var scrollElementWidth = isWindow ? window.innerWidth : $scrollElement[0].offsetWidth;
+    var scrollElementHeight = isWindow ? window.innerHeight : $scrollElement[0].offsetHeight;
+    var swiperOffset = swiper.$el.offset();
+    var rtl = swiper.rtlTranslate;
+    var inView = false;
+    if (rtl) swiperOffset.left -= swiper.$el[0].scrollLeft;
+    var swiperCoord = [[swiperOffset.left, swiperOffset.top], [swiperOffset.left + swiper.width, swiperOffset.top], [swiperOffset.left, swiperOffset.top + swiper.height], [swiperOffset.left + swiper.width, swiperOffset.top + swiper.height]];
+
+    for (var i = 0; i < swiperCoord.length; i += 1) {
+      var point = swiperCoord[i];
+
+      if (point[0] >= 0 && point[0] <= scrollElementWidth && point[1] >= 0 && point[1] <= scrollElementHeight) {
+        if (point[0] === 0 && point[1] === 0) continue; // eslint-disable-line
+
+        inView = true;
+      }
+    }
+
+    if (inView) {
+      swiper.lazy.load();
+      $scrollElement.off('scroll', swiper.lazy.checkInViewOnLoad);
+    } else if (!swiper.lazy.scrollHandlerAttached) {
+      swiper.lazy.scrollHandlerAttached = true;
+      $scrollElement.on('scroll', swiper.lazy.checkInViewOnLoad);
+    }
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'lazy',
   params: {
     lazy: {
+      checkInView: false,
       enabled: false,
       loadPrevNext: false,
       loadPrevNextAmount: 1,
       loadOnTransitionStart: false,
+      scrollingElement: '',
       elementClass: 'swiper-lazy',
       loadingClass: 'swiper-lazy-loading',
       loadedClass: 'swiper-lazy-loaded',
@@ -12855,7 +12894,7 @@ var Lazy = {
   },
   create: function create() {
     var swiper = this;
-    Object(_utils_utils__WEBPACK_IMPORTED_MODULE_1__["bindModuleMethods"])(swiper, {
+    Object(_utils_utils__WEBPACK_IMPORTED_MODULE_2__["bindModuleMethods"])(swiper, {
       lazy: _extends({
         initialImageLoaded: false
       }, Lazy)
@@ -12869,7 +12908,11 @@ var Lazy = {
     },
     init: function init(swiper) {
       if (swiper.params.lazy.enabled && !swiper.params.loop && swiper.params.initialSlide === 0) {
-        swiper.lazy.load();
+        if (swiper.params.lazy.checkInView) {
+          swiper.lazy.checkInViewOnLoad();
+        } else {
+          swiper.lazy.load();
+        }
       }
     },
     scroll: function scroll(swiper) {
@@ -13044,6 +13087,7 @@ var Mousewheel = {
   },
   handle: function handle(event) {
     var e = event;
+    var disableParentSwiper = true;
     var swiper = this;
     var params = swiper.params.mousewheel;
 
@@ -13073,7 +13117,20 @@ var Mousewheel = {
     }
 
     if (delta === 0) return true;
-    if (params.invert) delta = -delta;
+    if (params.invert) delta = -delta; // Get the scroll positions
+
+    var positions = swiper.getTranslate() + delta * params.sensitivity;
+    if (positions >= swiper.minTranslate()) positions = swiper.minTranslate();
+    if (positions <= swiper.maxTranslate()) positions = swiper.maxTranslate(); // When loop is true:
+    //     the disableParentSwiper will be true.
+    // When loop is false:
+    //     if the scroll positions is not on edge,
+    //     then the disableParentSwiper will be true.
+    //     if the scroll on edge positions,
+    //     then the disableParentSwiper will be false.
+
+    disableParentSwiper = swiper.params.loop ? true : !(positions === swiper.minTranslate() || positions === swiper.maxTranslate());
+    if (disableParentSwiper && swiper.params.nested) e.stopPropagation();
 
     if (!swiper.params.freeMode) {
       // Register the new event in a variable which stores the relevant data
@@ -13751,7 +13808,7 @@ var Pagination = {
       }
 
       $el.html(paginationHTML);
-      swiper.pagination.bullets = $el.find("." + params.bulletClass);
+      swiper.pagination.bullets = $el.find("." + params.bulletClass.replace(/ /g, '.'));
     }
 
     if (params.type === 'fraction') {
@@ -13809,7 +13866,7 @@ var Pagination = {
     }
 
     if (params.clickable) {
-      $el.on('click', "." + params.bulletClass, function onClick(e) {
+      $el.on('click', "." + params.bulletClass.replace(/ /g, '.'), function onClick(e) {
         e.preventDefault();
         var index = Object(_utils_dom__WEBPACK_IMPORTED_MODULE_0__["default"])(this).index() * swiper.params.slidesPerGroup;
         if (swiper.params.loop) index += swiper.loopedSlides;
@@ -13832,7 +13889,7 @@ var Pagination = {
     if (swiper.pagination.bullets) swiper.pagination.bullets.removeClass(params.bulletActiveClass);
 
     if (params.clickable) {
-      $el.off('click', "." + params.bulletClass);
+      $el.off('click', "." + params.bulletClass.replace(/ /g, '.'));
     }
   }
 };
@@ -14898,7 +14955,7 @@ var Virtual = {
   create: function create() {
     var swiper = this;
     Object(_utils_utils__WEBPACK_IMPORTED_MODULE_1__["bindModuleMethods"])(swiper, {
-      virtual: _extends(_extends({}, Virtual), {}, {
+      virtual: _extends({}, Virtual, {
         slides: swiper.params.virtual.slides,
         cache: {}
       })
@@ -15626,7 +15683,7 @@ var Observer = {
   create: function create() {
     var swiper = this;
     Object(_utils_utils__WEBPACK_IMPORTED_MODULE_1__["bindModuleMethods"])(swiper, {
-      observer: _extends(_extends({}, Observer), {}, {
+      observer: _extends({}, Observer, {
         observers: []
       })
     });
@@ -16100,7 +16157,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _esm_components_effect_coverflow_effect_coverflow__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./esm/components/effect-coverflow/effect-coverflow */ "./node_modules/swiper/esm/components/effect-coverflow/effect-coverflow.js");
 /* harmony import */ var _esm_components_thumbs_thumbs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./esm/components/thumbs/thumbs */ "./node_modules/swiper/esm/components/thumbs/thumbs.js");
 /**
- * Swiper 6.3.5
+ * Swiper 6.4.5
  * Most modern mobile touch slider and framework with hardware accelerated transitions
  * https://swiperjs.com
  *
@@ -16108,7 +16165,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * Released under the MIT License
  *
- * Released on: October 30, 2020
+ * Released on: December 18, 2020
  */
 
 

@@ -8,10 +8,10 @@ $modal_size: 1270;
 
     --swiper-theme-color: white;
 
-    &.processing{
-        .modal__wrapper{
+    &.processing {
+        .modal__wrapper {
             &:after {
-                content: '';
+                content: "";
                 @extend .swiper-lazy-preloader;
                 --swiper-theme-color: rgb(250, 49, 143);
                 position: fixed !important;
@@ -51,30 +51,27 @@ $modal_size: 1270;
 
             .no-webp & {
                 background: linear-gradient(
-                    180deg,
-                    #000000 3.27%,
-                    rgba(0, 0, 0, 0.5) 43.75%,
-                    rgba(0, 0, 0, 0.5) 64.58%,
-                    #000000 100%,
-                    #000000 100%
-                ),
-                url(/assets/main/img/head/bg.jpg);
+                        180deg,
+                        #000000 3.27%,
+                        rgba(0, 0, 0, 0.5) 43.75%,
+                        rgba(0, 0, 0, 0.5) 64.58%,
+                        #000000 100%,
+                        #000000 100%
+                    ),
+                    url(/assets/main/img/head/bg.jpg);
             }
-    
+
             .webp & {
                 background: linear-gradient(
-                    180deg,
-                    #000000 3.27%,
-                    rgba(0, 0, 0, 0.5) 43.75%,
-                    rgba(0, 0, 0, 0.5) 64.58%,
-                    #000000 100%,
-                    #000000 100%
-                ),
-                url(/assets/main/img/head/bg.webp);
+                        180deg,
+                        #000000 3.27%,
+                        rgba(0, 0, 0, 0.5) 43.75%,
+                        rgba(0, 0, 0, 0.5) 64.58%,
+                        #000000 100%,
+                        #000000 100%
+                    ),
+                    url(/assets/main/img/head/bg.webp);
             }
-    
-
-
 
             background-repeat: no-repeat;
             background-size: cover;
@@ -129,9 +126,10 @@ $modal_size: 1270;
     }
     .swiper-wrapper {
         align-items: center;
-        
+
         @media (max-width: $md6+px) {
             align-items: flex-start;
+            transition-property: transform !important;
         }
     }
 
@@ -255,7 +253,7 @@ $modal_size: 1270;
             max-width: 100%;
             box-shadow: $shadow_elem;
             position: relative;
-            transition: opacity .2s;
+            transition: opacity 0.2s;
 
             &.swiper-lazy:not(.swiper-lazy-loaded) {
                 opacity: 0;
@@ -271,7 +269,7 @@ $modal_size: 1270;
             z-index: 10;
         }
 
-       /* @media (max-width: $modal_size+px) {
+        /* @media (max-width: $modal_size+px) {
             //flex: 0 0 400px;
 
             @media (max-height: 650px) {
