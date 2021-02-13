@@ -6,7 +6,9 @@ export default class {
     constructor() {
         this.isLoading = false;
         this.slider = swiper();
-        this.slider.on('reachEnd', () => this.slider.slides.length && setTimeout(this.load, 200));
+        this.slider.on('reachEnd', () =>{
+            this.slider.slides.length && setTimeout(this.load.bind(this), 200)
+        });
     }
 
     async get (tag, params) {
