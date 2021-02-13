@@ -428,13 +428,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_promise_finally__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.promise.finally */ "./node_modules/core-js/modules/es.promise.finally.js");
-/* harmony import */ var core_js_modules_es_promise_finally__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_finally__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _swiper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./swiper */ "./#src/js/modules/projects/swiper.js");
-/* harmony import */ var _helpers_makeRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helpers/makeRequest */ "./#src/js/modules/helpers/makeRequest.js");
-/* harmony import */ var _helpers_scrolLock__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helpers/scrolLock */ "./#src/js/modules/helpers/scrolLock.js");
-
-
+/* harmony import */ var _swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./swiper */ "./#src/js/modules/projects/swiper.js");
+/* harmony import */ var _helpers_makeRequest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/makeRequest */ "./#src/js/modules/helpers/makeRequest.js");
+/* harmony import */ var _helpers_scrolLock__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helpers/scrolLock */ "./#src/js/modules/helpers/scrolLock.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -442,75 +438,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = (class {
   constructor() {
-    _defineProperty(this, "get", (tag, params) => {
-      const locale = document.body.getAttribute('data-locale');
-      const url = "api/" + locale + "/projects" + (tag.length ? "/" + tag : '');
-
-      const toggleBusy = state => {
-        this.isRequestBusy = state;
-        loadmore.classList.toggle('processing', state);
-        modal.classList.toggle('processing', state);
-      };
-
-      toggleBusy(true);
-      return Object(_helpers_makeRequest__WEBPACK_IMPORTED_MODULE_2__["default"])(url, {
-        method: 'POST',
-        body: JSON.stringify(params)
-      }).finally(() => toggleBusy(false));
-    });
-
-    _defineProperty(this, "append", (result, setEmpty = false) => {
-      let page = 0;
-
-      if (setEmpty) {
-        document.querySelectorAll('.project').forEach(item => item.remove());
-        this.slider.removeAllSlides();
-      } else {
-        page = +loadmore.getAttribute('data-page');
-      }
-
-      this.slider.appendSlide(result.view.slides);
-      this.slider.update();
-      this.slider.lazy.load();
-      loadmore.insertAdjacentHTML('beforebegin', result.view.projects);
-      loadmore.setAttribute('data-page', page += 1);
-      loadmore.classList.toggle('is-hidden', page >= result.maxPages || result.maxPages <= 1);
-    });
-
-    _defineProperty(this, "load", async () => {
-      if (loadmore.matches('.is-hidden') || this.isRequestBusy) {
-        return;
-      }
-
-      const isMobile = window.matchMedia("(max-width: 670px)").matches || window.matchMedia("(max-height: 480px)").matches;
-      const tag = loadmore.getAttribute('data-tag');
-      const page = loadmore.getAttribute('data-page');
-      const result = await this.get(tag, {
-        count: isMobile ? 4 : 3,
-        skip: isMobile ? 0 : 1,
-        page: parseInt(page)
-      });
-      this.append(result);
-    });
-
-    _defineProperty(this, "changeTab", async newTab => {
-      const tabs = document.querySelectorAll('.tabs__item');
-      const tag = newTab.getAttribute('data-tag');
-      const result = await this.get(tag, {
-        count: 4,
-        skip: 0,
-        page: 0
-      });
-      this.append(result, true);
-      tabs.forEach(item => item.classList.remove('is-active'));
-      newTab.classList.add('is-active');
-      newTab.blur();
-      loadmore.setAttribute('data-tag', tag);
-    });
-
     _defineProperty(this, "toggleSlider", (slide = -1) => {
       const state = slide != -1;
-      Object(_helpers_scrolLock__WEBPACK_IMPORTED_MODULE_3__["default"])(state);
+      Object(_helpers_scrolLock__WEBPACK_IMPORTED_MODULE_2__["default"])(state);
       document.querySelector('.modal').classList.toggle('is-active', state);
 
       if (state) {
@@ -519,9 +449,77 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     });
 
-    this.isRequestBusy = false;
-    this.slider = Object(_swiper__WEBPACK_IMPORTED_MODULE_1__["default"])();
+    this.isLoading = false;
+    this.slider = Object(_swiper__WEBPACK_IMPORTED_MODULE_0__["default"])();
     this.slider.on('reachEnd', () => this.slider.slides.length && setTimeout(this.load, 200));
+  }
+
+  async get(tag, params) {
+    const locale = document.body.getAttribute('data-locale');
+    const url = "api/" + locale + "/projects" + (tag.length ? "/" + tag : '');
+
+    const toggleLoading = state => {
+      this.isLoading = state;
+      loadmore.classList.toggle('processing', state);
+      modal.classList.toggle('processing', state);
+    };
+
+    toggleLoading(true);
+    const res = await Object(_helpers_makeRequest__WEBPACK_IMPORTED_MODULE_1__["default"])(url, {
+      method: 'POST',
+      body: JSON.stringify(params)
+    });
+    toggleLoading(false);
+    return res;
+  }
+
+  append(result, setEmpty = false) {
+    let page = 0;
+
+    if (setEmpty) {
+      document.querySelectorAll('.project').forEach(item => item.remove());
+      this.slider.removeAllSlides();
+    } else {
+      page = +loadmore.getAttribute('data-page');
+    }
+
+    this.slider.appendSlide(result.view.slides);
+    this.slider.update();
+    this.slider.lazy.load();
+    loadmore.insertAdjacentHTML('beforebegin', result.view.projects);
+    loadmore.setAttribute('data-page', page += 1);
+    loadmore.classList.toggle('is-hidden', page >= result.maxPages || result.maxPages <= 1);
+  }
+
+  async load() {
+    if (loadmore.matches('.is-hidden') || this.isLoading) {
+      return;
+    }
+
+    const isMobile = window.matchMedia("(max-width: 670px)").matches || window.matchMedia("(max-height: 480px)").matches;
+    const tag = loadmore.getAttribute('data-tag');
+    const page = loadmore.getAttribute('data-page');
+    const result = await this.get(tag, {
+      count: isMobile ? 4 : 3,
+      skip: isMobile ? 0 : 1,
+      page: parseInt(page)
+    });
+    this.append(result);
+  }
+
+  async changeTab(newTab) {
+    const tabs = document.querySelectorAll('.tabs__item');
+    const tag = newTab.getAttribute('data-tag');
+    const result = await this.get(tag, {
+      count: 4,
+      skip: 0,
+      page: 0
+    });
+    this.append(result, true);
+    tabs.forEach(item => item.classList.remove('is-active'));
+    newTab.classList.add('is-active');
+    newTab.blur();
+    loadmore.setAttribute('data-tag', tag);
   }
 
 });

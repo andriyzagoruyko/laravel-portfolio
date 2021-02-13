@@ -26,6 +26,7 @@ export default () => {
     swiper.on('slideChange', function () {
         const modalWrapper = document.querySelector('.modal__wrapper');
         modalWrapper.style.overflow = 'auto';
+        //fix auto height bug on mobile
         setTimeout(() => {
             modalWrapper.style.overflow = '';
             swiper.updateAutoHeight(5)

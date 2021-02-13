@@ -4,35 +4,35 @@ import scrollLock from '../helpers/scrolLock'
 
 export default class {
     constructor() {
-        this.isRequestBusy = false;
+        this.isLoading = false;
         this.slider = swiper();
         this.slider.on('reachEnd', () => this.slider.slides.length && setTimeout(this.load, 200));
     }
 
-    get = (tag, params) => {
+    async get (tag, params) {
         const locale = document.body.getAttribute('data-locale');
         const url = `api/${locale}/projects${tag.length ? `/${tag}` : ''}`;
 
-        const toggleBusy = (state) => {
-            this.isRequestBusy = state;
-            loadmore.classList.toggle('processing', state);
-            modal.classList.toggle('processing', state);
-        }
-
-        toggleBusy(true);
-
-        return makeRequest(url, {
+        this.toggleLoading(true);
+        
+        const res = await makeRequest(url, {
             method: 'POST',
             body: JSON.stringify(params)
         })
-        .finally(() => toggleBusy(false));
+
+        this.toggleLoading(false)
+
+        return res;
     }
 
-    append = (result, setEmpty = false) => {
+    append(result, setEmpty = false) {
         let page = 0;
 
         if (setEmpty) {
-            document.querySelectorAll('.project').forEach(item => item.remove())
+            document.querySelectorAll('.project').forEach(item => item.remove());
+            
+            //fix swiper bug
+            this.slider.removeAllSlides();
             this.slider.removeAllSlides();
         } else {
             page = +loadmore.getAttribute('data-page');
@@ -47,12 +47,13 @@ export default class {
         loadmore.classList.toggle('is-hidden', page >= result.maxPages || result.maxPages <= 1);
     }
 
-    load = async () => {
-        if (loadmore.matches('.is-hidden') || this.isRequestBusy) {
+    async load() {
+        if (loadmore.matches('.is-hidden') || this.isLoading) {
             return;
         }
 
-        const isMobile = window.matchMedia("(max-width: 670px)").matches || window.matchMedia("(max-height: 480px)").matches;
+        const isMobile = window.matchMedia("(max-width: 670px)").matches 
+            || window.matchMedia("(max-height: 480px)").matches;
         const tag = loadmore.getAttribute('data-tag');
         const page = loadmore.getAttribute('data-page')
 
@@ -65,7 +66,7 @@ export default class {
         this.append(result);
     }
 
-    changeTab = async (newTab) => {
+    async changeTab(newTab) {
         const tabs = document.querySelectorAll('.tabs__item');
         const tag = newTab.getAttribute('data-tag');
 
@@ -92,5 +93,11 @@ export default class {
             this.slider.update();
             this.slider.slideTo(slide, 0);
         }
+    }
+
+    toggleLoading(state) {
+        this.isLoading = state;
+        loadmore.classList.toggle('processing', state);
+        modal.classList.toggle('processing', state);
     }
 }

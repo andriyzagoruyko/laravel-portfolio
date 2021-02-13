@@ -9,7 +9,7 @@ function html() {
     return src(path.src.html)
         .pipe(fileinclude())
         .pipe(pretty_html())
-        .pipe(dest(path.build.html))
+        .pipe(dest(path.build.html[0]))
         .pipe(browsersync.stream());
 }
 
