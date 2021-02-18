@@ -6,7 +6,7 @@ return [
     'nav_about' => 'About',
     'nav_contact' => 'Contact',
 
-    'title_portfolio' => 'Last projects',
+    'title_portfolio' => 'Latest projects',
     'title_service' => 'My service',
     'title_about' => 'About me',
     'title_contact' => 'Contact',
