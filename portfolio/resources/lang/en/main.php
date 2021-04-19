@@ -23,7 +23,7 @@ return [
     'service_title_ecommerce' => 'E-commerce',
 
     'service_text_forntend' => 'Responsive pages development using HTML, CSS and JavaScript native, React or jQuery',
-    'service_text_backend' => 'RESTful web applications development using PHP framework Laravel',
+    'service_text_backend' => 'RESTful web applications development using NodeJS Express or PHP Laravel',
     'service_text_cms' => 'Developing themes and plugins for WordPress and creating sites using builders plugins',
     'service_text_ecommerce' => 'Сreating landing pages and online stores using Wordpress or Laravel',
 
